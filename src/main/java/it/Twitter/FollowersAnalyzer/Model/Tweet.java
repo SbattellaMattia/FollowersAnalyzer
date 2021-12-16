@@ -5,7 +5,7 @@ public class Tweet extends Super{
 	private int likes;
 	private String text;
 	
-	public Tweet(String id) {
+	public Tweet(Long id) {
 		super(id);
 	}
 

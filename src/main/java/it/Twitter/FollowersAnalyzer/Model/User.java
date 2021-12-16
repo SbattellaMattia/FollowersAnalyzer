@@ -8,12 +8,12 @@ package it.Twitter.FollowersAnalyzer.Model;
 		private int friendsCount;
 		
 
-		public User(String id) {
+		public User(Long id) {
 			super(id);
 		}
 		
 		
-		public User(String id, String name) {
+		public User(Long id, String name) {
 			super(id);
 			this.name = name;
 		}
@@ -59,7 +59,7 @@ package it.Twitter.FollowersAnalyzer.Model;
 		}
 
 
-		public User(String id, String name, String username) {
+		public User(Long id, String name, String username) {
 			super(id);
 			this.username = name;
 			this.name = username;
