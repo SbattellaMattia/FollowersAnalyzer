@@ -1,4 +1,4 @@
-package it.Twitter.FollowersAnalizer.Exceptions;
+package it.Twitter.FollowersAnalyzer.Exceptions;
 
 public class NameNotFoundException extends Exception{
 	
