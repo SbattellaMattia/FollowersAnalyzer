@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import it.Twitter.FollowersAnalyzer.Model.User;
 
 @JsonComponent
-public class JsonSerialize {
+public class JsonToString {
 	 public static class Serializer extends JsonSerializer<User> {
 
 	        @Override

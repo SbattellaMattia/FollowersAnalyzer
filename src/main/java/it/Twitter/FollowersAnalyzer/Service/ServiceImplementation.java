@@ -25,12 +25,13 @@ public String getFollowers(Long id) throws IOException {
 		String line="";
 		
 		// Sending get request
-        String url="https://api.twitter.com/2/users/"+id+"/followers";
+        String url="https://api.twitter.com/2/users/"+id+"/followers?user.fields=created_at&max_results=200";
 		try {
 			
 			URLConnection openConnection = new URL(url).openConnection();
 			openConnection.setRequestProperty("Authorization","Bearer "+ BearerToken);
-			openConnection.addRequestProperty("max_results","5");
+			//TODO
+			//openConnection.addRequestProperty("max_results","5");
 			InputStream input = openConnection.getInputStream();
 			try {
 				InputStreamReader reader = new InputStreamReader(input);
