@@ -16,8 +16,6 @@ public class Service {
 	}
 
 
-	
-	
 public String Connection(String Url) throws IOException {
 		String aux="";
 		String line="";

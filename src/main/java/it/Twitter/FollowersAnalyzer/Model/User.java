@@ -68,7 +68,7 @@ package it.Twitter.FollowersAnalyzer.Model;
 
 		@Override
 		public String toString() {
-			return "User [id="+ getId() + "name=" + name + ", username=" + username + "]";
+			return "User [id="+ getId() + ",name=" + name + ", username=" + username + "]";
 		}
 		
 		

@@ -1,6 +1,6 @@
 package it.Twitter.FollowersAnalyzer.JsonComponent;
 
-import org.json.simple.JSONObject;
+import java.util.ArrayList;
 
 import it.Twitter.FollowersAnalyzer.Model.User;
 
@@ -13,16 +13,72 @@ public class JsonStringToObject {
 		JsonString = jsonString;
 	}
 
-
-	public User JsonStringToUser(){
-		String[] J = JsonString.split("{");
-		for(int i=1; i<J.length;i++)
-			String[] JsonUser = J[i].split("}");
+	
+	public String JsonStringToString(){
+		JsonString=JsonString.substring(10,(JsonString.length()-1));
+		char JsonArray[]=JsonString.toCharArray();
+		
+		for(int i=0; i<JsonArray.length;i++) {
+			if(JsonArray[i]=='"'||JsonArray[i]=='{'||JsonArray[i]=='}'||
+			   JsonArray[i]==']'||JsonArray[i]=='[') JsonArray[i]=' ';
+		}
+		
+		String string="";
+		for(char c:JsonArray)if(c!=' ')string+=c;
+		
+		return string;
+	}
+	
+	public ArrayList<User> StringToUser(String string){
+		//System.out.println("AAAAAAAAAAA"+string);
+		ArrayList<User> Users = new ArrayList<User>();
+		String Array[]=string.split(",");
+		Long id=0L;
+		String name="";
+		String username="";
+		int cont=0;
+		
+		for(String z: Array) {
+		System.out.println(z);}
+		
+		for(String i: Array) {
 			
-		User user=new User((Long)obj.get("id"),(String)obj.get("name"),(String)obj.get("username"));
-		return user;
-
-
+			//Provato lo switch
+			String Array2[]=i.split(":");
+			
+			if (Array2[0].equals("id")){
+				id=Long.parseLong(Array2[1]);
+				cont++;	
+			}
+			if (Array2[0].equals("name")){
+				name=Array2[1];
+				cont++;	
+			}
+			if (Array2[0].equals("username")){
+				username=Array2[1];
+				cont++;	
+			}
+			
+			if(cont==3) {
+				User user=new User(id,name,username);
+				Users.add(user);
+				cont=0;
+			}
+			
+			
+		}
+		
+		return Users;
 	}
 
+	
+
+		
 }
+	
+	
+	
+	
+	
+	
+	

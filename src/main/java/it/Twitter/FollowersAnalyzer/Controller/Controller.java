@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.Twitter.FollowersAnalyzer.JsonComponent.JsonStringToObject;
 import it.Twitter.FollowersAnalyzer.JsonComponent.StringToJson;
+import it.Twitter.FollowersAnalyzer.Model.User;
 import it.Twitter.FollowersAnalyzer.Service.ServiceFollowers;
 import it.Twitter.FollowersAnalyzer.Service.Service;
 import it.Twitter.FollowersAnalyzer.Service.ServiceTweet;
@@ -23,6 +25,13 @@ public class Controller {
 	public JSONObject getFollowers(@PathVariable Long id) throws IOException, ParseException{
 			ServiceFollowers service = new ServiceFollowers(id);
 			json=new StringToJson(service.getFollowers());
+			JsonStringToObject ccc=new JsonStringToObject(service.getFollowers());
+			
+			for(User a:ccc.StringToUser(ccc.JsonStringToString())) {
+				System.out.println(a.toString());
+			}
+				
+			
 			return json.ToJson();
     }
 	
