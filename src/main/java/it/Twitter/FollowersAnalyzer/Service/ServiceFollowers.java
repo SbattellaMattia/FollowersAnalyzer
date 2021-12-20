@@ -9,6 +9,8 @@ public class ServiceFollowers extends Service{
 		this.url="https://api.twitter.com/2/users/"+id+"/followers?user.fields=created_at&max_results=2";
 	}
 	
+	
+	
 	public String getFollowers() throws IOException {
 		return Connection(url);
 	}

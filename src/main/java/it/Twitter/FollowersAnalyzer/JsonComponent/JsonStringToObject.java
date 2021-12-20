@@ -18,13 +18,10 @@ public class JsonStringToObject {
 		JsonString=JsonString.substring(10,(JsonString.length()-1));
 		char JsonArray[]=JsonString.toCharArray();
 		
-		for(int i=0; i<JsonArray.length;i++) {
-			if(JsonArray[i]=='"'||JsonArray[i]=='{'||JsonArray[i]=='}'||
-			   JsonArray[i]==']'||JsonArray[i]=='[') JsonArray[i]=' ';
-		}
 		
 		String string="";
-		for(char c:JsonArray)if(c!=' ')string+=c;
+		for(char i:JsonArray)if(JsonArray[i]!='"'||JsonArray[i]!='{'||JsonArray[i]!='}'||
+				   				JsonArray[i]!=']'||JsonArray[i]!='[')string+=i;
 		
 		return string;
 	}
