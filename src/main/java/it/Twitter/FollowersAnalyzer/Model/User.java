@@ -1,21 +1,41 @@
 package it.Twitter.FollowersAnalyzer.Model;
 
+import java.util.ArrayList;
+
+
 	public class User extends Super{
-		
+
 		private String name;
 		private String username;
+		private String location;
+		private String description;
+		private boolean protect;
 		private int followersCount;
 		private int friendsCount;
-		
+		private String createdAt;
+		private int favouritesCount;
+		private boolean verified;
 
+		private ArrayList<User> followers = new ArrayList<User>();
+		private ArrayList<User> friends = new ArrayList<User>();
+
+
+		
 		public User(Long id) {
 			super(id);
 		}
-		
-		
+
+
 		public User(Long id, String name) {
 			super(id);
 			this.name = name;
+		}
+
+
+		public User(Long id, String name, String username) {
+			super(id);
+			this.username = name;
+			this.name = username;
 		}
 
 
@@ -39,13 +59,23 @@ package it.Twitter.FollowersAnalyzer.Model;
 		}
 
 
+		public ArrayList<User> getFollowers(){
+			return this.followers;
+		} 
+
+
+		public void setFollowers(ArrayList<User> followers) {
+			this.followers = followers;
+		}
+
+
 		public int getFollowersCount() {
 			return followersCount;
 		}
 
 
-		public void setFollowersCount(int followersCount) {
-			this.followersCount = followersCount;
+		public void setFollowersCount() {
+			this.followersCount = followers.size();
 		}
 
 
@@ -54,23 +84,83 @@ package it.Twitter.FollowersAnalyzer.Model;
 		}
 
 
-		public void setFriendsCount(int friendsCount) {
-			this.friendsCount = friendsCount;
+		public void setFriendsCount() {
+			this.friendsCount = friends.size();
 		}
 
 
-		public User(Long id, String name, String username) {
-			super(id);
-			this.username = name;
-			this.name = username;
+		public String getLocation() {
+			return location;
+		}
+
+
+		public void setLocation(String location) {
+			this.location = location;
+		}
+
+
+		public String getDescription() {
+			return description;
+		}
+
+
+		public void setDescription(String description) {
+			this.description = description;
+		}
+
+
+		public boolean isProtect() {
+			return protect;
+		}
+
+
+		public void setProtect(boolean protect) {
+			this.protect = protect;
+		}
+
+
+		public String getCreatedAt() {
+			return createdAt;
+		}
+
+
+		public void setCreatedAt(String createdAt) {
+			this.createdAt = createdAt;
+		}
+
+
+		public int getFavouritesCount() {
+			return favouritesCount;
+		}
+
+
+		public void setFavouritesCount(int favouritesCount) {
+			this.favouritesCount = favouritesCount;
+		}
+
+
+		public boolean isVerified() {
+			return verified;
+		}
+
+
+		public void setVerified(boolean verified) {
+			this.verified = verified;
 		}
 
 
 		@Override
 		public String toString() {
-			return "User [id="+ getId() + ",name=" + name + ", username=" + username + "]";
-		}
-		
-		
 
-}
+			return "User [id="+ getId() + ",name=" + name + ", username=" + username + "]\n";
+		}
+
+
+		public String ArrayToString() {
+
+			String s = "";
+			for(User user : followers) s += user.toString();
+			return s;
+		}
+
+} 
