@@ -19,7 +19,7 @@ import java.util.ArrayList;
 		private ArrayList<User> followers = new ArrayList<User>();
 		private ArrayList<User> friends = new ArrayList<User>();
 
-
+	
 		
 		public User(Long id) {
 			super(id);

@@ -23,7 +23,7 @@ public class Controller {
 	
 	@GetMapping(value="/followers/{id}")
 	public JSONObject getFollowers(@PathVariable Long id) throws IOException, ParseException{
-			ServiceFollowers service = new ServiceFollowers(id);
+			ServiceFollowers service = new ServiceFollowers(id);	//istanzia il collegamento
 			json=new StringToJson(service.getFollowers());
 			JsonStringToObject ccc=new JsonStringToObject(service.getFollowers());
 			
