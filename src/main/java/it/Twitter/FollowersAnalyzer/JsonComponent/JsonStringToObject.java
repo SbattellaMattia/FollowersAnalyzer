@@ -2,6 +2,7 @@ package it.Twitter.FollowersAnalyzer.JsonComponent;
 
 import java.util.ArrayList;
 
+import it.Twitter.FollowersAnalyzer.Model.Tweet;
 import it.Twitter.FollowersAnalyzer.Model.User;
 
 public class JsonStringToObject {
@@ -18,19 +19,18 @@ public class JsonStringToObject {
 		JsonString=JsonString.substring(10,(JsonString.length()-1));
 		char JsonArray[]=JsonString.toCharArray();
 		
-		for(int i=0; i<JsonArray.length;i++) {
-			if(JsonArray[i]=='"'||JsonArray[i]=='{'||JsonArray[i]=='}'||
-			   JsonArray[i]==']'||JsonArray[i]=='[') JsonArray[i]=' ';
-		}
 		
 		String string="";
-		for(char c:JsonArray)if(c!=' ')string+=c;
+		for(char i:JsonArray)if(JsonArray[i]!='"'||JsonArray[i]!='{'||JsonArray[i]!='}'||
+				   				JsonArray[i]!=']'||JsonArray[i]!='[')string+=i;
 		
 		return string;
 	}
 	
+	
+	
+	
 	public ArrayList<User> StringToUser(String string){
-		//System.out.println("AAAAAAAAAAA"+string);
 		ArrayList<User> Users = new ArrayList<User>();
 		String Array[]=string.split(",");
 		Long id=0L;
@@ -38,8 +38,8 @@ public class JsonStringToObject {
 		String username="";
 		int cont=0;
 		
-		for(String z: Array) {
-		System.out.println(z);}
+		/*for(String z: Array) {
+		System.out.println(z);}*/
 		
 		for(String i: Array) {
 			
@@ -70,15 +70,44 @@ public class JsonStringToObject {
 		
 		return Users;
 	}
-
 	
+	
+	public ArrayList<Tweet> StringToTweet(String string){
+		ArrayList<Tweet> Tweets = new ArrayList<Tweet>();
+		String Array[]=string.split(",");
+		Long id=0L;
+		String text="";
+		int cont=0;
+		
+		/*for(String z: Array) {
+		System.out.println(z);}*/
+		
+		for(String i: Array) {
+			
+			//Provato lo switch
+			String Array2[]=i.split(":");
+			
+			if (Array2[0].equals("id")){
+				id=Long.parseLong(Array2[1]);
+				cont++;	
+			}
+			if (Array2[0].equals("text")){
+				text=Array2[1];
+				cont++;	
+			}
+			
+			if(cont==2) {
+				Tweet tweet=new Tweet(id,text);
+				Tweets.add(tweet);
+				cont=0;
+			}
+			
+			
+		}
+		
+		return Tweets;
+	}
 
 		
 }
-	
-	
-	
-	
-	
-	
 	

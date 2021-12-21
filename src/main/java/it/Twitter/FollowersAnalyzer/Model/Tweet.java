@@ -8,6 +8,11 @@ public class Tweet extends Super{
 	public Tweet(Long id) {
 		super(id);
 	}
+	
+	public Tweet(Long id, String text) {
+		super(id);
+		this.text=text;
+	}
 
 	public int getLikes() {
 		return likes;
