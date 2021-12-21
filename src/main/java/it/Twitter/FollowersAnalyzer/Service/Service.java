@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 
-public class Service {	
+public abstract class Service {	
 	private String BearerToken;
+	protected String Url;
 	
 	
 	public Service() {

@@ -13,7 +13,6 @@ package it.Twitter.FollowersAnalyzer.Model;
 			return id;
 		}
 
-		
 		public void setId(Long id) {
 			this.id = id;
 		}

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 		private ArrayList<User> followers = new ArrayList<User>();
 		private ArrayList<User> friends = new ArrayList<User>();
+		private ArrayList<Tweet>tweets = new ArrayList<Tweet>();
 
 
 		
@@ -147,20 +148,41 @@ import java.util.ArrayList;
 		public void setVerified(boolean verified) {
 			this.verified = verified;
 		}
+		
+		
+		public ArrayList<Tweet> getTweets() {
+			return tweets;
+		}
 
 
-		@Override
-		public String toString() {
+		public void setTweets(ArrayList<Tweet> tweets) {
+			this.tweets = tweets;
+		}
 
+		public String UserToString() {
 			return "User [id="+ getId() + ",name=" + name + ", username=" + username + "]\n";
 		}
 
 
-		public String ArrayToString() {
+		public String UserArrayToString() {
 
-			String s = "";
-			for(User user : followers) s += user.toString();
-			return s;
+			String aux = "";
+			for(User user : followers) aux += user.UserToString();
+			return aux;
 		}
+		
+		public String TweetToString(Tweet tweet) {
+			return "Tweet [id="+ tweet.getId() + ",text=" + tweet.getText() +"]\n";
+		}
+
+
+		public String TweetArrayToString() {
+
+			String aux = "";
+			for(Tweet tweet : tweets) aux +=TweetToString(tweet);
+			return aux;
+		}
+		
+		
 
 } 
