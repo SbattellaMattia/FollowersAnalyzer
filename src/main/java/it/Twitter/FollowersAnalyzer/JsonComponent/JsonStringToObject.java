@@ -16,30 +16,28 @@ public class JsonStringToObject {
 
 	
 	public String JsonStringToString(){
-		JsonString=JsonString.substring(10,(JsonString.length()-1));
 		char JsonArray[]=JsonString.toCharArray();
 		
-		
 		String string="";
-		for(char i:JsonArray)if(JsonArray[i]!='"'||JsonArray[i]!='{'||JsonArray[i]!='}'||
-				   				JsonArray[i]!=']'||JsonArray[i]!='[')string+=i;
+		for(char i:JsonArray)if(i!='"'&& i!='{'&& i!='}'&&
+				   				i!=']'&& i!='[')string+=i;
 		
+		//System.out.println(string);
+		string=string.substring(5);
+		//System.out.println(string);
 		return string;
 	}
 	
 	
 	
 	
-	public ArrayList<User> StringToUser(String string){
+	public ArrayList<User> StringToUser(){
 		ArrayList<User> Users = new ArrayList<User>();
-		String Array[]=string.split(",");
+		String Array[]=JsonStringToString().split(",");
 		Long id=0L;
 		String name="";
 		String username="";
 		int cont=0;
-		
-		/*for(String z: Array) {
-		System.out.println(z);}*/
 		
 		for(String i: Array) {
 			
@@ -61,20 +59,20 @@ public class JsonStringToObject {
 			
 			if(cont==3) {
 				User user=new User(id,name,username);
+				//System.out.println(user.UserToString());
 				Users.add(user);
 				cont=0;
 			}
 			
 			
 		}
-		
 		return Users;
 	}
 	
 	
-	public ArrayList<Tweet> StringToTweet(String string){
+	public ArrayList<Tweet> StringToTweet(){
 		ArrayList<Tweet> Tweets = new ArrayList<Tweet>();
-		String Array[]=string.split(",");
+		String Array[]=JsonStringToString().split(",");
 		Long id=0L;
 		String text="";
 		int cont=0;
