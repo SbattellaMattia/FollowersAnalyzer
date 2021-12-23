@@ -24,6 +24,11 @@ import java.util.ArrayList;
 		
 		public User(Long id) {
 			super(id);
+			name = getName();
+			username = getUsername();
+			location = getLocation();
+			
+			
 		}
 
 

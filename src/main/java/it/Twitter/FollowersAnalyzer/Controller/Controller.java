@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+//import it.Twitter.FollowersAnalyzer.Exceptions.IdNotFoundException;
 import it.Twitter.FollowersAnalyzer.JsonComponent.JsonStringToObject;
 import it.Twitter.FollowersAnalyzer.JsonComponent.StringToJson;
 import it.Twitter.FollowersAnalyzer.Model.User;
 import it.Twitter.FollowersAnalyzer.Service.ServiceFollowers;
 import it.Twitter.FollowersAnalyzer.Service.Service;
 import it.Twitter.FollowersAnalyzer.Service.ServiceTweet;
+import it.Twitter.FollowersAnalyzer.Service.ServiceUser;
 
 @RestController
 public class Controller {
@@ -47,6 +49,13 @@ public class Controller {
 			json=new StringToJson(service.getTweet(id));
 			return json.ToJson();
     }*/
+	
+	/*@GetMapping(value="/{id}")
+	public ResponseEntity<JSONObject> getUser(@PathVariable Long id) throws IOException, ParseException, IdNotFoundException{
+		ServiceUser service = new ServiceUser(id);
+		json = new StringToJson(service.getUser());
+		return json.ToJson();
+	}*/
 	
 	
 }
