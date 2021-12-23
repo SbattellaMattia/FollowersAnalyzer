@@ -44,6 +44,8 @@ public class JsonStringToObject {
 			//Provato lo switch
 			String Array2[]=i.split(":");
 			
+			for(String a: Array2) {System.out.println(a);}
+			
 			if (Array2[0].equals("id")){
 				id=Long.parseLong(Array2[1]);
 				cont++;	

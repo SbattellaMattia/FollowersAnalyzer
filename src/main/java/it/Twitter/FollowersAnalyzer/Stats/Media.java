@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Media {
 	
 	private int somma=0;
-	private double media=0;
+	private float media=0;
 	
 	
 	public Media(ArrayList<Integer> numerofollowersxUser) {

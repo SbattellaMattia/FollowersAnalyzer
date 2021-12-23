@@ -59,9 +59,9 @@ public class Controller {
 			}
 			
 			String line="";
-			for(Long i : IdFollowers) {
+			/*for(Long i : IdFollowers) {
 				line+=" "+i;
-			}
+			}*/
 			
 			
 			
