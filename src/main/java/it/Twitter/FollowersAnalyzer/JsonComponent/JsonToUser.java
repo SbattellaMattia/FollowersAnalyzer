@@ -28,6 +28,24 @@ public class JsonToUser {
         User user=new User(id,name,username);
         return user;
     }
+    
+    public User parseOneUser(JSONObject User) 
+    {
+    	
+    	JSONObject data = (JSONObject) User.get("data");
+    	
+        String name = (String) data.get("name");    
+        //System.out.println(name);
+         
+        String username = (String) data.get("username");    
+        //System.out.println(username);
+         
+        Long id = Long.parseLong((String) data.get("id"));    
+        //System.out.println(id);
+        
+        User user=new User(id,name,username);
+        return user;
+    }
 
     
     public ArrayList<User> parseUsers(JSONObject Users) 
@@ -45,5 +63,6 @@ public class JsonToUser {
         }
         return followers;
     }
+    
 }   
 
