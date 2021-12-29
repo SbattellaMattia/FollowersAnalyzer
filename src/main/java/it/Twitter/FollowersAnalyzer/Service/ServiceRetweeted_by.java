@@ -10,7 +10,7 @@ public class ServiceRetweeted_by extends Service{
 		this.Url="https://api.twitter.com/2/tweets/"+id+"/retweeted_by";
 	}
 	
-	public String getFollowers() throws IOException {
+	public String getRetweeted_by() throws IOException {
 		return Connection(Url);
 	}
 
