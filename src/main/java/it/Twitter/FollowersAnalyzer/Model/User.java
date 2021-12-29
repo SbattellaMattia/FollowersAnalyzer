@@ -165,7 +165,7 @@ import java.util.ArrayList;
 		}
 
 		public String UserToString() {
-			return "User [id="+ getId() + ",name=" + name + ", username=" + username + "]\n";
+			return "{\"id\": \""+ getId() + "\",\"name\": \"" + name + "\",\"username\": \"" + username + "\"}";
 		}
 
 
@@ -187,6 +187,12 @@ import java.util.ArrayList;
 			for(Tweet tweet : tweets) aux +=TweetToString(tweet);
 			return aux;
 		}
+		
+		
+		
+		
+		
+		
 		
 		
 
