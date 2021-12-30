@@ -3,6 +3,7 @@ package it.Twitter.FollowersAnalyzer.Controller;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
@@ -13,19 +14,21 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import it.Twitter.FollowersAnalyzer.Filter.FilterByFollowersRange;
+import it.Twitter.FollowersAnalyzer.Filter.FilterByName;
+import it.Twitter.FollowersAnalyzer.Filter.FilterByRefollowers;
+import it.Twitter.FollowersAnalyzer.Filter.FilterByUsername;
 import it.Twitter.FollowersAnalyzer.JsonComponent.JsonToUser;
 import it.Twitter.FollowersAnalyzer.JsonComponent.StringToJson;
 import it.Twitter.FollowersAnalyzer.Model.User;
 import it.Twitter.FollowersAnalyzer.Service.ServiceFollowers;
+import it.Twitter.FollowersAnalyzer.Service.ServiceFollowing;
 import it.Twitter.FollowersAnalyzer.Service.ServiceLikedTweets;
 import it.Twitter.FollowersAnalyzer.Service.ServiceRetweeted_by;
 import it.Twitter.FollowersAnalyzer.Service.ServiceTweet;
-import it.Twitter.FollowersAnalyzer.Service.ServiceUser;
 import it.Twitter.FollowersAnalyzer.Service.ServiceUserById;
 import it.Twitter.FollowersAnalyzer.Service.ServiceUserByUsername;
 import it.Twitter.FollowersAnalyzer.Stats.Media;
-import it.Twitter.FollowersAnalyzer.Exceptions.IdNotFoundException;
-import it.Twitter.FollowersAnalyzer.Exceptions.EmptyStringException;
+
 
 
 
@@ -65,48 +68,42 @@ public class Controller {
 		return new ResponseEntity<>(json.ToJson(), HttpStatus.OK);
 	}
 
-	
+	@GetMapping(value="/UserById/{id}")
 	public JSONObject getUserById(@PathVariable Long id) throws IOException, ParseException{
 		ServiceUserById service = new ServiceUserById(id);
 		json=new StringToJson(service.getUser());
-
 		JsonToUser jsonUser=new JsonToUser();
-
 		User user=jsonUser.parseOneUser(json.ToJson());
-		//System.out.println(user.UserToString());
-
-		//StringToJson json2=new StringToJson(user.UserToString());
 		json=new StringToJson(user.UserToString());
-		//return json2.ToJson();
 		return json.ToJson(); 
 	}
 
 
 	@GetMapping(value="/Followers/{id}")
-	public JSONObject getFollowers(@PathVariable Long id) throws IOException, ParseException{
-
-		ServiceFollowers service = new ServiceFollowers(id);	//istanzia il collegamento
+	public JSONObject getFollowers(@PathVariable Long id, @RequestParam(defaultValue = "all") String name, @RequestParam(defaultValue = "all") String username) throws IOException, ParseException{
+		
+		
+		JsonToUser jsonUser=new JsonToUser();
+		User user= jsonUser.parseUser(getUserById(id));
+		
+		ServiceFollowers service = new ServiceFollowers(id);	
 		json=new StringToJson(service.getFollowers());
-
-		/*JsonToUser jsonUser=new JsonToUser();
-
-			for(User i: jsonUser.parseUsers(json.ToJson())) System.out.println(i.UserToString());*/
-
-		ServiceFollowers service = new ServiceFollowers(id);
-
-		/*JsonToUser jsonUser=new JsonToUser();
-			User user=new User(id);*/
-
-		json=new StringToJson(service.getFollowers());
-
-		/*try {
-				user.setFollowers(jsonUser.parseUsers(json.ToJson()));
-			}
-			catch(ParseException e) {
-				System.err.println("Errore nel parsing");
-			}
-			json=new StringToJson(user.AAA());*/
-
+		user.setFollowers(jsonUser.parseUsers(json.ToJson()));
+		
+		FilterByName filterName=new FilterByName();
+		FilterByUsername filterUsername=new FilterByUsername();
+		
+		if((!name.equals("all"))&& username.equals("all")) json=new StringToJson(filterName.Filter(user, name));
+		if((!username.equals("all"))&& name.equals("all")) json=new StringToJson(filterUsername.Filter(user, username));
+		if(username.equals("all") && name.equals("all")) json=new StringToJson(user.FollowersArrayToString());
+		
+		return json.ToJson();
+	}
+	
+	@GetMapping(value="/Following/{id}")
+	public JSONObject getFollowing(@PathVariable Long id) throws IOException, ParseException{
+		ServiceFollowing service = new ServiceFollowing(id);	
+		json=new StringToJson(service.getFollowing());
 		return json.ToJson();
 	}
 
@@ -142,12 +139,12 @@ public class Controller {
 		ArrayList<Integer> NumFollower = new ArrayList<Integer>();
 
 
-		for(User i : jsonUser.parseUsers(getFollowers(id))) {
+		for(User i : jsonUser.parseUsers(getFollowers(id,"all","all"))) {
 			IdFollowers.add(i.getId());
 		}
 
 		for(Long i: IdFollowers) {
-			NumFollower.add(jsonUser.parseUsers(getFollowers(i)).size());	
+			NumFollower.add(jsonUser.parseUsers(getFollowers(i,"all","all")).size());	
 		}
 
 		String line="";
@@ -158,14 +155,6 @@ public class Controller {
 		return line+"\n"+media.toString();
 	}
 
-
-	/*@GetMapping(value="/{id}")
-	public ResponseEntity<JSONObject> getUser(@PathVariable Long id) throws IOException, ParseException, IdNotFoundException{
-		ServiceUser service = new ServiceUser(id);
-		json = new StringToJson(service.getUser());
-		return json.ToJson();
-	}*/
-	
 	
 	@GetMapping(value="/FollowersStats/{id}")
 	public JSONObject getStats(@PathVariable Long id, @RequestParam(defaultValue = "number") String method) throws IOException, ParseException{
@@ -175,15 +164,33 @@ public class Controller {
 		FilterByFollowersRange filter= new FilterByFollowersRange();
 		
 		User user=jsonUser.parseUser(Jobj);
-		user.setFollowers(jsonUser.parseUsers(getFollowers(id)));
+		user.setFollowers(jsonUser.parseUsers(getFollowers(id,"all","all")));
 		
 		for(User i : user.getFollowers()) {
-			i.setFollowers(jsonUser.parseUsers(getFollowers(i.getId())));	
+			i.setFollowers(jsonUser.parseUsers(getFollowers(i.getId(),"all","all")));	
 		}
 		
 		filter.Filter(user.getFollowers());
 		if(method.equals("number"))json=new StringToJson(filter.NumberToString());
 		if(method.equals("%"))json=new StringToJson(filter.PerToString());
+		return json.ToJson();
+	}
+	
+	
+	@GetMapping(value="/StatsRefollowers/{id}")
+	public /*JSONArray*/JSONObject getRefollowers(@PathVariable Long id) throws IOException, ParseException{
+		
+		JSONObject Jobj=getUserById(id);
+		JsonToUser jsonUser=new JsonToUser();
+		FilterByRefollowers filter= new FilterByRefollowers();
+		
+		User user=jsonUser.parseUser(Jobj);
+		
+		user.setFollowers(jsonUser.parseUsers(getFollowers(id,"all","all")));
+		user.setFollowing(jsonUser.parseUsers(getFollowing(id)));
+		
+		System.out.println(filter.Filter(user));
+		json=new StringToJson(filter.Filter(user));
 		return json.ToJson();
 	}
 

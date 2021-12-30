@@ -37,7 +37,7 @@ public class JsonToUser {
         String name = (String) data.get("name");    
         //System.out.println(name);
          
-        String username = (String) data.get("username");    
+        String username =(String) data.get("username");    
         //System.out.println(username);
          
         Long id = Long.parseLong((String) data.get("id"));    

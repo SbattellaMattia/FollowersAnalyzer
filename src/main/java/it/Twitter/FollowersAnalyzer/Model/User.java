@@ -11,13 +11,13 @@ import java.util.ArrayList;
 		private String description;
 		private boolean protect;
 		private int followersCount;
-		private int friendsCount;
+		private int followingCount;
 		private String createdAt;
 		private int favouritesCount;
 		private boolean verified;
 
 		private ArrayList<User> followers = new ArrayList<User>();
-		private ArrayList<User> friends = new ArrayList<User>();
+		private ArrayList<User> following = new ArrayList<User>();
 		private ArrayList<Tweet>tweets = new ArrayList<Tweet>();
 
 	
@@ -40,8 +40,8 @@ import java.util.ArrayList;
 
 		public User(Long id, String name, String username) {
 			super(id);
-			this.username = name;
-			this.name = username;
+			this.name = name;
+			this.username = username;
 		}
 
 
@@ -84,14 +84,21 @@ import java.util.ArrayList;
 			this.followersCount = followers.size();
 		}
 
+		public ArrayList<User> getFollowing(){
+			return this.following;
+		} 
 
-		public int getFriendsCount() {
-			return friendsCount;
+		public void setFollowing(ArrayList<User> following) {
+			this.following = following;
+		}
+		
+		public int getFollowingCount() {
+			return followingCount;
 		}
 
 
-		public void setFriendsCount() {
-			this.friendsCount = friends.size();
+		public void setFollowingCount() {
+			this.followingCount = following.size();
 		}
 
 
@@ -165,15 +172,21 @@ import java.util.ArrayList;
 		}
 
 		public String UserToString() {
-			return "{\"id\": \""+ getId() + "\",\"name\": \"" + name + "\",\"username\": \"" + username + "\"}";
+			return "{\"id\": \""+ getId() + "\",\"name\": \"" + getName() + "\",\"username\": \"" + getUsername() + "\"}";
 		}
 
+		public String FollowersArrayToString() {
 
-		public String UserArrayToString() {
+			String aux = "{\"Data\":[";
+			for(User user : followers) aux += user.UserToString()+",";
+			return aux.substring(0,(aux.length()-1))+"]}";
+		}
+		
+		public String FollowingArrayToString() {
 
-			String aux = "";
-			for(User user : followers) aux += user.UserToString();
-			return aux;
+			String aux = "{\"Data\":[";
+			for(User user : following) aux += user.UserToString()+",";
+			return aux.substring(0,(aux.length()-1))+"]}";
 		}
 		
 		public String TweetToString(Tweet tweet) {
