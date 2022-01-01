@@ -15,7 +15,6 @@ public class JsonToUser {
 	JSONParser jsonParser = new JSONParser();
 
 
-
 	public User parseUser(JSONObject User) 
 	{
 		String name = (String) User.get("name");    
@@ -73,4 +72,3 @@ public class JsonToUser {
 	}
 
 }   
-
