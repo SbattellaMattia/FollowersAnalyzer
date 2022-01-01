@@ -2,6 +2,7 @@ package it.Twitter.FollowersAnalyzer.Controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.lang.NullPointerException;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -20,13 +21,12 @@ import it.Twitter.FollowersAnalyzer.Service.ServiceFollowers;
 import it.Twitter.FollowersAnalyzer.Service.ServiceLikedTweets;
 import it.Twitter.FollowersAnalyzer.Service.ServiceRetweeted_by;
 import it.Twitter.FollowersAnalyzer.Service.ServiceTweet;
-import it.Twitter.FollowersAnalyzer.Service.ServiceUser;
 import it.Twitter.FollowersAnalyzer.Service.ServiceUserById;
 import it.Twitter.FollowersAnalyzer.Service.ServiceUserByUsername;
 import it.Twitter.FollowersAnalyzer.Stats.Media;
 import it.Twitter.FollowersAnalyzer.Exceptions.IdNotFoundException;
 import it.Twitter.FollowersAnalyzer.Exceptions.EmptyStringException;
-
+import it.Twitter.FollowersAnalyzer.JsonComponent.JsonToError;
 
 
 
@@ -36,49 +36,35 @@ public class Controller {
 
 	StringToJson json;
 
-
-	/*@GetMapping(value="/UserById/{id}")
-	public JSONObject getUserById(@PathVariable Long id) throws IOException, ParseException, IdNotFoundException, EmptyStringException{
-		//if (id == null) throw new EmptyStringException ("Non hai inserito l'id utente!");
-		//try{
-		JsonToUser jsonUser=new JsonToUser();
-		User user=jsonUser.parseOneUser(json.ToJson());
-		ServiceUserById service = new ServiceUserById(id);
-		json=new StringToJson(service.getUser());
-		return json.ToJson();
-
-		} catch(IdNotFoundException e) {
-				e.IdNotFoundExceptionToString();
-				System.out.println(e);
-			}
-			finally {
-
-			}
-	}*/
-
-
 	@GetMapping(value="/UserByUsername/{username}")
-	public ResponseEntity<Object> getUserByUsername(@PathVariable String username) throws IOException, ParseException{
-		ServiceUserByUsername service = new ServiceUserByUsername(username);
-		json=new StringToJson(service.getUser());
-		
-		return new ResponseEntity<>(json.ToJson(), HttpStatus.OK);
+	public ResponseEntity<Object> getUserByUsername(@PathVariable String username) throws IOException, ParseException, IdNotFoundException, NullPointerException{
+	
+		try{
+			ServiceUserByUsername service = new ServiceUserByUsername(username);
+			json=new StringToJson(service.getUser());
+			JsonToUser jsonUser=new JsonToUser();
+			User user=jsonUser.parseOneUser(json.ToJson());
+			json=new StringToJson(user.UserToString());
+			return new ResponseEntity<>(json.ToJson(), HttpStatus.OK);
+		} catch (IdNotFoundException e) {
+			JsonToError jsonError = new JsonToError();
+			e = jsonError.parseErrors(json.ToJson());
+			System.out.println(e.IdNotFoundExceptionToString());
+			return new ResponseEntity<>(e.IdNotFoundExceptionToString(), HttpStatus.BAD_REQUEST);
+		}
 	}
 
 	
-	public JSONObject getUserById(@PathVariable Long id) throws IOException, ParseException{
+	@GetMapping(value="/UserById/{id}")
+	public ResponseEntity<Object> getUserById(@PathVariable Long id) throws IOException, ParseException{
+	//public JSONObject getUserById(@PathVariable Long id) throws IOException, ParseException{
 		ServiceUserById service = new ServiceUserById(id);
 		json=new StringToJson(service.getUser());
-
 		JsonToUser jsonUser=new JsonToUser();
-
 		User user=jsonUser.parseOneUser(json.ToJson());
-		//System.out.println(user.UserToString());
-
-		//StringToJson json2=new StringToJson(user.UserToString());
 		json=new StringToJson(user.UserToString());
-		//return json2.ToJson();
-		return json.ToJson(); 
+		return new ResponseEntity<>(json.ToJson(), HttpStatus.OK);
+		//return json.ToJson(); 
 	}
 
 
@@ -92,7 +78,7 @@ public class Controller {
 
 			for(User i: jsonUser.parseUsers(json.ToJson())) System.out.println(i.UserToString());*/
 
-		ServiceFollowers service = new ServiceFollowers(id);
+		//ServiceFollowers service = new ServiceFollowers(id);
 
 		/*JsonToUser jsonUser=new JsonToUser();
 			User user=new User(id);*/
@@ -112,25 +98,31 @@ public class Controller {
 
 
 	@GetMapping(value="/Tweets/{id}")
-	public JSONObject getTweet(@PathVariable Long id) throws IOException, ParseException{
+	public ResponseEntity<Object> getTweet(@PathVariable Long id) throws IOException, ParseException{
+	//public JSONObject getTweet(@PathVariable Long id) throws IOException, ParseException{
 		ServiceTweet service = new ServiceTweet(id);
 		json=new StringToJson(service.getTweet());
-		return json.ToJson();
+		return new ResponseEntity<>(json.ToJson(), HttpStatus.OK);
+		//return json.ToJson();
 	}
 
 	@GetMapping(value="/Retweeted_by/{id}")
-	public JSONObject getRetweeted_by(@PathVariable Long id) throws IOException, ParseException{
+	public ResponseEntity<Object> getRetweeted_by(@PathVariable Long id) throws IOException, ParseException{
+	//public JSONObject getRetweeted_by(@PathVariable Long id) throws IOException, ParseException{
 		ServiceRetweeted_by service = new ServiceRetweeted_by(id);
 		json=new StringToJson(service.getRetweeted_by());
-		return json.ToJson();
+		return new ResponseEntity<>(json.ToJson(), HttpStatus.OK);
+		//return json.ToJson();
 	}
 
 
 	@GetMapping(value="/LikedTweets/{id}")
-	public JSONObject getLikedTweets(@PathVariable Long id) throws IOException, ParseException{
+	public ResponseEntity<Object> getLikedTweets(@PathVariable Long id) throws IOException, ParseException{
+	//public JSONObject getLikedTweets(@PathVariable Long id) throws IOException, ParseException{
 		ServiceLikedTweets service = new ServiceLikedTweets(id);
 		json=new StringToJson(service.getLikedTweets());
-		return json.ToJson();
+		return new ResponseEntity<>(json.ToJson(), HttpStatus.OK);
+		//return json.ToJson();
 	}
 
 
@@ -158,19 +150,12 @@ public class Controller {
 		return line+"\n"+media.toString();
 	}
 
-
-	/*@GetMapping(value="/{id}")
-	public ResponseEntity<JSONObject> getUser(@PathVariable Long id) throws IOException, ParseException, IdNotFoundException{
-		ServiceUser service = new ServiceUser(id);
-		json = new StringToJson(service.getUser());
-		return json.ToJson();
-	}*/
-	
 	
 	@GetMapping(value="/FollowersStats/{id}")
 	public JSONObject getStats(@PathVariable Long id, @RequestParam(defaultValue = "number") String method) throws IOException, ParseException{
 		
-		JSONObject Jobj=getUserById(id);
+		
+		JSONObject Jobj= getUserById(id);
 		JsonToUser jsonUser=new JsonToUser();
 		FilterByFollowersRange filter= new FilterByFollowersRange();
 		
@@ -187,5 +172,25 @@ public class Controller {
 		return json.ToJson();
 	}
 
+
+
+	/*@GetMapping(value="/UserById/{id}")
+	public JSONObject getUserById(@PathVariable Long id) throws IOException, ParseException, IdNotFoundException, EmptyStringException{
+		//if (id == null) throw new EmptyStringException ("Non hai inserito l'id utente!");
+		//try{
+		JsonToUser jsonUser=new JsonToUser();
+		User user=jsonUser.parseOneUser(json.ToJson());
+		ServiceUserById service = new ServiceUserById(id);
+		json=new StringToJson(service.getUser());
+		return json.ToJson();
+
+		} catch(IdNotFoundException e) {
+				e.IdNotFoundExceptionToString();
+				System.out.println(e);
+			}
+			finally {
+
+			}
+	}*/
 
 }

@@ -27,8 +27,6 @@ import java.util.ArrayList;
 			name = getName();
 			username = getUsername();
 			location = getLocation();
-			
-			
 		}
 
 
@@ -40,8 +38,15 @@ import java.util.ArrayList;
 
 		public User(Long id, String name, String username) {
 			super(id);
-			this.username = name;
-			this.name = username;
+			this.name = name;
+			this.username = username;
+		}
+		
+		public User(Long id, String name, String username, String createdAt) {
+			super(id);
+			this.name = name;
+			this.username = username;
+			this.createdAt = createdAt;
 		}
 
 
@@ -130,8 +135,8 @@ import java.util.ArrayList;
 		}
 
 
-		public void setCreatedAt(String createdAt) {
-			this.createdAt = createdAt;
+		public void setCreatedAt(String createdAt) {	     
+		    this.createdAt = createdAt;
 		}
 
 
@@ -165,12 +170,11 @@ import java.util.ArrayList;
 		}
 
 		public String UserToString() {
-			return "{\"id\": \""+ getId() + "\",\"name\": \"" + name + "\",\"username\": \"" + username + "\"}";
+			return "{\"id\": \""+ getId() + "\",\"name\": \"" + name + "\",\"username\": \"" + username + "\",\"created_at\": \"" + createdAt +"\"}";
 		}
 
 
 		public String UserArrayToString() {
-
 			String aux = "";
 			for(User user : followers) aux += user.UserToString();
 			return aux;
@@ -182,18 +186,9 @@ import java.util.ArrayList;
 
 
 		public String TweetArrayToString() {
-
 			String aux = "";
 			for(Tweet tweet : tweets) aux +=TweetToString(tweet);
 			return aux;
 		}
-		
-		
-		
-		
-		
-		
-		
-		
 
 } 

@@ -2,7 +2,7 @@ package it.Twitter.FollowersAnalyzer.Exceptions;
 
 public class IdNotFoundException extends Exception{
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 	
 	private String Parameter;
 	private String ResourceType;
@@ -21,7 +21,7 @@ public class IdNotFoundException extends Exception{
 	}
 	
 	public IdNotFoundException (String Parameter, String ResourceType, String ResourceId, String Detail, String Title, String Type, String Value) {
-		
+	
 		this.Parameter = Parameter;
 		this.ResourceType = ResourceType;
 		this.ResourceId = ResourceId;
