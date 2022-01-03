@@ -8,7 +8,7 @@ import it.Twitter.FollowersAnalyzer.Exceptions.IdNotFoundException;
 public class ServiceUserByUsername extends Service {
 	
 	public ServiceUserByUsername(String username) {
-		this.Url="https://api.twitter.com/2/users/by/username/"+username;
+		this.Url="https://api.twitter.com/2/users/by/username/"+username+"?user.fields=created_at";
 	}
 	
 	public String getUser() throws IOException, IdNotFoundException{
