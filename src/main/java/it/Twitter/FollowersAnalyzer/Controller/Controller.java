@@ -60,8 +60,8 @@ public class Controller {
 
 
 	@GetMapping(value="/UserById/{id}")
-		//public ResponseEntity<Object> getUserById(@PathVariable Long id) throws IOException, ParseException{
-		public JSONObject getUserById(@PathVariable Long id) throws IOException, ParseException{
+		public ResponseEntity<Object> getUserById(@PathVariable Long id) throws IOException, ParseException{
+		//public JSONObject getUserById(@PathVariable Long id) throws IOException, ParseException{
 
 		ServiceUserById service = new ServiceUserById(id);
 		json=new StringToJson(service.getUser());
@@ -69,50 +69,28 @@ public class Controller {
 		User user=jsonUser.parseOneUser(json.ToJson());
 		json=new StringToJson(user.UserToString());
 
-		//return new ResponseEntity<>(json.ToJson(), HttpStatus.OK);
-		return json.ToJson(); 
+		return new ResponseEntity<>(json.ToJson(), HttpStatus.OK);
+		//return json.ToJson(); 
 	}
 
 
 	@GetMapping(value="/Followers/{id}")
 	public JSONObject getFollowers(@PathVariable Long id, @RequestParam(defaultValue = "all") String name, @RequestParam(defaultValue = "all") String username) throws IOException, ParseException{
 
-
 		JsonToUser jsonUser=new JsonToUser();
-		User user= jsonUser.parseUser(getUserById(id));
-
+		//User user= jsonUser.parseUser(getUserById(id));
+		User user= jsonUser.parseUser((JSONObject)getUserById(id).getBody());
+		
 		ServiceFollowers service = new ServiceFollowers(id);	
-		json=new StringToJson(service.getFollowers());
-
-		/*JsonToUser jsonUser=new JsonToUser();
-
-			for(User i: jsonUser.parseUsers(json.ToJson())) System.out.println(i.UserToString());*/
-
-		//ServiceFollowers service = new ServiceFollowers(id);
-
-		/*JsonToUser jsonUser=new JsonToUser();
-			User user=new User(id);*/
-
-		json=new StringToJson(service.getFollowers());
-
-		/*try {
-				user.setFollowers(jsonUser.parseUsers(json.ToJson()));
-			}
-			catch(ParseException e) {
-				System.err.println("Errore nel parsing");
-			}
-			json=new StringToJson(user.AAA());*/
-
+		json = new StringToJson(service.getFollowers());
 
 		user.setFollowers(jsonUser.parseUsers(json.ToJson()));
-
 		FilterByName filterName=new FilterByName();
 		FilterByUsername filterUsername=new FilterByUsername();
-
 		if((!name.equals("all"))&& username.equals("all")) json=new StringToJson(filterName.Filter(user, name));
 		if((!username.equals("all"))&& name.equals("all")) json=new StringToJson(filterUsername.Filter(user, username));
 		if(username.equals("all") && name.equals("all")) json=new StringToJson(user.FollowersArrayToString());
-
+		
 		return json.ToJson();
 	}
 
@@ -181,8 +159,8 @@ public class Controller {
 	@GetMapping(value="/FollowersStats/{id}")
 	public JSONObject getStats(@PathVariable Long id, @RequestParam(defaultValue = "number") String method) throws IOException, ParseException{
 
-
-		JSONObject Jobj= getUserById(id);
+		//JSONObject Jobj= getUserById(id);
+		JSONObject Jobj= (JSONObject)getUserById(id).getBody();
 		JsonToUser jsonUser=new JsonToUser();
 		FilterByFollowersRange filter= new FilterByFollowersRange();
 
@@ -202,8 +180,9 @@ public class Controller {
 
 	@GetMapping(value="/StatsRefollowers/{id}")
 	public /*JSONArray*/JSONObject getRefollowers(@PathVariable Long id) throws IOException, ParseException{
-
-		JSONObject Jobj=getUserById(id);
+		
+		//JSONObject Jobj = getUserById(id);
+		JSONObject Jobj= (JSONObject)getUserById(id).getBody();
 		JsonToUser jsonUser=new JsonToUser();
 		FilterByRefollowers filter= new FilterByRefollowers();
 
@@ -216,26 +195,5 @@ public class Controller {
 		json=new StringToJson(filter.Filter(user));
 		return json.ToJson();
 	}
-
-
-
-	/*@GetMapping(value="/UserById/{id}")
-	public JSONObject getUserById(@PathVariable Long id) throws IOException, ParseException, IdNotFoundException, EmptyStringException{
-		//if (id == null) throw new EmptyStringException ("Non hai inserito l'id utente!");
-		//try{
-		JsonToUser jsonUser=new JsonToUser();
-		User user=jsonUser.parseOneUser(json.ToJson());
-		ServiceUserById service = new ServiceUserById(id);
-		json=new StringToJson(service.getUser());
-		return json.ToJson();
-
-		} catch(IdNotFoundException e) {
-				e.IdNotFoundExceptionToString();
-				System.out.println(e);
-			}
-			finally {
-
-			}
-	}*/
 
 }

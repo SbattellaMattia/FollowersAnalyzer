@@ -14,7 +14,7 @@ public class StringToDate {
 
 		try {
 			Date date1 = dateParser.parse(createdAt);
-			SimpleDateFormat d1 = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat d1 = new SimpleDateFormat("dd-MM-yyyy");
 			date = d1.format(date1).toString();
 		} catch (ParseException e) {
 			e.printStackTrace();

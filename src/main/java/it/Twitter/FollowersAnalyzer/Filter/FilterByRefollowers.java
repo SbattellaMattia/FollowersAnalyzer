@@ -16,9 +16,5 @@ public class FilterByRefollowers extends Filter {
 		}
 		return UserArrayToString(Refollows);
 	}
-	
-	
-	
-	
 
 }

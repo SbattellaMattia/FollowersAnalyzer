@@ -5,18 +5,20 @@ import java.util.Iterator;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+//import org.json.simple.parser.JSONParser;
 import it.Twitter.FollowersAnalyzer.Model.User;
 import it.Twitter.FollowersAnalyzer.Utils.StringToDate;
 
 
 public class JsonToUser {
 
-	JSONParser jsonParser = new JSONParser();
+	//JSONParser jsonParser = new JSONParser();
 
 
 	public User parseUser(JSONObject User) 
 	{
+		StringToDate date = new StringToDate();
+		
 		String name = (String) User.get("name");    
 		//System.out.println(name);
 
@@ -25,8 +27,12 @@ public class JsonToUser {
 
 		Long id = Long.parseLong((String) User.get("id"));    
 		//System.out.println(id);
+		
+		String createdAt = date.stringToDate((String) User.get("created_at"));
 
-		User user=new User(id,name,username);
+		//User user=new User(id,name,username);
+		User user=new User(id,name,username,createdAt);
+		
 		return user;
 	}
 

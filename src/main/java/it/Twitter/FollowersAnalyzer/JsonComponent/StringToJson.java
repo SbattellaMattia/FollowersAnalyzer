@@ -13,19 +13,18 @@ public class StringToJson{
 	public StringToJson(String string) {
 		this.string = string;
 	}
-	
-		
-public JSONObject ToJson() throws ParseException{	
-	JSONParser parser = new JSONParser();  
-	JSONObject obj = (JSONObject) parser.parse(string);  
-	return obj;
+
+
+	public JSONObject ToJson() throws ParseException{	
+		JSONParser parser = new JSONParser();  
+		JSONObject obj = (JSONObject) parser.parse(string);  
+		return obj;
 	}
 
-public JSONArray ToJsonArray() throws ParseException{	
-	JSONParser parser = new JSONParser();  
-	JSONArray obj = (JSONArray) parser.parse(string);  
-	return obj;
+	public JSONArray ToJsonArray() throws ParseException{	
+		JSONParser parser = new JSONParser();  
+		JSONArray obj = (JSONArray) parser.parse(string);  
+		return obj;
 	}
-
 
 }

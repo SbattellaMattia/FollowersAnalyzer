@@ -183,14 +183,14 @@ public class User extends Super{
 
 	public String FollowersArrayToString() {
 
-			String aux = "{\"Data\":[";
+			String aux = "{\"data\":[";
 			for(User user : followers) aux += user.UserToString()+",";
 			return aux.substring(0,(aux.length()-1))+"]}";
 		}
 
 		public String FollowingArrayToString() {
 
-			String aux = "{\"Data\":[";
+			String aux = "{\"data\":[";
 			for(User user : following) aux += user.UserToString()+",";
 			return aux.substring(0,(aux.length()-1))+"]}";
 		}

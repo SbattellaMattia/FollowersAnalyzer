@@ -8,7 +8,7 @@ public abstract class Filter {
 
 	public String UserArrayToString(ArrayList<User> followers) {
 
-		String aux = "{\"Data\":[";
+		String aux = "{\"data\":[";
 		for(User user : followers) aux += user.UserToString()+",";
 		return aux.substring(0,(aux.length()-1))+"]}";
 	}
