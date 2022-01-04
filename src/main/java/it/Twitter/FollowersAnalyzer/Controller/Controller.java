@@ -19,6 +19,7 @@ import it.Twitter.FollowersAnalyzer.Filter.FilterByUsername;
 import it.Twitter.FollowersAnalyzer.Filter.FilterByVerified;
 import it.Twitter.FollowersAnalyzer.JsonComponent.JsonToUser;
 import it.Twitter.FollowersAnalyzer.JsonComponent.StringToJson;
+import it.Twitter.FollowersAnalyzer.Model.Tweet;
 import it.Twitter.FollowersAnalyzer.Model.User;
 import it.Twitter.FollowersAnalyzer.Service.ServiceFollowers;
 import it.Twitter.FollowersAnalyzer.Service.ServiceFollowing;
@@ -32,6 +33,7 @@ import it.Twitter.FollowersAnalyzer.Exceptions.ConnectionException;
 import it.Twitter.FollowersAnalyzer.Exceptions.NullDataException;
 import it.Twitter.FollowersAnalyzer.Exceptions.WrongParameter;
 import it.Twitter.FollowersAnalyzer.JsonComponent.JsonToError;
+import it.Twitter.FollowersAnalyzer.JsonComponent.JsonToTweet;
 
 
 @RestController
@@ -40,6 +42,7 @@ public class Controller {
 	JsonToError error=new JsonToError() ;
 	StringToJson json=new StringToJson();
 	JsonToUser jsonUser=new JsonToUser();
+	JsonToTweet jsonTweet=new JsonToTweet();
 	FilterByName filterName=new FilterByName();
 	FilterByUsername filterUsername=new FilterByUsername();
 
@@ -73,7 +76,6 @@ public class Controller {
 	@GetMapping(value="/Followers/{id}")
 	public ResponseEntity<JSONObject> getFollowers(@PathVariable Long id, @RequestParam(defaultValue = "all") String name, @RequestParam(defaultValue = "all") String username)throws IOException, ParseException, NullDataException, ConnectionException{
 		try {
-
 			User user= jsonUser.parseUser(getUserById(id).getBody());
 			ServiceFollowers service = new ServiceFollowers(id);
 
@@ -107,9 +109,16 @@ public class Controller {
 	}
 
 	@GetMapping(value="/Retweeted_by/{id}")
-	public ResponseEntity<JSONObject> getRetweeted_by(@PathVariable Long id) throws IOException, ParseException, NullDataException, ConnectionException{
-		ServiceRetweeted_by service = new ServiceRetweeted_by(id);
-		return new ResponseEntity<>(json.ToJson(service.getRetweeted_by()), HttpStatus.OK);
+	public ResponseEntity<JSONObject> getRetweeted_by(@PathVariable Long id,@RequestParam(defaultValue = "all") String username) throws IOException, ParseException, NullDataException, ConnectionException{
+		try {
+			ServiceRetweeted_by service = new ServiceRetweeted_by(id);
+			Tweet tweet=new Tweet(id);
+			tweet.setRetweeted_by(jsonUser.parseUsers(json.ToJson(service.getRetweeted_by())));
+			return new ResponseEntity<>(json.ToJson(tweet.RetweetedByArrayToString()), HttpStatus.OK);}
+		catch (ConnectionException error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
+		catch (NullDataException error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 	}
 
 
@@ -180,24 +189,16 @@ public class Controller {
 		
 		try{
 			FilterByVerified filter= new FilterByVerified();
-
 			User user=jsonUser.parseUser(getUserById(id).getBody());
 			user.setFollowers(jsonUser.parseUsers(getFollowers(id,"all","all").getBody()));
 			filter.Filter(user);
-
-			return new ResponseEntity<>(json.ToJson(filter.FilterToString(method)), HttpStatus.OK);
-		
-		}catch (ConnectionException error) {
-				return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);
-			}	
-		
+			return new ResponseEntity<>(json.ToJson(filter.FilterToString(method)), HttpStatus.OK);}
+		catch (ConnectionException error) {
+				return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}	
 		catch (NullDataException error) {
-			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);
-		}
-
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 		catch (WrongParameter error) {
-			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 		}
-	}
 
 }

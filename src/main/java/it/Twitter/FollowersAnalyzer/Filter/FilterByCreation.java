@@ -15,9 +15,9 @@ public class FilterByCreation extends Filter {
 		
 		ArrayList<User> FollowerDate = new ArrayList<User>();
 
-		for(User i: user.getFollowers()) {
+		/*for(User i: user.getFollowers()) {
 			if (j.getId().equals(i.getId())) Refollows.add(i) ;
-		}
+		}*/
 		return UserArrayToString(FollowerDate);
 	}
 

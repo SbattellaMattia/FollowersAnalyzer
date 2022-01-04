@@ -25,7 +25,7 @@ public class JsonToTweet {
 	}
 
 
-	public ArrayList<Tweet> parseUsers(JSONObject Tweet) 
+	public ArrayList<Tweet> parseTweets(JSONObject Tweet) 
 	{
 
 		ArrayList<Tweet> tweets = new ArrayList<Tweet>(); 
