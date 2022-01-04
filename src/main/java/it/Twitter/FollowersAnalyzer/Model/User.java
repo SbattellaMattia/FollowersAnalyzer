@@ -13,7 +13,7 @@ public class User extends Super{
 	private int followingCount;
 	private String createdAt;
 	private int favouritesCount;
-	private String verified;
+	private boolean verified;
 
 	private ArrayList<User> followers = new ArrayList<User>();
 	private ArrayList<User> following = new ArrayList<User>();
@@ -50,7 +50,7 @@ public class User extends Super{
 	}
 	
 	
-	public User(Long id, String name, String username, String createdAt, String verified) {
+	public User(Long id, String name, String username, String createdAt, boolean verified) {
 		super(id);
 		this.name = name;
 		this.username = username;

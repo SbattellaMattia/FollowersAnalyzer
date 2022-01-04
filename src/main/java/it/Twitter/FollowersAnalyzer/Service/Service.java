@@ -38,7 +38,7 @@ public abstract class Service {
 					line+= aux;
 				}
 			} catch (IOException e) {
-				System.err.println("Operazione di I/O interrotte");	
+				System.err.println(e.getMessage());	
 			} finally {
 				input.close();
 			}

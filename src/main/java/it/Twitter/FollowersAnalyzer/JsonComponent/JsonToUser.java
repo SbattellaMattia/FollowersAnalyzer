@@ -33,8 +33,10 @@ public class JsonToUser {
 
 		String createdAt = date.stringToDate((String) User.get("created_at"));
 		
-		String verified = (String)User.get("verified");
-		
+		boolean verified;
+		if ((User.get("verified")).equals("true")) verified = true;
+		else verified = false;
+	
 
 		//User user=new User(id,name,username,createdAt);
 		User user=new User(id,name,username,createdAt,verified);
@@ -61,8 +63,8 @@ public class JsonToUser {
 
 		String createdAt = date.stringToDate((String) data.get("created_at"));
 		
-		//boolean verified = (boolean)data.get("verified");
-		String verified = (String)User.get("verified");
+		boolean verified = (boolean)data.get("verified");
+		
 
 		//User user=new User(id,name,username,createdAt);
 		User user=new User(id,name,username,createdAt,verified);
