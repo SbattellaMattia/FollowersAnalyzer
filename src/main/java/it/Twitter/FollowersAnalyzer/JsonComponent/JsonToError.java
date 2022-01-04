@@ -35,7 +35,7 @@ public class JsonToError {
 		IdNotFoundException idNotFoundException = new IdNotFoundException(Parameter, ResourceType, ResourceId, Detail, Title, Type, Value);
 		return idNotFoundException;
 	}
-
+	
 	public IdNotFoundException parseErrors (JSONObject IdNotFoundExceptions) {
 
 		IdNotFoundException primo = new IdNotFoundException();

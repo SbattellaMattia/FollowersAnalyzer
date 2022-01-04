@@ -1,10 +1,8 @@
 package it.Twitter.FollowersAnalyzer.Controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.lang.NullPointerException;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
@@ -29,101 +27,102 @@ import it.Twitter.FollowersAnalyzer.Service.ServiceTweet;
 import it.Twitter.FollowersAnalyzer.Service.ServiceUserById;
 import it.Twitter.FollowersAnalyzer.Service.ServiceUserByUsername;
 import it.Twitter.FollowersAnalyzer.Stats.Media;
-import it.Twitter.FollowersAnalyzer.Exceptions.IdNotFoundException;
-import it.Twitter.FollowersAnalyzer.Exceptions.EmptyStringException;
+import it.Twitter.FollowersAnalyzer.Exceptions.ConnectionException;
+import it.Twitter.FollowersAnalyzer.Exceptions.NullDataException;
 import it.Twitter.FollowersAnalyzer.JsonComponent.JsonToError;
 
 
 @RestController
 public class Controller {
 
-
-	StringToJson json;
+	JsonToError error=new JsonToError() ;
+	StringToJson json=new StringToJson();
 	JsonToUser jsonUser=new JsonToUser();
+	FilterByName filterName=new FilterByName();
+	FilterByUsername filterUsername=new FilterByUsername();
+
 
 	@GetMapping(value="/UserByUsername/{username}")
-	public ResponseEntity<Object> getUserByUsername(@PathVariable String username) throws IOException, ParseException, IdNotFoundException, NullPointerException{
-
-		try{
-			ServiceUserByUsername service = new ServiceUserByUsername(username);
-			json=new StringToJson(service.getUser());
-			User user=jsonUser.parseOneUser(json.ToJson());
-			json=new StringToJson(user.UserToString());
-			return new ResponseEntity<>(json.ToJson(), HttpStatus.OK);
-		} catch (IdNotFoundException e) {
-			JsonToError jsonError = new JsonToError();
-			e = jsonError.parseErrors(json.ToJson());
-			System.out.println(e.IdNotFoundExceptionToString());
-			return new ResponseEntity<>(e.IdNotFoundExceptionToString(), HttpStatus.BAD_REQUEST);
+	public ResponseEntity<JSONObject> getUserByUsername(@PathVariable String username) throws IOException, ParseException,  NullPointerException, ConnectionException{
+		try {
+			try{
+				ServiceUserByUsername service = new ServiceUserByUsername(username);
+				User user=jsonUser.parseOneUser(json.ToJson(service.getUser()));
+				return new ResponseEntity<>(json.ToJson(user.UserToString()), HttpStatus.OK);
+			}catch (ConnectionException error) {
+				return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);
+			}	
+		}catch (NullDataException error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);
 		}
 	}
 
 
 	@GetMapping(value="/UserById/{id}")
-		public ResponseEntity<JSONObject> getUserById(@PathVariable Long id) throws IOException, ParseException{
-		
-		ServiceUserById service = new ServiceUserById(id);
-		json=new StringToJson(service.getUser());
-		User user=jsonUser.parseOneUser(json.ToJson());
-		json=new StringToJson(user.UserToString());
+		public ResponseEntity<JSONObject> getUserById(@PathVariable Long id) throws IOException, ParseException, NullDataException{
 
-		return new ResponseEntity<>(json.ToJson(), HttpStatus.OK);
+		try{
+			ServiceUserById service = new ServiceUserById(id);
+			User user=jsonUser.parseOneUser(json.ToJson(service.getUser()));
+			return new ResponseEntity<>(json.ToJson(user.UserToString()), HttpStatus.OK);
+		}catch (NullDataException error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);
+		}
 	}
 
 
 	@GetMapping(value="/Followers/{id}")
-	public ResponseEntity<JSONObject> getFollowers(@PathVariable Long id, @RequestParam(defaultValue = "all") String name, @RequestParam(defaultValue = "all") String username) throws IOException, ParseException{
+	public ResponseEntity<JSONObject> getFollowers(@PathVariable Long id, @RequestParam(defaultValue = "all") String name, @RequestParam(defaultValue = "all") String username) throws IOException, ParseException,ConnectionException{
+		try {
+			try {
+				User user= jsonUser.parseUser(getUserById(id).getBody());
+				ServiceFollowers service = new ServiceFollowers(id);
+				
+				user.setFollowers(jsonUser.parseUsers(json.ToJson(service.getFollowers())));
+				
+				if((!name.equals("all"))&& username.equals("all")) return new ResponseEntity<>(json.ToJson(filterName.Filter(user, name)), HttpStatus.OK);
+				if((!username.equals("all"))&& name.equals("all")) return new ResponseEntity<>(json.ToJson(filterUsername.Filter(user, username)), HttpStatus.OK);
+				else return new ResponseEntity<>(json.ToJson(user.FollowersArrayToString()), HttpStatus.OK);
 
-		User user= jsonUser.parseUser(getUserById(id).getBody());
-		
-		ServiceFollowers service = new ServiceFollowers(id);	
-		json = new StringToJson(service.getFollowers());
+			}catch (ConnectionException error) {
+				return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
+		}catch (NullDataException error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);
+		}
 
-		user.setFollowers(jsonUser.parseUsers(json.ToJson()));
 		
-		FilterByName filterName=new FilterByName();
-		FilterByUsername filterUsername=new FilterByUsername();
-		if((!name.equals("all"))&& username.equals("all")) json=new StringToJson(filterName.Filter(user, name));
-		if((!username.equals("all"))&& name.equals("all")) json=new StringToJson(filterUsername.Filter(user, username));
-		if(username.equals("all") && name.equals("all")) json=new StringToJson(user.FollowersArrayToString());
 		
-		return new ResponseEntity<>(json.ToJson(), HttpStatus.OK);
+			
 	}
 
 	@GetMapping(value="/Following/{id}")
 	public ResponseEntity<JSONObject> getFollowing(@PathVariable Long id) throws IOException, ParseException{
 		ServiceFollowing service = new ServiceFollowing(id);	
-		json=new StringToJson(service.getFollowing());
-		return new ResponseEntity<>(json.ToJson(), HttpStatus.OK);
+		return new ResponseEntity<>(json.ToJson(service.getFollowing()), HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/Tweets/{id}")
 	public ResponseEntity<JSONObject> getTweet(@PathVariable Long id) throws IOException, ParseException{
 		ServiceTweet service = new ServiceTweet(id);
-		json=new StringToJson(service.getTweet());
-		return new ResponseEntity<>(json.ToJson(), HttpStatus.OK);
+		return new ResponseEntity<>(json.ToJson(service.getTweet()), HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/Retweeted_by/{id}")
 	public ResponseEntity<JSONObject> getRetweeted_by(@PathVariable Long id) throws IOException, ParseException{
-		
 		ServiceRetweeted_by service = new ServiceRetweeted_by(id);
-		json=new StringToJson(service.getRetweeted_by());
-		return new ResponseEntity<>(json.ToJson(), HttpStatus.OK);
-		
+		return new ResponseEntity<>(json.ToJson(service.getRetweeted_by()), HttpStatus.OK);
 	}
 
 
 	@GetMapping(value="/LikedTweets/{id}")
 	public ResponseEntity<JSONObject> getLikedTweets(@PathVariable Long id) throws IOException, ParseException{
 		ServiceLikedTweets service = new ServiceLikedTweets(id);
-		json=new StringToJson(service.getLikedTweets());
-		return new ResponseEntity<>(json.ToJson(), HttpStatus.OK);
+		return new ResponseEntity<>(json.ToJson(service.getLikedTweets()), HttpStatus.OK);
 	}
 
 
 	@GetMapping(value="/MediaFollowers/{id}")
-	public ResponseEntity<JSONObject> getMedia(@PathVariable Long id) throws IOException, ParseException{
+	public ResponseEntity<JSONObject> getMedia(@PathVariable Long id) throws IOException, ParseException, NullDataException{
 
 		User user=jsonUser.parseUser(getUserById(id).getBody());
 		user.setFollowers(jsonUser.parseUsers(getFollowers(id,"all","all").getBody()));
@@ -132,9 +131,7 @@ public class Controller {
 			i.setFollowers(jsonUser.parseUsers(getFollowers(i.getId(),"all","all").getBody()));}
 		
 		Media media =new Media(user);
-		json=new StringToJson(media.toString());
-		
-		return new ResponseEntity<>(json.ToJson(), HttpStatus.OK);
+		return new ResponseEntity<>(json.ToJson(media.toString()), HttpStatus.OK);
 	}
 
 
@@ -167,9 +164,8 @@ public class Controller {
 		user.setFollowers(jsonUser.parseUsers(getFollowers(id,"all","all").getBody()));
 		user.setFollowing(jsonUser.parseUsers(getFollowing(id).getBody()));
 
-		json=new StringToJson(filter.Filter(user));
 		
-		return new ResponseEntity<>(json.ToJson(), HttpStatus.OK);
+		return new ResponseEntity<>(json.ToJson(filter.Filter(user)), HttpStatus.OK);
 	}
 
 }

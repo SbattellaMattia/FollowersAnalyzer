@@ -5,19 +5,24 @@ import java.util.Iterator;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import it.Twitter.FollowersAnalyzer.Exceptions.NullDataException;
 //import org.json.simple.parser.JSONParser;
 import it.Twitter.FollowersAnalyzer.Model.User;
 import it.Twitter.FollowersAnalyzer.Utils.StringToDate;
 
 
 public class JsonToUser {
-
+	StringToDate date = new StringToDate();
 	//JSONParser jsonParser = new JSONParser();
 
 
-	public User parseUser(JSONObject User) 
+	public User parseUser(JSONObject User) throws NullDataException
 	{
-		StringToDate date = new StringToDate();
+		if (User.get("id")==null)throw new NullDataException();
+		
+		Long id = Long.parseLong((String) User.get("id"));    
+		//System.out.println(id);
 		
 		String name = (String) User.get("name");    
 		//System.out.println(name);
@@ -25,23 +30,20 @@ public class JsonToUser {
 		String username = (String) User.get("username");    
 		//System.out.println(username);
 
-		Long id = Long.parseLong((String) User.get("id"));    
-		//System.out.println(id);
-		
 		String createdAt = date.stringToDate((String) User.get("created_at"));
 
-		//User user=new User(id,name,username);
 		User user=new User(id,name,username,createdAt);
 		
 		return user;
 	}
 
-	public User parseOneUser(JSONObject User) 
+	public User parseOneUser(JSONObject User) throws NullDataException
 	{
-		StringToDate date = new StringToDate();
-
+		
+		if(((JSONObject) User.get("data")) == null) throw new NullDataException();
+		
 		JSONObject data = (JSONObject) User.get("data");
-
+		
 		String name = (String) data.get("name");    
 		//System.out.println(name);
 
@@ -61,9 +63,10 @@ public class JsonToUser {
 
 
 
-	public ArrayList<User> parseUsers(JSONObject Users) 
+	public ArrayList<User> parseUsers(JSONObject Users) throws NullDataException
 	{
-
+		if(((JSONArray) Users.get("data")) == null) throw new NullDataException();
+		
 		ArrayList<User> followers = new ArrayList<User>(); 
 		JSONArray data = (JSONArray) Users.get("data");
 

@@ -8,20 +8,14 @@ import org.json.simple.parser.ParseException;
 
 
 public class StringToJson{
-	private String string;
-
-	public StringToJson(String string) {
-		this.string = string;
-	}
-
-
-	public JSONObject ToJson() throws ParseException{	
+	
+	public JSONObject ToJson(String string) throws ParseException{	
 		JSONParser parser = new JSONParser();  
 		JSONObject obj = (JSONObject) parser.parse(string);  
 		return obj;
 	}
 
-	public JSONArray ToJsonArray() throws ParseException{	
+	public JSONArray ToJsonArray(String string) throws ParseException{	
 		JSONParser parser = new JSONParser();  
 		JSONArray obj = (JSONArray) parser.parse(string);  
 		return obj;
