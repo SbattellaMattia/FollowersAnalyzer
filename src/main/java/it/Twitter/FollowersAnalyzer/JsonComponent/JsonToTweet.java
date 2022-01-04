@@ -29,7 +29,6 @@ public class JsonToTweet {
 
 	public ArrayList<Tweet> parseTweets(JSONObject Tweet) throws NullDataException
 	{
-
 		ArrayList<Tweet> tweets = new ArrayList<Tweet>(); 
 
 		JSONArray data = (JSONArray) Tweet.get("data");

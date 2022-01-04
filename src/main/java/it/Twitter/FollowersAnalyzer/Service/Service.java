@@ -17,7 +17,7 @@ public abstract class Service {
 	}
 
 
-	public String Connection(String Url) throws IOException {
+	public String Connection(String Url) throws IOException,ConnectionException {
 		String aux="";
 		String line="";
 
