@@ -2,6 +2,7 @@ package it.Twitter.FollowersAnalyzer.Filter;
 
 import java.util.ArrayList;
 
+import it.Twitter.FollowersAnalyzer.Exceptions.WrongParameter;
 import it.Twitter.FollowersAnalyzer.Model.User;
 
 public class FilterByFollowersRange {
@@ -25,7 +26,6 @@ public class FilterByFollowersRange {
 		
 		for(User i: followers) {
 			int num=i.getFollowers().size();
-			System.out.println(num);
 			if(num<=10)this.LESS_10++;
 			if(num>10 && num<=25) this.BETWEEN_10_25++;
 			if(num>25 && num<=50) this.BETWEEN_25_50++;
@@ -43,10 +43,17 @@ public class FilterByFollowersRange {
 		this.perMORE_100=Math.round(((double)MORE_100/tot*100)*100.0)/100.0;
 	}
 
-	public String NumberToString() {
+	public String FilterToString(String message) throws WrongParameter {
+		if(message.equals("number")) {
 		return "{\"LESS_10\": \"" + LESS_10 + "\",\"BETWEEN_10_25\": \"" + BETWEEN_10_25 + "\",\"BETWEEN_25_50\": \""
 				+ BETWEEN_25_50 + "\",\"BETWEEN_50_75\": \"" + BETWEEN_50_75 + "\",\"BETWEEN_75_100\": \"" + BETWEEN_75_100
-				+ "\",\"MORE_100\": \"" + MORE_100 + "\"}";
+				+ "\",\"MORE_100\": \"" + MORE_100 + "\"}";}
+		if(message.equals("%")) {
+			return "{\"LESS_10\": \"" + perLESS_10 + "%\",\"BETWEEN_10_25\": \"" + perBETWEEN_10_25 + "%\",\"BETWEEN_25_50\": \""
+					+ perBETWEEN_25_50 + "%\",\"BETWEEN_50_75\": \"" + perBETWEEN_50_75 + "%\",\"BETWEEN_75_100\": \"" + perBETWEEN_75_100
+					+ "%\",\"MORE_100\": \"" + perMORE_100 + "%\"}";}
+		
+		else throw new WrongParameter();
 	}
 	
 	public String PerToString() {
