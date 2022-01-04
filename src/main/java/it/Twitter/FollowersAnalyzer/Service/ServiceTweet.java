@@ -2,6 +2,8 @@ package it.Twitter.FollowersAnalyzer.Service;
 
 import java.io.IOException;
 
+import it.Twitter.FollowersAnalyzer.Exceptions.ConnectionException;
+
 /* Dato un Id di un Utente restituisce i suoi tweet
  */
 public class ServiceTweet extends Service {
@@ -10,7 +12,7 @@ public class ServiceTweet extends Service {
 		this.Url="https://api.twitter.com/2/users/"+id+"/tweets?max_results=10";
 	}
 	
-	public String getTweet() throws IOException {
+	public String getTweet() throws IOException, ConnectionException {
 		return Connection(Url);
 	}
 

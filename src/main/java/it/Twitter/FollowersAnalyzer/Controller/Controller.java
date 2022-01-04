@@ -32,6 +32,7 @@ import it.Twitter.FollowersAnalyzer.Exceptions.ConnectionException;
 import it.Twitter.FollowersAnalyzer.Exceptions.NullDataException;
 import it.Twitter.FollowersAnalyzer.Exceptions.WrongParameter;
 import it.Twitter.FollowersAnalyzer.JsonComponent.JsonToError;
+import it.Twitter.FollowersAnalyzer.JsonComponent.JsonToTweet;
 
 
 @RestController
@@ -40,6 +41,7 @@ public class Controller {
 	JsonToError error=new JsonToError() ;
 	StringToJson json=new StringToJson();
 	JsonToUser jsonUser=new JsonToUser();
+	JsonToTweet jsonTweet=new JsonToTweet();
 	FilterByName filterName=new FilterByName();
 	FilterByUsername filterUsername=new FilterByUsername();
 
@@ -91,22 +93,28 @@ public class Controller {
 		catch (NullDataException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);
 		}
-
-
-
-
 	}
 
+	
 	@GetMapping(value="/Following/{id}")
-	public ResponseEntity<JSONObject> getFollowing(@PathVariable Long id) throws IOException, ParseException{
+	public ResponseEntity<JSONObject> getFollowing(@PathVariable Long id) throws IOException, ParseException{;
 		ServiceFollowing service = new ServiceFollowing(id);	
 		return new ResponseEntity<>(json.ToJson(service.getFollowing()), HttpStatus.OK);
 	}
 
+
 	@GetMapping(value="/Tweets/{id}")
-	public ResponseEntity<JSONObject> getTweet(@PathVariable Long id) throws IOException, ParseException{
-		ServiceTweet service = new ServiceTweet(id);
-		return new ResponseEntity<>(json.ToJson(service.getTweet()), HttpStatus.OK);
+	public ResponseEntity<JSONObject> getTweet(@PathVariable Long id) throws IOException, ParseException, ConnectionException{
+		try{
+			User user = jsonUser.parseUser(getUserById(id).getBody());
+			ServiceTweet service = new ServiceTweet(id);
+			user.setTweets(jsonTweet.parseTweets(json.ToJson(service.getTweet())));  
+			return new ResponseEntity<>(json.ToJson(user.TweetArrayToString()), HttpStatus.OK);}
+		
+		catch (ConnectionException error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}	
+		catch(NullDataException error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 	}
 
 	@GetMapping(value="/Retweeted_by/{id}")

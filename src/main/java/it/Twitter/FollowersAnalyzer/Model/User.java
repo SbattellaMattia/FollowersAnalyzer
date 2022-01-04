@@ -204,14 +204,13 @@ public class User extends Super{
 		}
 
 		public String TweetToString(Tweet tweet) {
-			return "Tweet [id="+ tweet.getId() + ",text=" + tweet.getText() +"]\n";
+			return "{\"id\": \""+ tweet.getId() + "\",\"text\": \"" + tweet.getText() + "\"}";
 		}
 
-
 		public String TweetArrayToString() {
-			String aux = "";
-			for(Tweet tweet : tweets) aux +=TweetToString(tweet);
-			return aux;
+			String aux = "{\"data\":[";
+			for(Tweet tweet : tweets) aux += TweetToString(tweet)+",";
+			return aux.substring(0,(aux.length()-1))+"]}";
 		}
 
 	} 

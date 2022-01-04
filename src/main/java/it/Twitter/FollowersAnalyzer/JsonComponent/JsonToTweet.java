@@ -6,6 +6,8 @@ import java.util.Iterator;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+
+import it.Twitter.FollowersAnalyzer.Exceptions.NullDataException;
 import it.Twitter.FollowersAnalyzer.Model.Tweet;
 
 public class JsonToTweet {
@@ -25,7 +27,7 @@ public class JsonToTweet {
 	}
 
 
-	public ArrayList<Tweet> parseUsers(JSONObject Tweet) 
+	public ArrayList<Tweet> parseTweets(JSONObject Tweet) throws NullDataException
 	{
 
 		ArrayList<Tweet> tweets = new ArrayList<Tweet>(); 
