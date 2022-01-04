@@ -46,21 +46,18 @@ public class Controller {
 	@GetMapping(value="/UserByUsername/{username}")
 	public ResponseEntity<JSONObject> getUserByUsername(@PathVariable String username) throws IOException, ParseException,  NullPointerException, ConnectionException{
 		try {
-		
-				ServiceUserByUsername service = new ServiceUserByUsername(username);
-				User user=jsonUser.parseOneUser(json.ToJson(service.getUser()));
-				return new ResponseEntity<>(json.ToJson(user.UserToString()), HttpStatus.OK);
-			}catch (ConnectionException error) {
-				return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);
-			}	
+			ServiceUserByUsername service = new ServiceUserByUsername(username);
+			User user=jsonUser.parseOneUser(json.ToJson(service.getUser()));
+			return new ResponseEntity<>(json.ToJson(user.UserToString()), HttpStatus.OK);}
+		catch (ConnectionException error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}	
 		catch (NullDataException error) {
-			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);
-		}
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 	}
 
 
 	@GetMapping(value="/UserById/{id}")
-		public ResponseEntity<JSONObject> getUserById(@PathVariable Long id) throws IOException, ParseException, NullDataException{
+		public ResponseEntity<JSONObject> getUserById(@PathVariable Long id)throws IOException, ParseException, NullDataException, ConnectionException{
 
 		try{
 			ServiceUserById service = new ServiceUserById(id);
@@ -73,7 +70,7 @@ public class Controller {
 
 
 	@GetMapping(value="/Followers/{id}")
-	public ResponseEntity<JSONObject> getFollowers(@PathVariable Long id, @RequestParam(defaultValue = "all") String name, @RequestParam(defaultValue = "all") String username) throws IOException, ParseException,ConnectionException{
+	public ResponseEntity<JSONObject> getFollowers(@PathVariable Long id, @RequestParam(defaultValue = "all") String name, @RequestParam(defaultValue = "all") String username)throws IOException, ParseException, NullDataException, ConnectionException{
 		try {
 
 			User user= jsonUser.parseUser(getUserById(id).getBody());
@@ -97,26 +94,26 @@ public class Controller {
 	}
 
 	@GetMapping(value="/Following/{id}")
-	public ResponseEntity<JSONObject> getFollowing(@PathVariable Long id) throws IOException, ParseException{
+	public ResponseEntity<JSONObject> getFollowing(@PathVariable Long id)throws IOException, ParseException, NullDataException, ConnectionException{
 		ServiceFollowing service = new ServiceFollowing(id);	
 		return new ResponseEntity<>(json.ToJson(service.getFollowing()), HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/Tweets/{id}")
-	public ResponseEntity<JSONObject> getTweet(@PathVariable Long id) throws IOException, ParseException{
+	public ResponseEntity<JSONObject> getTweet(@PathVariable Long id)throws IOException, ParseException, NullDataException, ConnectionException{
 		ServiceTweet service = new ServiceTweet(id);
 		return new ResponseEntity<>(json.ToJson(service.getTweet()), HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/Retweeted_by/{id}")
-	public ResponseEntity<JSONObject> getRetweeted_by(@PathVariable Long id) throws IOException, ParseException{
+	public ResponseEntity<JSONObject> getRetweeted_by(@PathVariable Long id) throws IOException, ParseException, NullDataException, ConnectionException{
 		ServiceRetweeted_by service = new ServiceRetweeted_by(id);
 		return new ResponseEntity<>(json.ToJson(service.getRetweeted_by()), HttpStatus.OK);
 	}
 
 
 	@GetMapping(value="/LikedTweets/{id}")
-	public ResponseEntity<JSONObject> getLikedTweets(@PathVariable Long id) throws IOException, ParseException{
+	public ResponseEntity<JSONObject> getLikedTweets(@PathVariable Long id)throws IOException, ParseException, NullDataException, ConnectionException{
 		ServiceLikedTweets service = new ServiceLikedTweets(id);
 		return new ResponseEntity<>(json.ToJson(service.getLikedTweets()), HttpStatus.OK);
 	}
