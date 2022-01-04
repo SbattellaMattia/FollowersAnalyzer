@@ -47,5 +47,5 @@ public class FilterByCreation extends Filter {
 		
 		return day;	
 	}
-	
+
 }

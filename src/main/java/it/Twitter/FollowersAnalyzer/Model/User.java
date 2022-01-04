@@ -2,7 +2,6 @@ package it.Twitter.FollowersAnalyzer.Model;
 
 import java.util.ArrayList;
 
-
 public class User extends Super{
 
 	private String name;
@@ -48,6 +47,15 @@ public class User extends Super{
 		this.name = name;
 		this.username = username;
 		this.createdAt = createdAt;
+	}
+	
+	
+	public User(Long id, String name, String username, String createdAt, boolean verified) {
+		super(id);
+		this.name = name;
+		this.username = username;
+		this.createdAt = createdAt;
+		this.verified = verified;
 	}
 
 
@@ -178,7 +186,7 @@ public class User extends Super{
 	}
 
 	public String UserToString() {
-		return "{\"id\": \""+ getId() + "\",\"name\": \"" + getName() + "\",\"username\": \"" + getUsername() + "\",\"created_at\": \"" + getCreatedAt() +"\"}";
+		return "{\"id\": \""+ getId() + "\",\"name\": \"" + getName() + "\",\"username\": \"" + getUsername() + "\",\"created_at\": \"" + getCreatedAt() + "\",\"verified\": \"" + isVerified() + "\"}";
 	}
 
 	public String FollowersArrayToString() {

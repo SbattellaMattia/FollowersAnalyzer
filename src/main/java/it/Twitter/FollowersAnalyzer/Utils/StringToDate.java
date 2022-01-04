@@ -17,7 +17,8 @@ public class StringToDate {
 			SimpleDateFormat d1 = new SimpleDateFormat("dd-MM-yyyy");
 			date = d1.format(date1).toString();
 		} catch (ParseException e) {
-			e.printStackTrace();
+			//System.out.println("Errore qui");
+			//e.printStackTrace();
 		}
 		return date;
 	}

@@ -9,7 +9,7 @@ import it.Twitter.FollowersAnalyzer.Exceptions.ConnectionException;
 public class ServiceUserByUsername extends Service {
 	
 	public ServiceUserByUsername(String username) {
-		this.Url="https://api.twitter.com/2/users/by/username/"+username+"?user.fields=created_at";
+		this.Url="https://api.twitter.com/2/users/by/username/"+username+"?user.fields=created_at,verified";
 	}
 	
 	public String getUser() throws IOException,ConnectionException{

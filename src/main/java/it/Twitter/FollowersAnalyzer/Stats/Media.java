@@ -24,11 +24,5 @@ public class Media {
 	public String toString() {
 		return "{\"MediaFollowers(per utente)\":[{\"media\": \""+ media + " followers\"}]}";	
 	}
-	
-	
-	
-	
-	
-	
 
 }

@@ -54,6 +54,6 @@ public class FilterByFollowersRange {
 					+ "%\",\"MORE_100\": \"" + perMORE_100 + "%\"}";}
 		
 		else throw new WrongParameter();
-	}	
-	
+	}
+
 }

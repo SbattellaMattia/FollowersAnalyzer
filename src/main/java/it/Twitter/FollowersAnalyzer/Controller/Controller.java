@@ -16,6 +16,7 @@ import it.Twitter.FollowersAnalyzer.Filter.FilterByFollowersRange;
 import it.Twitter.FollowersAnalyzer.Filter.FilterByName;
 import it.Twitter.FollowersAnalyzer.Filter.FilterByRefollowers;
 import it.Twitter.FollowersAnalyzer.Filter.FilterByUsername;
+import it.Twitter.FollowersAnalyzer.Filter.FilterByVerified;
 import it.Twitter.FollowersAnalyzer.JsonComponent.JsonToUser;
 import it.Twitter.FollowersAnalyzer.JsonComponent.StringToJson;
 import it.Twitter.FollowersAnalyzer.Model.User;
@@ -88,9 +89,9 @@ public class Controller {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);
 		}
 
-		
-		
-			
+
+
+
 	}
 
 	@GetMapping(value="/Following/{id}")
@@ -98,13 +99,13 @@ public class Controller {
 		ServiceFollowing service = new ServiceFollowing(id);	
 		return new ResponseEntity<>(json.ToJson(service.getFollowing()), HttpStatus.OK);
 	}
-	
+
 	@GetMapping(value="/Tweets/{id}")
 	public ResponseEntity<JSONObject> getTweet(@PathVariable Long id)throws IOException, ParseException, NullDataException, ConnectionException{
 		ServiceTweet service = new ServiceTweet(id);
 		return new ResponseEntity<>(json.ToJson(service.getTweet()), HttpStatus.OK);
 	}
-	
+
 	@GetMapping(value="/Retweeted_by/{id}")
 	public ResponseEntity<JSONObject> getRetweeted_by(@PathVariable Long id) throws IOException, ParseException, NullDataException, ConnectionException{
 		ServiceRetweeted_by service = new ServiceRetweeted_by(id);
@@ -120,6 +121,7 @@ public class Controller {
 
 
 	@GetMapping(value="/MediaFollowers/{id}")
+
 	public ResponseEntity<JSONObject> getMedia(@PathVariable Long id) throws IOException, ParseException, NullDataException, ConnectionException{
 		try {
 			User user=jsonUser.parseUser(getUserById(id).getBody());
@@ -132,9 +134,10 @@ public class Controller {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 		catch (NullDataException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
+
 	}
 
-	
+
 	@GetMapping(value="/FollowersStats/{id}")
 	public ResponseEntity<JSONObject> getStats(@PathVariable Long id, @RequestParam(defaultValue = "number") String method) throws IOException, ParseException, NullDataException, ConnectionException{
 		FilterByFollowersRange filter= new FilterByFollowersRange();
@@ -152,12 +155,14 @@ public class Controller {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 		catch (NullDataException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}	
+
 	}
 
 
 	@GetMapping(value="/StatsRefollowers/{id}")
 	public ResponseEntity<JSONObject> getRefollowers(@PathVariable Long id) throws IOException, ParseException, NullDataException, ConnectionException{
 		FilterByRefollowers filter= new FilterByRefollowers();
+
 		try {
 			User user=jsonUser.parseUser(getUserById(id).getBody());
 			user.setFollowers(jsonUser.parseUsers(getFollowers(id,"all","all").getBody()));
@@ -167,6 +172,32 @@ public class Controller {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 		catch (NullDataException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
+
+	}
+
+	@GetMapping(value="/VerifiedFollowers/{id}")
+	public ResponseEntity<JSONObject> getVerifiedFollowers(@PathVariable Long id, @RequestParam(defaultValue = "verified") String method) throws IOException, ParseException, ConnectionException, WrongParameter, NullDataException{
+		
+		try{
+			FilterByVerified filter= new FilterByVerified();
+
+			User user=jsonUser.parseUser(getUserById(id).getBody());
+			user.setFollowers(jsonUser.parseUsers(getFollowers(id,"all","all").getBody()));
+			filter.Filter(user);
+
+			return new ResponseEntity<>(json.ToJson(filter.FilterToString(method)), HttpStatus.OK);
+		
+		}catch (ConnectionException error) {
+				return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);
+			}	
+		
+		catch (NullDataException error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);
+		}
+
+		catch (WrongParameter error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);
+		}
 	}
 
 }

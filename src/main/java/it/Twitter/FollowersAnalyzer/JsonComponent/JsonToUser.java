@@ -16,13 +16,14 @@ public class JsonToUser {
 	StringToDate date = new StringToDate();
 	//JSONParser jsonParser = new JSONParser();
 
-
 	public User parseUser(JSONObject User) throws NullDataException
 	{
+
 		if (User.get("id")==null)throw new NullDataException();
 		
 		Long id = Long.parseLong((String) User.get("id"));    
 		//System.out.println(id);
+
 		
 		String name = (String) User.get("name");    
 		//System.out.println(name);
@@ -31,17 +32,24 @@ public class JsonToUser {
 		//System.out.println(username);
 
 		String createdAt = date.stringToDate((String) User.get("created_at"));
-
-		User user=new User(id,name,username,createdAt);
 		
-		return user;
+		boolean verified;
+		if ((User.get("verified")).equals("true")) verified = true;
+		else verified = false;
+	
+
+		//User user=new User(id,name,username,createdAt);
+		User user=new User(id,name,username,createdAt,verified);
+
+		return user; 
 	}
 
 	public User parseOneUser(JSONObject User) throws NullDataException
 	{
-		
+
 		if(((JSONObject) User.get("data")) == null) throw new NullDataException();
 		
+
 		JSONObject data = (JSONObject) User.get("data");
 		
 		String name = (String) data.get("name");    
@@ -54,9 +62,12 @@ public class JsonToUser {
 		//System.out.println(id);
 
 		String createdAt = date.stringToDate((String) data.get("created_at"));
+		
+		boolean verified = (boolean)data.get("verified");
+		
 
-		//User user=new User(id,name,username);
-		User user=new User(id,name,username,createdAt);
+		//User user=new User(id,name,username,createdAt);
+		User user=new User(id,name,username,createdAt,verified);
 		
 		return user;
 	}
