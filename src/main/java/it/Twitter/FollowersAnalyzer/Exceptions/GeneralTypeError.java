@@ -1,8 +1,14 @@
 package it.Twitter.FollowersAnalyzer.Exceptions;
 
+import org.json.simple.JSONObject;
+
+import it.Twitter.FollowersAnalyzer.JsonComponent.JsonToGeneralTypeError;
+
 public class GeneralTypeError extends Exception{
-	
+final static String message="Id non trovato";
 private static final long serialVersionUID = 1L;
+
+JsonToGeneralTypeError err=new JsonToGeneralTypeError();
 	
 	private String Timestamp;
 	private Integer Status;
@@ -16,9 +22,13 @@ private static final long serialVersionUID = 1L;
 		super();
 	}
 	
-	public GeneralTypeError(String message) {
+	public GeneralTypeError(JSONObject job) {
 		super(message);
+		this.Trace=err.getTrace(job);
+		this.Status=err.getStatus(job);
 	}
+	
+	
 	
 	public GeneralTypeError (String Timestamp, Integer Status, String Error, String Trace, String Message, String Path) {
 		

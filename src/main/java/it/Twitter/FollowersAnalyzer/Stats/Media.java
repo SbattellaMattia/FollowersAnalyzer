@@ -1,7 +1,5 @@
 package it.Twitter.FollowersAnalyzer.Stats;
 
-import java.util.ArrayList;
-
 import it.Twitter.FollowersAnalyzer.Model.User;
 
 public class Media {
