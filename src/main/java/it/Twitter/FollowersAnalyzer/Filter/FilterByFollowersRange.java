@@ -25,7 +25,7 @@ public class FilterByFollowersRange {
 		
 		for(User i: followers) {
 			int num=i.getFollowers().size();
-			System.out.println(num);
+			//System.out.println(num);
 			if(num<=10)this.LESS_10++;
 			if(num>10 && num<=25) this.BETWEEN_10_25++;
 			if(num>25 && num<=50) this.BETWEEN_25_50++;

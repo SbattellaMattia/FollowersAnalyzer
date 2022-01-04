@@ -7,7 +7,7 @@ import java.io.IOException;
 public class ServiceUserById extends Service {
 	
 	public ServiceUserById(Long id) {
-		this.Url="https://api.twitter.com/2/users/"+id+"?user.fields=created_at";
+		this.Url="https://api.twitter.com/2/users/"+id+"?user.fields=created_at&user.fields=verified";
 	}
 
 	public String getUser() throws IOException {

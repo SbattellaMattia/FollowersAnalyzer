@@ -13,11 +13,10 @@ import it.Twitter.FollowersAnalyzer.Utils.StringToDate;
 public class JsonToUser {
 
 	//JSONParser jsonParser = new JSONParser();
-
+	StringToDate date = new StringToDate();
 
 	public User parseUser(JSONObject User) 
 	{
-		StringToDate date = new StringToDate();
 		
 		String name = (String) User.get("name");    
 		//System.out.println(name);
@@ -29,16 +28,17 @@ public class JsonToUser {
 		//System.out.println(id);
 		
 		String createdAt = date.stringToDate((String) User.get("created_at"));
+		
+		boolean verified = (boolean) User.get("verified");
 
-		//User user=new User(id,name,username);
-		User user=new User(id,name,username,createdAt);
+		//User user=new User(id,name,username,createdAt);
+		User user=new User(id,name,username,createdAt,verified);
 		
 		return user;
 	}
 
 	public User parseOneUser(JSONObject User) 
 	{
-		StringToDate date = new StringToDate();
 
 		JSONObject data = (JSONObject) User.get("data");
 
@@ -52,9 +52,11 @@ public class JsonToUser {
 		//System.out.println(id);
 
 		String createdAt = date.stringToDate((String) data.get("created_at"));
+		
+		boolean verified = (boolean)data.get("verified");
 
-		//User user=new User(id,name,username);
-		User user=new User(id,name,username,createdAt);
+		//User user=new User(id,name,username,createdAt);
+		User user=new User(id,name,username,createdAt, verified);
 		
 		return user;
 	}

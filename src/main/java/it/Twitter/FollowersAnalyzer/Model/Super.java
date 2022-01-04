@@ -7,7 +7,6 @@ package it.Twitter.FollowersAnalyzer.Model;
 		public Super(Long id) {
 			this.id = id;
 		}
-
 		
 		public Long getId() {
 			return id;
