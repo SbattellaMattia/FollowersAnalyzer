@@ -121,7 +121,6 @@ public class Controller {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 	}
 
-
 	@GetMapping(value="/LikedTweets/{id}")
 	public ResponseEntity<JSONObject> getLikedTweets(@PathVariable Long id)throws IOException, ParseException, NullDataException, ConnectionException{
 		ServiceLikedTweets service = new ServiceLikedTweets(id);
