@@ -74,18 +74,18 @@ public class Controller {
 
 
 	@GetMapping(value="/Followers/{id}")
-	public ResponseEntity<JSONObject> getFollowers(@PathVariable Long id, @RequestParam(defaultValue = "all") String name, @RequestParam(defaultValue = "all") String username)throws IOException, ParseException, NullDataException, ConnectionException{
+	public ResponseEntity<JSONObject> getFollowers(@PathVariable Long id, /*@RequestParam(defaultValue = "all") String name,*/ @RequestParam(defaultValue = "all") String username)throws IOException, ParseException, NullDataException, ConnectionException{
 		try {
 			User user= jsonUser.parseUser(getUserById(id).getBody());
 			ServiceFollowers service = new ServiceFollowers(id);
 
 			user.setFollowers(jsonUser.parseUsers(json.ToJson(service.getFollowers())));
 
-			if((!name.equals("all"))&& username.equals("all")) return new ResponseEntity<>(json.ToJson(filterName.Filter(user, name)), HttpStatus.OK);
-			if((!username.equals("all"))&& name.equals("all")) return new ResponseEntity<>(json.ToJson(filterUsername.Filter(user, username)), HttpStatus.OK);
-			else return new ResponseEntity<>(json.ToJson(user.FollowersArrayToString()), HttpStatus.OK);
-
-		}catch (ConnectionException error) {
+			/*if((!name.equals("all"))&& username.equals("all")) return new ResponseEntity<>(json.ToJson(filterName.Filter(user, name)), HttpStatus.OK);*/
+			if(/*(*/!username.equals("all")/*)&& name.equals("all")*/) return new ResponseEntity<>(json.ToJson(filterUsername.FilterFollower(user, username)), HttpStatus.OK);
+			else return new ResponseEntity<>(json.ToJson(user.FollowersArrayToString()), HttpStatus.OK);}
+		
+		catch (ConnectionException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 		catch (NullDataException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);
@@ -95,10 +95,21 @@ public class Controller {
 	
 	@GetMapping(value="/Following/{id}")
 
-	public ResponseEntity<JSONObject> getFollowing(@PathVariable Long id)throws IOException, ParseException, NullDataException, ConnectionException{
+	public ResponseEntity<JSONObject> getFollowing(@PathVariable Long id, @RequestParam(defaultValue = "all") String username)throws IOException, ParseException, NullDataException, ConnectionException{
+		try{
+			User user= jsonUser.parseUser(getUserById(id).getBody());
+			ServiceFollowing service = new ServiceFollowing(id);	
+			
+			user.setFollowing(jsonUser.parseUsers(json.ToJson(service.getFollowing())));
+			
+			if(!username.equals("all")) return new ResponseEntity<>(json.ToJson(filterUsername.FilterFollowing(user, username)), HttpStatus.OK);
+			else return new ResponseEntity<>(json.ToJson(user.FollowingArrayToString()), HttpStatus.OK);}
 
-		ServiceFollowing service = new ServiceFollowing(id);	
-		return new ResponseEntity<>(json.ToJson(service.getFollowing()), HttpStatus.OK);
+		catch (ConnectionException error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
+		catch (NullDataException error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);
+		}
 	}
 
 
@@ -131,11 +142,19 @@ public class Controller {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 	}
 
-
+	//tweet a cui l'utente il cui id è passato come parametro, ha messo like.
 	@GetMapping(value="/LikedTweets/{id}")
 	public ResponseEntity<JSONObject> getLikedTweets(@PathVariable Long id)throws IOException, ParseException, NullDataException, ConnectionException{
-		ServiceLikedTweets service = new ServiceLikedTweets(id);
-		return new ResponseEntity<>(json.ToJson(service.getLikedTweets()), HttpStatus.OK);
+		try{
+			ServiceLikedTweets service = new ServiceLikedTweets(id);
+			User user = jsonUser.parseUser(getUserById(id).getBody());
+			user.setLikedTweets(jsonTweet.parseTweets(json.ToJson(service.getLikedTweets())));  
+			return new ResponseEntity<>(json.ToJson(user.TweetArrayToString()), HttpStatus.OK);}
+
+		catch (ConnectionException error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
+		catch (NullDataException error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 	}
 
 
@@ -144,9 +163,9 @@ public class Controller {
 	public ResponseEntity<JSONObject> getMedia(@PathVariable Long id) throws IOException, ParseException, NullDataException, ConnectionException{
 		try {
 			User user=jsonUser.parseUser(getUserById(id).getBody());
-			user.setFollowers(jsonUser.parseUsers(getFollowers(id,"all","all").getBody()));
+			user.setFollowers(jsonUser.parseUsers(getFollowers(id,/*"all",*/"all").getBody()));
 			for(User i : user.getFollowers()) {
-				i.setFollowers(jsonUser.parseUsers(getFollowers(i.getId(),"all","all").getBody()));}
+				i.setFollowers(jsonUser.parseUsers(getFollowers(i.getId(),/*"all",*/"all").getBody()));}
 			Media media =new Media(user);
 			return new ResponseEntity<>(json.ToJson(media.toString()), HttpStatus.OK);}
 		catch (ConnectionException error) {
@@ -163,9 +182,9 @@ public class Controller {
 
 		try {
 			User user=jsonUser.parseUser(getUserById(id).getBody());
-			user.setFollowers(jsonUser.parseUsers(getFollowers(id,"all","all").getBody()));
+			user.setFollowers(jsonUser.parseUsers(getFollowers(id,/*"all",*/"all").getBody()));
 			for(User i : user.getFollowers()) {
-				i.setFollowers(jsonUser.parseUsers(getFollowers(i.getId(),"all","all").getBody()));}
+				i.setFollowers(jsonUser.parseUsers(getFollowers(i.getId(),/*"all",*/"all").getBody()));}
 			filter.Filter(user.getFollowers());
 			return new ResponseEntity<>(json.ToJson(filter.FilterToString(method)), HttpStatus.OK);}
 		catch (WrongParameter error) {
@@ -184,8 +203,8 @@ public class Controller {
 
 		try {
 			User user=jsonUser.parseUser(getUserById(id).getBody());
-			user.setFollowers(jsonUser.parseUsers(getFollowers(id,"all","all").getBody()));
-			user.setFollowing(jsonUser.parseUsers(getFollowing(id).getBody()));
+			user.setFollowers(jsonUser.parseUsers(getFollowers(id,/*"all",*/"all").getBody()));
+			user.setFollowing(jsonUser.parseUsers(getFollowing(id,"all").getBody()));
 			return new ResponseEntity<>(json.ToJson(filter.Filter(user)), HttpStatus.OK);}
 		catch (ConnectionException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
@@ -200,7 +219,7 @@ public class Controller {
 		try{
 			FilterByVerified filter= new FilterByVerified();
 			User user=jsonUser.parseUser(getUserById(id).getBody());
-			user.setFollowers(jsonUser.parseUsers(getFollowers(id,"all","all").getBody()));
+			user.setFollowers(jsonUser.parseUsers(getFollowers(id,/*"all",*/"all").getBody()));
 			filter.Filter(user);
 			return new ResponseEntity<>(json.ToJson(filter.FilterToString(method)), HttpStatus.OK);}
 		catch (ConnectionException error) {
@@ -212,3 +231,4 @@ public class Controller {
 		}
 
 }
+//followers che hanno messo like al tweet di un id

@@ -17,7 +17,8 @@ public class User extends Super{
 
 	private ArrayList<User> followers = new ArrayList<User>();
 	private ArrayList<User> following = new ArrayList<User>();
-	private ArrayList<Tweet>tweets = new ArrayList<Tweet>();
+	private ArrayList<Tweet> tweets = new ArrayList<Tweet>();
+	private ArrayList<Tweet> likedTweets = new ArrayList<Tweet>();
 
 
 
@@ -184,20 +185,29 @@ public class User extends Super{
 	public void setTweets(ArrayList<Tweet> tweets) {
 		this.tweets = tweets;
 	}
+	
+	
+	public ArrayList<Tweet> getLikedTweets() {
+		return likedTweets;
+	}
 
+	
+	public void setLikedTweets(ArrayList<Tweet> likedTweets) {
+		this.likedTweets = likedTweets;
+	}
+	
+	
 	public String UserToString() {
 		return "{\"id\": \""+ getId() + "\",\"name\": \"" + getName() + "\",\"username\": \"" + getUsername() + "\",\"created_at\": \"" + getCreatedAt() + "\",\"verified\": \"" + isVerified() + "\"}";
 	}
 
 	public String FollowersArrayToString() {
-
 			String aux = "{\"data\":[";
 			for(User user : followers) aux += user.UserToString()+",";
 			return aux.substring(0,(aux.length()-1))+"]}";
 		}
 
 		public String FollowingArrayToString() {
-
 			String aux = "{\"data\":[";
 			for(User user : following) aux += user.UserToString()+",";
 			return aux.substring(0,(aux.length()-1))+"]}";
