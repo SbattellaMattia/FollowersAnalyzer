@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import it.Twitter.FollowersAnalyzer.Filter.FilterByCreation;
 import it.Twitter.FollowersAnalyzer.Filter.FilterByFollowersRange;
 import it.Twitter.FollowersAnalyzer.Filter.FilterByName;
 import it.Twitter.FollowersAnalyzer.Filter.FilterByRefollowers;
@@ -30,6 +32,7 @@ import it.Twitter.FollowersAnalyzer.Service.ServiceUserById;
 import it.Twitter.FollowersAnalyzer.Service.ServiceUserByUsername;
 import it.Twitter.FollowersAnalyzer.Stats.Media;
 import it.Twitter.FollowersAnalyzer.Exceptions.ConnectionException;
+import it.Twitter.FollowersAnalyzer.Exceptions.DateException;
 import it.Twitter.FollowersAnalyzer.Exceptions.NullDataException;
 import it.Twitter.FollowersAnalyzer.Exceptions.WrongParameter;
 import it.Twitter.FollowersAnalyzer.JsonComponent.JsonToError;
@@ -142,6 +145,7 @@ public class Controller {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 	}
 
+	
 	//tweet a cui l'utente il cui id è passato come parametro, ha messo like.
 	@GetMapping(value="/LikedTweets/{id}")
 	public ResponseEntity<JSONObject> getLikedTweets(@PathVariable Long id)throws IOException, ParseException, NullDataException, ConnectionException{
@@ -227,6 +231,24 @@ public class Controller {
 		catch (NullDataException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 		catch (WrongParameter error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
+		}
+	
+	
+	@GetMapping(value="/FollowerByDate/{id}")
+	public ResponseEntity<JSONObject> getFilterDate(@PathVariable Long id, @RequestParam(defaultValue = "01-01-2009") String date) throws IOException, ParseException, ConnectionException, WrongParameter, NullDataException, NumberFormatException, DateException{
+		
+		try {
+			User user= jsonUser.parseUser(getUserById(id).getBody());
+			ServiceFollowers service = new ServiceFollowers(id);
+			user.setFollowers(jsonUser.parseUsers(json.ToJson(service.getFollowers())));
+			FilterByCreation filter= new FilterByCreation();
+			return new ResponseEntity<>(json.ToJson(filter.Filter(user, date)), HttpStatus.OK);}
+		catch (ConnectionException error) {
+				return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}	
+		catch (NullDataException error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
+		catch (DateException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 		}
 

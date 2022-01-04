@@ -3,21 +3,39 @@ package it.Twitter.FollowersAnalyzer.Filter;
 import java.util.ArrayList;
 
 import it.Twitter.FollowersAnalyzer.Exceptions.DateException;
+import it.Twitter.FollowersAnalyzer.Exceptions.NullDataException;
 import it.Twitter.FollowersAnalyzer.Model.User;
 
 public class FilterByCreation extends Filter {
 
-	public String Filter(User user,String date) {
+	public String Filter(User user,String date) throws NumberFormatException, DateException, NullDataException {
 		
-		int year=Integer.parseInt(date.substring(6,9));
-		int month=Integer.parseInt(date.substring(3,4));
-		int day=Integer.parseInt(date.substring(0,1));
+		int year=checkYear(Integer.parseInt(date.substring(6,date.length())));
+		int month=checkMonth(Integer.parseInt(date.substring(3,5)));
+		int day=checkDay(Integer.parseInt(date.substring(0,2)),month);
+		
 		
 		ArrayList<User> FollowerDate = new ArrayList<User>();
 
-		/*for(User i: user.getFollowers()) {
-			if (j.getId().equals(i.getId())) Refollows.add(i) ;
-		}*/
+		for(User i: user.getFollowers()) {
+			int UserYear=Integer.parseInt(i.getCreatedAt().substring(6,date.length()));
+			int UserMonth=Integer.parseInt(i.getCreatedAt().substring(3,5));
+			int UserDay=Integer.parseInt(i.getCreatedAt().substring(0,2));
+			
+			if (UserYear>year) {
+				FollowerDate.add(i);}
+			if (UserYear==year) {
+				if (UserMonth>month) {
+					FollowerDate.add(i);}
+				if (UserMonth==month) {
+					if (UserDay>day) {
+						FollowerDate.add(i);}
+				}
+			}
+				
+		}		
+		
+		if (FollowerDate.isEmpty()) throw new NullDataException();
 		return UserArrayToString(FollowerDate);
 	}
 
