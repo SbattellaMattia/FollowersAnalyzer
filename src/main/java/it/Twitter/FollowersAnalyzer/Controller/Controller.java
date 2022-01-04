@@ -90,22 +90,32 @@ public class Controller {
 		catch (NullDataException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);
 		}
-
-
-
-
 	}
 
+	
 	@GetMapping(value="/Following/{id}")
+
 	public ResponseEntity<JSONObject> getFollowing(@PathVariable Long id)throws IOException, ParseException, NullDataException, ConnectionException{
+
 		ServiceFollowing service = new ServiceFollowing(id);	
 		return new ResponseEntity<>(json.ToJson(service.getFollowing()), HttpStatus.OK);
 	}
 
+
 	@GetMapping(value="/Tweets/{id}")
-	public ResponseEntity<JSONObject> getTweet(@PathVariable Long id)throws IOException, ParseException, NullDataException, ConnectionException{
-		ServiceTweet service = new ServiceTweet(id);
-		return new ResponseEntity<>(json.ToJson(service.getTweet()), HttpStatus.OK);
+
+	public ResponseEntity<JSONObject> getTweet(@PathVariable Long id) throws IOException, ParseException, NullDataException, ConnectionException{
+		try{
+			User user = jsonUser.parseUser(getUserById(id).getBody());
+			ServiceTweet service = new ServiceTweet(id);
+			user.setTweets(jsonTweet.parseTweets(json.ToJson(service.getTweet())));  
+			return new ResponseEntity<>(json.ToJson(user.TweetArrayToString()), HttpStatus.OK);}
+		
+		catch (ConnectionException error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}	
+		catch(NullDataException error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
+
 	}
 
 	@GetMapping(value="/Retweeted_by/{id}")
