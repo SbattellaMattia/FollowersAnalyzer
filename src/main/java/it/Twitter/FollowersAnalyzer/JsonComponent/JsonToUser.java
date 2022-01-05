@@ -6,6 +6,7 @@ import java.util.Iterator;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import it.Twitter.FollowersAnalyzer.Exceptions.DateException;
 import it.Twitter.FollowersAnalyzer.Exceptions.NullDataException;
 //import org.json.simple.parser.JSONParser;
 import it.Twitter.FollowersAnalyzer.Model.User;
@@ -14,9 +15,8 @@ import it.Twitter.FollowersAnalyzer.Utils.StringToDate;
 
 public class JsonToUser {
 	StringToDate date = new StringToDate();
-	//JSONParser jsonParser = new JSONParser();
 
-	public User parseUser(JSONObject User) throws NullDataException
+	public User parseUser(JSONObject User) throws NullDataException, DateException
 	{
 
 		if (User.get("id")==null)throw new NullDataException();
@@ -44,13 +44,13 @@ public class JsonToUser {
 		return user; 
 	}
 
-	public User parseOneUser(JSONObject User) throws NullDataException
+	public User parseOneUser(JSONObject data) throws NullDataException, DateException
 	{
 
-		if(((JSONObject) User.get("data")) == null) throw new NullDataException();
+		//if(((JSONObject) User.get("data")) == null) throw new NullDataException();
 		
 
-		JSONObject data = (JSONObject) User.get("data");
+		//JSONObject data = (JSONObject) User.get("data");
 		
 		String name = (String) data.get("name");    
 		//System.out.println(name);
@@ -63,8 +63,9 @@ public class JsonToUser {
 
 		String createdAt = date.stringToDate((String) data.get("created_at"));
 		
-		boolean verified = (boolean)data.get("verified");
-		
+		boolean verified;
+		if ((data.get("verified")).equals("true")) verified = true;
+		else verified = false;
 
 		//User user=new User(id,name,username,createdAt);
 		User user=new User(id,name,username,createdAt,verified);
@@ -74,7 +75,7 @@ public class JsonToUser {
 
 
 
-	public ArrayList<User> parseUsers(JSONObject Users) throws NullDataException
+	public ArrayList<User> parseUsers(JSONObject Users) throws NullDataException, DateException
 	{
 		if(((JSONArray) Users.get("data")) == null) throw new NullDataException();
 		

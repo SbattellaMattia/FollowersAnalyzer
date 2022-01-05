@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import it.Twitter.FollowersAnalyzer.Filter.FilterByCreation;
+import it.Twitter.FollowersAnalyzer.Filter.FilterByFollowers;
 import it.Twitter.FollowersAnalyzer.Filter.FilterByFollowersRange;
 import it.Twitter.FollowersAnalyzer.Filter.FilterByName;
 import it.Twitter.FollowersAnalyzer.Filter.FilterByRefollowers;
@@ -26,8 +27,10 @@ import it.Twitter.FollowersAnalyzer.Model.User;
 import it.Twitter.FollowersAnalyzer.Service.ServiceFollowers;
 import it.Twitter.FollowersAnalyzer.Service.ServiceFollowing;
 import it.Twitter.FollowersAnalyzer.Service.ServiceLikedTweets;
+import it.Twitter.FollowersAnalyzer.Service.ServiceLikingUsers;
 import it.Twitter.FollowersAnalyzer.Service.ServiceRetweeted_by;
 import it.Twitter.FollowersAnalyzer.Service.ServiceTweet;
+import it.Twitter.FollowersAnalyzer.Service.ServiceTweetById;
 import it.Twitter.FollowersAnalyzer.Service.ServiceUserById;
 import it.Twitter.FollowersAnalyzer.Service.ServiceUserByUsername;
 import it.Twitter.FollowersAnalyzer.Stats.Media;
@@ -48,10 +51,10 @@ public class Controller {
 	JsonToTweet jsonTweet=new JsonToTweet();
 	FilterByName filterName=new FilterByName();
 	FilterByUsername filterUsername=new FilterByUsername();
-
+	FilterByFollowers filterByFollowers = new FilterByFollowers();
 
 	@GetMapping(value="/UserByUsername/{username}")
-	public ResponseEntity<JSONObject> getUserByUsername(@PathVariable String username) throws IOException, ParseException,  NullPointerException, ConnectionException{
+	public ResponseEntity<JSONObject> getUserByUsername(@PathVariable String username) throws IOException, ParseException,  NullPointerException, ConnectionException, DateException{
 		try {
 			ServiceUserByUsername service = new ServiceUserByUsername(username);
 			User user=jsonUser.parseOneUser(json.ToJson(service.getUser()));
@@ -64,20 +67,39 @@ public class Controller {
 
 
 	@GetMapping(value="/UserById/{id}")
-		public ResponseEntity<JSONObject> getUserById(@PathVariable Long id)throws IOException, ParseException, NullDataException, ConnectionException{
+		public ResponseEntity<JSONObject> getUserById(@PathVariable Long id)throws IOException, ParseException, NullDataException, ConnectionException, DateException{
 
 		try{
 			ServiceUserById service = new ServiceUserById(id);
 			User user=jsonUser.parseOneUser(json.ToJson(service.getUser()));
 			return new ResponseEntity<>(json.ToJson(user.UserToString()), HttpStatus.OK);
+			
+		}catch (ConnectionException error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);
 		}catch (NullDataException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@GetMapping(value="/TweetById/{id}")
+	public ResponseEntity<JSONObject> getTweetById(@PathVariable Long id)throws IOException, ParseException, NullDataException, ConnectionException, DateException{
+
+	try{
+		ServiceTweetById service = new ServiceTweetById(id);
+		Tweet tweet=jsonTweet.parseOneTweet(json.ToJson(service.getTweetById()));
+		return new ResponseEntity<>(json.ToJson(tweet.TweetToString()), HttpStatus.OK);
+		
+	}catch (ConnectionException error) {
+		return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);
+	}catch (NullDataException error) {
+		return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);
+	}
+	
+}
 
 
 	@GetMapping(value="/Followers/{id}")
-	public ResponseEntity<JSONObject> getFollowers(@PathVariable Long id, /*@RequestParam(defaultValue = "all") String name,*/ @RequestParam(defaultValue = "all") String username)throws IOException, ParseException, NullDataException, ConnectionException{
+	public ResponseEntity<JSONObject> getFollowers(@PathVariable Long id, /*@RequestParam(defaultValue = "all") String name,*/ @RequestParam(defaultValue = "all") String username)throws IOException, ParseException, NullDataException, ConnectionException, DateException{
 		try {
 			User user= jsonUser.parseUser(getUserById(id).getBody());
 			ServiceFollowers service = new ServiceFollowers(id);
@@ -98,7 +120,7 @@ public class Controller {
 	
 	@GetMapping(value="/Following/{id}")
 
-	public ResponseEntity<JSONObject> getFollowing(@PathVariable Long id, @RequestParam(defaultValue = "all") String username)throws IOException, ParseException, NullDataException, ConnectionException{
+	public ResponseEntity<JSONObject> getFollowing(@PathVariable Long id, @RequestParam(defaultValue = "all") String username)throws IOException, ParseException, NullDataException, ConnectionException, DateException{
 		try{
 			User user= jsonUser.parseUser(getUserById(id).getBody());
 			ServiceFollowing service = new ServiceFollowing(id);	
@@ -118,7 +140,7 @@ public class Controller {
 
 	@GetMapping(value="/Tweets/{id}")
 
-	public ResponseEntity<JSONObject> getTweet(@PathVariable Long id) throws IOException, ParseException, NullDataException, ConnectionException{
+	public ResponseEntity<JSONObject> getTweet(@PathVariable Long id) throws IOException, ParseException, NullDataException, ConnectionException, DateException{
 		try{
 			User user = jsonUser.parseUser(getUserById(id).getBody());
 			ServiceTweet service = new ServiceTweet(id);
@@ -133,7 +155,7 @@ public class Controller {
 	}
 
 	@GetMapping(value="/Retweeted_by/{id}")
-	public ResponseEntity<JSONObject> getRetweeted_by(@PathVariable Long id,@RequestParam(defaultValue = "all") String username) throws IOException, ParseException, NullDataException, ConnectionException{
+	public ResponseEntity<JSONObject> getRetweeted_by(@PathVariable Long id,@RequestParam(defaultValue = "all") String username) throws IOException, ParseException, NullDataException, ConnectionException, DateException{
 		try {
 			ServiceRetweeted_by service = new ServiceRetweeted_by(id);
 			Tweet tweet=new Tweet(id);
@@ -148,7 +170,7 @@ public class Controller {
 	
 	//tweet a cui l'utente il cui id è passato come parametro, ha messo like.
 	@GetMapping(value="/LikedTweets/{id}")
-	public ResponseEntity<JSONObject> getLikedTweets(@PathVariable Long id)throws IOException, ParseException, NullDataException, ConnectionException{
+	public ResponseEntity<JSONObject> getLikedTweets(@PathVariable Long id)throws IOException, ParseException, NullDataException, ConnectionException, DateException{
 		try{
 			ServiceLikedTweets service = new ServiceLikedTweets(id);
 			User user = jsonUser.parseUser(getUserById(id).getBody());
@@ -164,7 +186,7 @@ public class Controller {
 
 	@GetMapping(value="/MediaFollowers/{id}")
 
-	public ResponseEntity<JSONObject> getMedia(@PathVariable Long id) throws IOException, ParseException, NullDataException, ConnectionException{
+	public ResponseEntity<JSONObject> getMedia(@PathVariable Long id) throws IOException, ParseException, NullDataException, ConnectionException, DateException{
 		try {
 			User user=jsonUser.parseUser(getUserById(id).getBody());
 			user.setFollowers(jsonUser.parseUsers(getFollowers(id,/*"all",*/"all").getBody()));
@@ -181,7 +203,7 @@ public class Controller {
 
 
 	@GetMapping(value="/FollowersStats/{id}")
-	public ResponseEntity<JSONObject> getStats(@PathVariable Long id, @RequestParam(defaultValue = "number") String method) throws IOException, ParseException, NullDataException, ConnectionException{
+	public ResponseEntity<JSONObject> getStats(@PathVariable Long id, @RequestParam(defaultValue = "number") String method) throws IOException, ParseException, NullDataException, ConnectionException, DateException{
 		FilterByFollowersRange filter= new FilterByFollowersRange();
 
 		try {
@@ -202,7 +224,7 @@ public class Controller {
 
 
 	@GetMapping(value="/StatsRefollowers/{id}")
-	public ResponseEntity<JSONObject> getRefollowers(@PathVariable Long id) throws IOException, ParseException, NullDataException, ConnectionException{
+	public ResponseEntity<JSONObject> getRefollowers(@PathVariable Long id) throws IOException, ParseException, NullDataException, ConnectionException, DateException{
 		FilterByRefollowers filter= new FilterByRefollowers();
 
 		try {
@@ -218,7 +240,7 @@ public class Controller {
 	}
 
 	@GetMapping(value="/VerifiedFollowers/{id}")
-	public ResponseEntity<JSONObject> getVerifiedFollowers(@PathVariable Long id, @RequestParam(defaultValue = "verified") String method) throws IOException, ParseException, ConnectionException, WrongParameter, NullDataException{
+	public ResponseEntity<JSONObject> getVerifiedFollowers(@PathVariable Long id, @RequestParam(defaultValue = "verified") String method) throws IOException, ParseException, ConnectionException, WrongParameter, NullDataException, DateException{
 		
 		try{
 			FilterByVerified filter= new FilterByVerified();
@@ -251,6 +273,25 @@ public class Controller {
 		catch (DateException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 		}
+	
+	//restituisce gli utenti che hanno messo like ad un tweet il cui id è passato come parametro
+	@GetMapping(value="/Likes/{id}")
+	public ResponseEntity<JSONObject> getLikes(@PathVariable Long id,@RequestParam(defaultValue = "all") String method) throws IOException, ParseException, NullDataException, ConnectionException, WrongParameter, DateException{
+		try {
+			ServiceLikingUsers service = new ServiceLikingUsers(id);
+			Tweet tweet=jsonTweet.parseOneTweet(getTweetById(id).getBody());
+			System.out.println("AAAAAA");
+			tweet.setLikingUsers(jsonUser.parseUsers(json.ToJson(service.getLikingUsers())));
+			
+			User user= jsonUser.parseUser(getUserById(tweet.getAuthorId()).getBody());
+			user.setFollowers(jsonUser.parseUsers(getFollowers(user.getId()/*tweet.getAuthorId()*/,"all").getBody()));
+			System.out.println(user.FollowersArrayToString());
+			
+			return new ResponseEntity<>(json.ToJson(filterByFollowers.Filter(user,tweet,method)), HttpStatus.OK);}
+		catch (ConnectionException error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
+		catch (NullDataException error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
+	}
 
 }
-//followers che hanno messo like al tweet di un id
