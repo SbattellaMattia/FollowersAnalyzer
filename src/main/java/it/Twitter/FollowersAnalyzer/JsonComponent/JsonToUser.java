@@ -44,17 +44,17 @@ public class JsonToUser {
 		return user; 
 	}
 
-	public User parseOneUser(JSONObject data) throws NullDataException, DateException
+	public User parseOneUser(JSONObject User) throws NullDataException, DateException
 	{
 
-<<<<<<< HEAD
-		if(((JSONObject) User.get("data")) == null) throw new NullDataException(" Bad parsing or no Users match");
-=======
-		//if(((JSONObject) User.get("data")) == null) throw new NullDataException();
->>>>>>> 26f31777036d97520dc337dc8ed7bbf1daa09788
+
+		//if(((JSONObject) User.get("data")) == null) throw new NullDataException(" Bad parsing or no Users match");
+
+		if(((JSONObject) User.get("data")) == null) throw new NullDataException("");
+
 		
 
-		//JSONObject data = (JSONObject) User.get("data");
+		JSONObject data = (JSONObject) User.get("data");
 		
 		String name = (String) data.get("name");    
 		//System.out.println(name);

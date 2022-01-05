@@ -19,7 +19,7 @@ public class FilterByFollowers extends Filter{
 			searchLikingFollowers(user,tweet,method);
 			return UserArrayToString(likingFollowers);}
 
-		else throw new WrongParameter();
+		else throw new WrongParameter(" \""+method+"\" is not allowed");
 	}
 	
 	public void searchLikingFollowers(User user,Tweet tweet,String method) {

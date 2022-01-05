@@ -19,7 +19,7 @@ public class JsonToTweet {
 
 	public Tweet parseTweet(JSONObject Tweet) throws NullDataException, DateException
 	{
-		if (Tweet.get("id")==null)throw new NullDataException();
+		if (Tweet.get("id")==null)throw new NullDataException("");
 		
 		String text = (String) Tweet.get("text");    
 		//System.out.println(text);
@@ -37,7 +37,7 @@ public class JsonToTweet {
 
 	public Tweet parseOneTweet(JSONObject Tweet) throws NullDataException, DateException
 	{
-		if(((JSONObject) Tweet.get("data")) == null) throw new NullDataException();
+		if(((JSONObject) Tweet.get("data")) == null) throw new NullDataException("");
 		
 		JSONObject data = (JSONObject) Tweet.get("data");
 		
