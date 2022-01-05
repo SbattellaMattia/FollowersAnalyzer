@@ -1,6 +1,9 @@
 package it.Twitter.FollowersAnalyzer.Utils;
 
 import java.util.Date;
+
+import it.Twitter.FollowersAnalyzer.Exceptions.DateException;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -8,7 +11,7 @@ public class StringToDate {
 
 	public String date;
 
-	public String stringToDate(String createdAt) {
+	public String stringToDate(String createdAt) throws DateException{
 
 		SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
@@ -17,8 +20,7 @@ public class StringToDate {
 			SimpleDateFormat d1 = new SimpleDateFormat("dd-MM-yyyy");
 			date = d1.format(date1).toString();
 		} catch (ParseException e) {
-			//System.out.println("Errore qui");
-			//e.printStackTrace();
+			throw new DateException(" date parsing error!");
 		}
 		return date;
 	}

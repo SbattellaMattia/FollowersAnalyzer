@@ -111,81 +111,65 @@ public class User extends Super{
 		return followingCount;
 	}
 
-
 	public void setFollowingCount() {
 		this.followingCount = following.size();
 	}
-
 
 	public String getLocation() {
 		return location;
 	}
 
-
 	public void setLocation(String location) {
 		this.location = location;
 	}
-
 
 	public String getDescription() {
 		return description;
 	}
 
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 
 	public boolean isProtect() {
 		return protect;
 	}
 
-
 	public void setProtect(boolean protect) {
 		this.protect = protect;
 	}
-
 
 	public String getCreatedAt() {
 		return createdAt;
 	}
 
-
 	public void setCreatedAt(String createdAt) {	     
 		this.createdAt = createdAt;
 	}
-
 
 	public int getFavouritesCount() {
 		return favouritesCount;
 	}
 
-
 	public void setFavouritesCount(int favouritesCount) {
 		this.favouritesCount = favouritesCount;
 	}
-
 
 	public boolean isVerified() {
 		return verified;
 	}
 
-
 	public void setVerified(boolean verified) {
 		this.verified = verified;
 	}
-
 
 	public ArrayList<Tweet> getTweets() {
 		return tweets;
 	}
 
-
 	public void setTweets(ArrayList<Tweet> tweets) {
 		this.tweets = tweets;
 	}
-	
 	
 	public ArrayList<Tweet> getLikedTweets() {
 		return likedTweets;
