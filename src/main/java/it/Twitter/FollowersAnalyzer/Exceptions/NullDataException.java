@@ -4,8 +4,8 @@ public class NullDataException extends Exception{
 	final static String message="Data is null, wrong or inexistent Id";
 	private static final long serialVersionUID = 5L;
 	
-	public NullDataException() {
-		super(message);
+	public NullDataException(String mex) {
+		super(message+mex);
 	}
 	
 	public String getError() {

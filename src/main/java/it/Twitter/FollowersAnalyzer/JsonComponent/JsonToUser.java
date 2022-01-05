@@ -19,7 +19,7 @@ public class JsonToUser {
 	public User parseUser(JSONObject User) throws NullDataException
 	{
 
-		if (User.get("id")==null)throw new NullDataException();
+		if (User.get("id")==null)throw new NullDataException(" Bad parsing or no Users match");
 		
 		Long id = Long.parseLong((String) User.get("id"));    
 		//System.out.println(id);
@@ -47,7 +47,7 @@ public class JsonToUser {
 	public User parseOneUser(JSONObject User) throws NullDataException
 	{
 
-		if(((JSONObject) User.get("data")) == null) throw new NullDataException();
+		if(((JSONObject) User.get("data")) == null) throw new NullDataException(" Bad parsing or no Users match");
 		
 
 		JSONObject data = (JSONObject) User.get("data");
@@ -76,7 +76,7 @@ public class JsonToUser {
 
 	public ArrayList<User> parseUsers(JSONObject Users) throws NullDataException
 	{
-		if(((JSONArray) Users.get("data")) == null) throw new NullDataException();
+		if(((JSONArray) Users.get("data")) == null) throw new NullDataException(" Bad parsing or no Users match");
 		
 		ArrayList<User> followers = new ArrayList<User>(); 
 		JSONArray data = (JSONArray) Users.get("data");

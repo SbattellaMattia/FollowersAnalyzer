@@ -48,7 +48,7 @@ public class Controller {
 	JsonToTweet jsonTweet=new JsonToTweet();
 	FilterByName filterName=new FilterByName();
 	FilterByUsername filterUsername=new FilterByUsername();
-
+	FilterByCreation filterByCreation= new FilterByCreation();
 
 	@GetMapping(value="/UserByUsername/{username}")
 	public ResponseEntity<JSONObject> getUserByUsername(@PathVariable String username) throws IOException, ParseException,  NullPointerException, ConnectionException{
@@ -236,16 +236,17 @@ public class Controller {
 	
 	
 	@GetMapping(value="/FollowerByDate/{id}")
-	public ResponseEntity<JSONObject> getFilterDate(@PathVariable Long id, @RequestParam(defaultValue = "01-01-2009") String date) throws IOException, ParseException, ConnectionException, WrongParameter, NullDataException, NumberFormatException, DateException{
+	public ResponseEntity<JSONObject> getFilterDate(@PathVariable Long id, @RequestParam(defaultValue = "01-01-2010") String StartDate,@RequestParam(defaultValue = "null") String EndDate) throws IOException, ParseException, ConnectionException, WrongParameter, NullDataException, NumberFormatException, DateException{
 		
 		try {
 			User user= jsonUser.parseUser(getUserById(id).getBody());
 			ServiceFollowers service = new ServiceFollowers(id);
 			user.setFollowers(jsonUser.parseUsers(json.ToJson(service.getFollowers())));
-			FilterByCreation filter= new FilterByCreation();
-			return new ResponseEntity<>(json.ToJson(filter.Filter(user, date)), HttpStatus.OK);}
+			return new ResponseEntity<>(json.ToJson(filterByCreation.Filter(user, StartDate, EndDate)), HttpStatus.OK);}
 		catch (ConnectionException error) {
-				return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}	
+				return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
+		catch (WrongParameter error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 		catch (NullDataException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 		catch (DateException error) {
