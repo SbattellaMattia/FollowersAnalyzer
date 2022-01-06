@@ -17,7 +17,9 @@ public class JsonToTweet {
 
 	public Tweet parseTweet(JSONObject Tweet) throws NullDataException, DateException
 	{
+
 		if (Tweet.get("id")==null)throw new NullDataException("no Tweets match");
+
 		
 		String text = (String) Tweet.get("text");    
 		//System.out.println(text);
