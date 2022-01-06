@@ -83,7 +83,7 @@ public class FilterByCreation extends Filter {
 
 
 	public int checkYear(int year) throws DateException {
-		if(year<2010 || year>2021 )
+		if(year<2005 || year>2021 )
 			throw new DateException("year<2010 or year>2021: " + year);
 		return year;}
 

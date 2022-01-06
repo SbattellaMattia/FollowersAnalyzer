@@ -9,7 +9,7 @@ import it.Twitter.FollowersAnalyzer.Exceptions.ConnectionException;
 public class ServiceLikedTweets extends Service{
 	
 	public ServiceLikedTweets(Long id) {
-		this.Url="https://api.twitter.com/2/users/"+id+"/liked_tweets?max_results=10";
+		this.Url=PATTERN_USER_ID+id+"/liked_tweets?"+PATTERN_TWEET_FIELDS/*+"&"+PATTERN_MAX_RESULTS*/;
 	}
 	
 	public String getLikedTweets() throws IOException, ConnectionException {

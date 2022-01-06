@@ -9,7 +9,7 @@ import it.Twitter.FollowersAnalyzer.Exceptions.ConnectionException;
 public class ServiceFollowing extends Service{
 	
 	public ServiceFollowing(Long id) {
-		this.Url="https://api.twitter.com/2/users/"+id+"/following?user.fields=created_at,verified&max_results=200";
+		this.Url=PATTERN_USER_ID+id+"/following?user.fields=created_at,verified&max_results=200";
 	}
 	
 	public String getFollowing() throws IOException, ConnectionException {

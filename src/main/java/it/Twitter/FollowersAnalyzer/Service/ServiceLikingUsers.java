@@ -8,7 +8,7 @@ import it.Twitter.FollowersAnalyzer.Exceptions.ConnectionException;
 public class ServiceLikingUsers extends Service{
 
 	public ServiceLikingUsers(Long id) {
-		this.Url="https://api.twitter.com/2/users/"+id+"/liking_users?user.fields=created_at,verified";
+		this.Url=PATTERN_TWEET_ID+id+"/liking_users?"+PATTERN_USER_FIELDS;
 	}
 
 	public String getLikingUsers() throws IOException,ConnectionException {

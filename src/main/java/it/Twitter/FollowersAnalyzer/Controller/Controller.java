@@ -52,7 +52,9 @@ public class Controller {
 	FilterByUsername filterUsername=new FilterByUsername();
 	FilterByCreation filterByCreation= new FilterByCreation();
 	FilterByFollowers filterByFollowers = new FilterByFollowers();
-
+	FilterByRefollowers filterStatsRefollowers= new FilterByRefollowers();
+	FilterByVerified filterByVerified= new FilterByVerified();
+	FilterByFollowersRange filterFollowersRange= new FilterByFollowersRange();
 
 	@GetMapping(value="/UserByUsername/{username}")
 	public ResponseEntity<JSONObject> getUserByUsername(@PathVariable String username) throws IOException, ParseException,  NullPointerException, ConnectionException, DateException{
@@ -147,7 +149,6 @@ public class Controller {
 			ServiceTweet service = new ServiceTweet(id);
 			user.setTweets(jsonTweet.parseTweets(json.ToJson(service.getTweet())));  
 			return new ResponseEntity<>(json.ToJson(user.TweetArrayToString()), HttpStatus.OK);}
-		
 		catch (ConnectionException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}	
 		catch(NullDataException error) {
@@ -175,8 +176,10 @@ public class Controller {
 		try{
 			ServiceLikedTweets service = new ServiceLikedTweets(id);
 			User user = jsonUser.parseUser(getUserById(id).getBody());
-			user.setLikedTweets(jsonTweet.parseTweets(json.ToJson(service.getLikedTweets())));  
-			return new ResponseEntity<>(json.ToJson(user.TweetArrayToString()), HttpStatus.OK);}
+			user.setLikedTweets(jsonTweet.parseTweets(json.ToJson(service.getLikedTweets())));
+			
+			System.out.println(user.LikedTweetArrayToString());
+			return new ResponseEntity<>(json.ToJson(user.LikedTweetArrayToString()), HttpStatus.OK);}
 
 		catch (ConnectionException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
@@ -205,15 +208,15 @@ public class Controller {
 
 	@GetMapping(value="/FollowersStats/{id}")
 	public ResponseEntity<JSONObject> getStats(@PathVariable Long id, @RequestParam(defaultValue = "number") String method) throws IOException, ParseException, NullDataException, ConnectionException, DateException{
-		FilterByFollowersRange filter= new FilterByFollowersRange();
+		
 
 		try {
 			User user=jsonUser.parseUser(getUserById(id).getBody());
 			user.setFollowers(jsonUser.parseUsers(getFollowers(id,/*"all",*/"all").getBody()));
 			for(User i : user.getFollowers()) {
 				i.setFollowers(jsonUser.parseUsers(getFollowers(i.getId(),/*"all",*/"all").getBody()));}
-			filter.Filter(user.getFollowers());
-			return new ResponseEntity<>(json.ToJson(filter.FilterToString(method)), HttpStatus.OK);}
+			filterFollowersRange.Filter(user.getFollowers());
+			return new ResponseEntity<>(json.ToJson(filterFollowersRange.FilterToString(method)), HttpStatus.OK);}
 		catch (WrongParameter error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 		catch (ConnectionException error) {
@@ -226,13 +229,13 @@ public class Controller {
 
 	@GetMapping(value="/StatsRefollowers/{id}")
 	public ResponseEntity<JSONObject> getRefollowers(@PathVariable Long id) throws IOException, ParseException, NullDataException, ConnectionException, DateException{
-		FilterByRefollowers filter= new FilterByRefollowers();
+		
 
 		try {
 			User user=jsonUser.parseUser(getUserById(id).getBody());
 			user.setFollowers(jsonUser.parseUsers(getFollowers(id,/*"all",*/"all").getBody()));
 			user.setFollowing(jsonUser.parseUsers(getFollowing(id,"all").getBody()));
-			return new ResponseEntity<>(json.ToJson(filter.Filter(user)), HttpStatus.OK);}
+			return new ResponseEntity<>(json.ToJson(filterStatsRefollowers.Filter(user)), HttpStatus.OK);}
 		catch (ConnectionException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 		catch (NullDataException error) {
@@ -244,11 +247,11 @@ public class Controller {
 	public ResponseEntity<JSONObject> getVerifiedFollowers(@PathVariable Long id, @RequestParam(defaultValue = "verified") String method) throws IOException, ParseException, ConnectionException, WrongParameter, NullDataException, DateException{
 		
 		try{
-			FilterByVerified filter= new FilterByVerified();
+			
 			User user=jsonUser.parseUser(getUserById(id).getBody());
 			user.setFollowers(jsonUser.parseUsers(getFollowers(id,/*"all",*/"all").getBody()));
-			filter.Filter(user);
-			return new ResponseEntity<>(json.ToJson(filter.FilterToString(method)), HttpStatus.OK);}
+			filterByVerified.Filter(user);
+			return new ResponseEntity<>(json.ToJson(filterByVerified.FilterToString(method)), HttpStatus.OK);}
 		catch (ConnectionException error) {
 				return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}	
 		catch (NullDataException error) {
@@ -259,7 +262,7 @@ public class Controller {
 	
 	
 	@GetMapping(value="/FollowerByDate/{id}")
-	public ResponseEntity<JSONObject> getFilterDate(@PathVariable Long id, @RequestParam(defaultValue = "01-01-2010") String StartDate,@RequestParam(defaultValue = "null") String EndDate) throws IOException, ParseException, ConnectionException, WrongParameter, NullDataException, NumberFormatException, DateException{
+	public ResponseEntity<JSONObject> getFilterDate(@PathVariable Long id, @RequestParam(defaultValue = "01-01-2005") String StartDate,@RequestParam(defaultValue = "null") String EndDate) throws IOException, ParseException, ConnectionException, WrongParameter, NullDataException, NumberFormatException, DateException{
 		
 		try {
 			User user= jsonUser.parseUser(getUserById(id).getBody());
@@ -281,14 +284,10 @@ public class Controller {
 	public ResponseEntity<JSONObject> getLikes(@PathVariable Long id,@RequestParam(defaultValue = "all") String method) throws IOException, ParseException, NullDataException, ConnectionException, WrongParameter, DateException{
 		try {
 			ServiceLikingUsers service = new ServiceLikingUsers(id);
-			Tweet tweet=jsonTweet.parseOneTweet(getTweetById(id).getBody());
-			System.out.println("AAAAAA");
+			Tweet tweet=jsonTweet.parseTweet(getTweetById(id).getBody());
 			tweet.setLikingUsers(jsonUser.parseUsers(json.ToJson(service.getLikingUsers())));
-			
 			User user= jsonUser.parseUser(getUserById(tweet.getAuthorId()).getBody());
 			user.setFollowers(jsonUser.parseUsers(getFollowers(user.getId()/*tweet.getAuthorId()*/,"all").getBody()));
-			System.out.println(user.FollowersArrayToString());
-			
 			return new ResponseEntity<>(json.ToJson(filterByFollowers.Filter(user,tweet,method)), HttpStatus.OK);}
 		catch (ConnectionException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}

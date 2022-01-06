@@ -9,7 +9,7 @@ import it.Twitter.FollowersAnalyzer.Exceptions.ConnectionException;
 public class ServiceRetweeted_by extends Service{
 	
 	public ServiceRetweeted_by(Long id) {
-		this.Url="https://api.twitter.com/2/tweets/"+id+"/retweeted_by?user.fields=created_at,verified";
+		this.Url=PATTERN_TWEET_ID+id+"/retweeted_by?"+PATTERN_USER_FIELDS;
 	}
 	
 	public String getRetweeted_by() throws IOException, ConnectionException {

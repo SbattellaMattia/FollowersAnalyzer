@@ -7,9 +7,15 @@ import java.net.URLConnection;
 import it.Twitter.FollowersAnalyzer.Exceptions.ConnectionException;
 
 public abstract class Service {	
+	
 	private String BearerToken;
 	protected String Url;
-
+	
+	final String PATTERN_USER_ID="https://api.twitter.com/2/users/";
+	final String PATTERN_TWEET_ID="https://api.twitter.com/2/tweets/";
+	final String PATTERN_USER_FIELDS="user.fields=created_at,verified";
+	final String PATTERN_TWEET_FIELDS="tweet.fields=created_at,author_id";
+	final String PATTERN_MAX_RESULTS="max_results=10";
 
 	public Service() {
 		//this.BearerToken = "AAAAAAAAAAAAAAAAAAAAABIfWgEAAAAAAOF%2FgMH8TPODq1PwU9Qu0jIyJW4%3DKAuT33sk6LZuTaZR89Pyo9H0rRt6W8GYYxQNP6USsNPbNoHhb6";

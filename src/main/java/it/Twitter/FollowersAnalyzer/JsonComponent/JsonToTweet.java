@@ -5,8 +5,6 @@ import java.util.Iterator;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
 import it.Twitter.FollowersAnalyzer.Exceptions.DateException;
 import it.Twitter.FollowersAnalyzer.Exceptions.NullDataException;
 import it.Twitter.FollowersAnalyzer.Model.Tweet;
@@ -19,14 +17,14 @@ public class JsonToTweet {
 
 	public Tweet parseTweet(JSONObject Tweet) throws NullDataException, DateException
 	{
-		if (Tweet.get("id")==null)throw new NullDataException("");
+		if (Tweet.get("id")==null)throw new NullDataException("no Tweets match");
 		
 		String text = (String) Tweet.get("text");    
 		//System.out.println(text);
 
 		Long id = Long.parseLong((String) Tweet.get("id"));    
 		//System.out.println(id);
-		
+	
 		String createdAt = date.stringToDate((String) Tweet.get("created_at"));
 
 		Long authorId = Long.parseLong((String) Tweet.get("author_id"));
@@ -37,9 +35,9 @@ public class JsonToTweet {
 
 	public Tweet parseOneTweet(JSONObject Tweet) throws NullDataException, DateException
 	{
-		if(((JSONObject) Tweet.get("data")) == null) throw new NullDataException("");
 		
 		JSONObject data = (JSONObject) Tweet.get("data");
+		if(data==null)throw new NullDataException("no Tweet match");
 		
 		String text = (String) data.get("text");    
 		//System.out.println(text);
@@ -59,10 +57,9 @@ public class JsonToTweet {
 	public ArrayList<Tweet> parseTweets(JSONObject Tweet) throws NullDataException, DateException
 	{
 		ArrayList<Tweet> tweets = new ArrayList<Tweet>(); 
-
 		JSONArray data = (JSONArray) Tweet.get("data");
-		
-		//@SuppressWarnings("unchecked")
+		if(data == null) throw new NullDataException("no Tweets match");
+		@SuppressWarnings("unchecked")
 		Iterator<JSONObject> iterator = data.iterator();
 
 		while (iterator.hasNext()) {
