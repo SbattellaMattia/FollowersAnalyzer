@@ -1,11 +1,11 @@
-package it.Twitter.FollowersAnalyzer.Filter;
+package it.Twitter.FollowersAnalyzer.Stats;
 
 import java.util.ArrayList;
 
 import it.Twitter.FollowersAnalyzer.Exceptions.WrongParameter;
 import it.Twitter.FollowersAnalyzer.Model.User;
 
-public class FilterByFollowersRange {
+public class StatFollowersRange {
 	private int LESS_10;
 	private int BETWEEN_10_25;
 	private int BETWEEN_25_50;
@@ -22,7 +22,7 @@ public class FilterByFollowersRange {
 	private int tot;
 	
 	
-	public void Filter(ArrayList<User> followers) {
+	public void Stat(ArrayList<User> followers) {
 		
 		for(User i: followers) {
 			int num=i.getFollowers().size();
@@ -43,17 +43,17 @@ public class FilterByFollowersRange {
 		this.perMORE_100=Math.round(((double)MORE_100/tot*100)*100.0)/100.0;
 	}
 
-	public String FilterToString(String message) throws WrongParameter {
+	public String StatToString(String message) throws WrongParameter {
 		if(message.equals("number")) {
-		return "{\"LESS_10\": \"" + LESS_10 + "\",\"BETWEEN_10_25\": \"" + BETWEEN_10_25 + "\",\"BETWEEN_25_50\": \""
+		return "{\"Number for section of followers\":[{\"LESS_10\": \"" + LESS_10 + "\",\"BETWEEN_10_25\": \"" + BETWEEN_10_25 + "\",\"BETWEEN_25_50\": \""
 				+ BETWEEN_25_50 + "\",\"BETWEEN_50_75\": \"" + BETWEEN_50_75 + "\",\"BETWEEN_75_100\": \"" + BETWEEN_75_100
-				+ "\",\"MORE_100\": \"" + MORE_100 + "\"}";}
+				+ "\",\"MORE_100\": \"" + MORE_100 + "\"}]}";}
 		if(message.equals("%")) {
-			return "{\"LESS_10\": \"" + perLESS_10 + "%\",\"BETWEEN_10_25\": \"" + perBETWEEN_10_25 + "%\",\"BETWEEN_25_50\": \""
+			return "{\"Percentage for section of followers\":[{\"LESS_10\": \"" + perLESS_10 + "%\",\"BETWEEN_10_25\": \"" + perBETWEEN_10_25 + "%\",\"BETWEEN_25_50\": \""
 					+ perBETWEEN_25_50 + "%\",\"BETWEEN_50_75\": \"" + perBETWEEN_50_75 + "%\",\"BETWEEN_75_100\": \"" + perBETWEEN_75_100
-					+ "%\",\"MORE_100\": \"" + perMORE_100 + "%\"}";}
+					+ "%\",\"MORE_100\": \"" + perMORE_100 + "%\"}]}";}
 		
-		else throw new WrongParameter(" \""+message+"\" is not allowed");
+		throw new WrongParameter(" \""+message+"\" is not allowed");
 	}
 
 }

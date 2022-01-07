@@ -2,12 +2,12 @@ package it.Twitter.FollowersAnalyzer.Stats;
 
 import it.Twitter.FollowersAnalyzer.Model.User;
 
-public class Media {
+public class StatMedia {
 	
 	private int somma=0;
 	private double media=0;
 	
-	public Media(User user) {
+	public StatMedia(User user) {
 		
 		for(User i: user.getFollowers()) {
 			somma+=i.getFollowers().size();

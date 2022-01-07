@@ -9,7 +9,7 @@ import it.Twitter.FollowersAnalyzer.Exceptions.ConnectionException;
 public class ServiceUserById extends Service {
 	
 	public ServiceUserById(Long id) {
-		this.Url=PATTERN_USER_ID+id+"?"+PATTERN_USER_FIELDS;
+		this.Url=PATTERN_USER_ID+id+ PARAMETER+PATTERN_USER_FIELDS;
 	}
 
 	public String getUser() throws IOException, ConnectionException {

@@ -11,46 +11,30 @@ import it.Twitter.FollowersAnalyzer.Model.Tweet;
 import it.Twitter.FollowersAnalyzer.Utils.StringToDate;
 
 public class JsonToTweet {
-
-	//JSONParser jsonParser = new JSONParser();
 	StringToDate date = new StringToDate();
 
 	public Tweet parseTweet(JSONObject Tweet) throws NullDataException, DateException
 	{
-
 		if (Tweet.get("id")==null)throw new NullDataException("no Tweets match");
 
-		
 		String text = (String) Tweet.get("text");    
-		//System.out.println(text);
-
 		Long id = Long.parseLong((String) Tweet.get("id"));    
-		//System.out.println(id);
-	
 		String createdAt = date.stringToDate((String) Tweet.get("created_at"));
-
 		Long authorId = Long.parseLong((String) Tweet.get("author_id"));
-		
 		Tweet tweet=new Tweet(id,text,createdAt,authorId);
 		return tweet;
 	}
 
+	
 	public Tweet parseOneTweet(JSONObject Tweet) throws NullDataException, DateException
 	{
-		
 		JSONObject data = (JSONObject) Tweet.get("data");
 		if(data==null)throw new NullDataException("no Tweet match");
 		
 		String text = (String) data.get("text");    
-		//System.out.println(text);
-
 		Long id = Long.parseLong((String) data.get("id"));    
-		//System.out.println(id);
-		
 		String createdAt = date.stringToDate((String) data.get("created_at"));
-
 		Long authorId = Long.parseLong((String) data.get("author_id"));
-		
 		Tweet tweet=new Tweet(id,text,createdAt,authorId);
 		return tweet;
 	}

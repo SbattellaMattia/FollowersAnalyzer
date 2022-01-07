@@ -7,9 +7,10 @@ import it.Twitter.FollowersAnalyzer.Exceptions.ConnectionException;
 /* Dato un Id di un tweet restituisce gli Utenti che lo hanno retweettato
  */
 public class ServiceRetweeted_by extends Service{
+	private String PATTERN_SERVICE_RETWEETED_BY="/retweeted_by";
 	
 	public ServiceRetweeted_by(Long id) {
-		this.Url=PATTERN_TWEET_ID+id+"/retweeted_by?"+PATTERN_USER_FIELDS;
+		this.Url=PATTERN_TWEET_ID+id+PATTERN_SERVICE_RETWEETED_BY+PARAMETER+PATTERN_USER_FIELDS+AND+PATTERN_MAX_RESULTS;
 	}
 	
 	public String getRetweeted_by() throws IOException, ConnectionException {

@@ -16,6 +16,8 @@ public abstract class Service {
 	final String PATTERN_USER_FIELDS="user.fields=created_at,verified";
 	final String PATTERN_TWEET_FIELDS="tweet.fields=created_at,author_id";
 	final String PATTERN_MAX_RESULTS="max_results=10";
+	final String PARAMETER="?";
+	final String AND="&";
 
 	public Service() {
 		//this.BearerToken = "AAAAAAAAAAAAAAAAAAAAABIfWgEAAAAAAOF%2FgMH8TPODq1PwU9Qu0jIyJW4%3DKAuT33sk6LZuTaZR89Pyo9H0rRt6W8GYYxQNP6USsNPbNoHhb6";
@@ -29,28 +31,23 @@ public abstract class Service {
 
 		// Sending get request
 		try {
-
 			URLConnection openConnection = new URL(Url).openConnection();
 			openConnection.setRequestProperty("Authorization","Bearer "+ BearerToken);
 			InputStream input = openConnection.getInputStream();
 			try {
 				InputStreamReader reader = new InputStreamReader(input);
 				BufferedReader buf = new BufferedReader(reader);
-				
-				if (( aux = buf.readLine() ) == null) throw new ConnectionException();
-				else line+= aux;
-				
 				while ( ( aux = buf.readLine() ) != null ) {
 					line+= aux;
 				}
-			} catch (IOException e) {
-				System.err.println(e.getMessage());	
-			} finally {
-				input.close();
-			}
-		} catch (ConnectionException e) {
-			return e.getError();
-		}
+			}catch (IOException e) {
+				throw new ConnectionException("Input text is null or interrupted I/O operation");} 
+			finally {
+				input.close();}
+		}catch (IOException e) {
+			throw new ConnectionException("Too many request");} 
+
+		
 		return line;
 	}
 
