@@ -10,7 +10,7 @@ public class ServiceTweet extends Service {
 	
 	public ServiceTweet(Long id) {
 		//this.Url="https://api.twitter.com/2/users/"+id+"/tweets?max_results=10";
-		this.Url="://api.twitter.com/2/users/:id/tweets?max_results=10&tweet.fields=author_id,created_at";
+		this.Url="https://api.twitter.com/2/users/:id/tweets?max_results=10&tweet.fields=author_id,created_at";
 	}
 	
 	public String getTweet() throws IOException, ConnectionException {
