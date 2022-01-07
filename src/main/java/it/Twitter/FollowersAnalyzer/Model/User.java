@@ -182,7 +182,7 @@ public class User extends Super{
 	
 	
 	public String UserToString() {
-		return "{\"id\": \""+ getId() + "\",\"name\": \"" + getName() + "\",\"username\": \"" + getUsername() + "\",\"created_at\": \"" + getCreatedAt() + "\",\"verified\": \"" + isVerified() + "\"}";
+		return "{\"id\": \""+ getId() + "\",\"name\": \"" + getName() + "\",\"username\": \"" + getUsername() + "\",\"created_at\": \"" + getCreatedAt() + "\",\"verified\": " + isVerified() + "}";
 	}
 
 	public String FollowersArrayToString() {
@@ -198,12 +198,18 @@ public class User extends Super{
 		}
 
 		public String TweetToString(Tweet tweet) {
-			return "{\"id\": \""+ tweet.getId() + "\",\"text\": \"" + tweet.getText() + "\"}";
+			return "{\"id\": \""+ tweet.getId() + "\",\"text\": \"" + tweet.getText() + "\",\"created_at\": \""+ tweet.getCreatedAt() + "\",\"author_id\": \"" + tweet.getAuthorId() +"\"}";
 		}
 
 		public String TweetArrayToString() {
 			String aux = "{\"data\":[";
 			for(Tweet tweet : tweets) aux += TweetToString(tweet)+",";
+			return aux.substring(0,(aux.length()-1))+"]}";
+		}
+		
+		public String LikedTweetArrayToString() {
+			String aux = "{\"data\":[";
+			for(Tweet tweet : likedTweets) aux += TweetToString(tweet)+",";
 			return aux.substring(0,(aux.length()-1))+"]}";
 		}
 

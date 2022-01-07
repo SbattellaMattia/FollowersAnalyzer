@@ -7,7 +7,7 @@ import it.Twitter.FollowersAnalyzer.Exceptions.ConnectionException;
 public class ServiceTweetById extends Service {
 	
 	public ServiceTweetById(Long id) {
-		this.Url="https://api.twitter.com/2/tweets/"+id+"?tweet.fields=author_id,created_at";
+		this.Url=PATTERN_TWEET_ID+id+ PARAMETER+PATTERN_TWEET_FIELDS;
 	}
 
 	public String getTweetById() throws IOException,ConnectionException {
