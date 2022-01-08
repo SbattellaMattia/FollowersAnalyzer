@@ -33,6 +33,7 @@ import it.Twitter.FollowersAnalyzer.Service.ServiceUserById;
 import it.Twitter.FollowersAnalyzer.Service.ServiceUserByUsername;
 import it.Twitter.FollowersAnalyzer.Stats.StatFollowersRange;
 import it.Twitter.FollowersAnalyzer.Stats.StatMedia;
+import it.Twitter.FollowersAnalyzer.Stats.StatVarianza;
 import it.Twitter.FollowersAnalyzer.Utils.Counter;
 import it.Twitter.FollowersAnalyzer.Exceptions.ConnectionException;
 import it.Twitter.FollowersAnalyzer.Exceptions.DateException;
@@ -248,9 +249,9 @@ public class Controller {
 	public ResponseEntity<JSONObject> getMedia(@PathVariable Long id) throws IOException, ParseException, NullDataException, ConnectionException, DateException, WrongParameter{
 		try {
 			User user=jsonUser.parseUser(getUserById(id).getBody());
-			user.setFollowers(jsonUser.parseUsers(getFollowers(id,/*"all",*/"all").getBody()));
+			user.setFollowers(jsonUser.parseUsers(getFollowers(id,"all").getBody()));
 			for(User i : user.getFollowers()) {
-				i.setFollowers(jsonUser.parseUsers(getFollowers(i.getId(),/*"all",*/"all").getBody()));}
+				i.setFollowers(jsonUser.parseUsers(getFollowers(i.getId(),"all").getBody()));}
 			StatMedia media =new StatMedia(user);
 			return new ResponseEntity<>(json.ToJson(media.toString()), HttpStatus.OK);}
 		catch (ConnectionException error) {
@@ -313,6 +314,21 @@ public class Controller {
 	}
 	
 	
+	@GetMapping(value="/FollowersStats/Varianza/{id}")
+	public ResponseEntity<JSONObject> getVarianza(@PathVariable Long id) throws IOException, ParseException, NullDataException, ConnectionException, DateException, WrongParameter{
+		try {
+			User user=jsonUser.parseUser(getUserById(id).getBody());
+			user.setFollowers(jsonUser.parseUsers(getFollowers(id,"all").getBody()));
+			for(User i : user.getFollowers()) {
+				i.setFollowers(jsonUser.parseUsers(getFollowers(i.getId(),"all").getBody()));}
+			StatVarianza varianza =new StatVarianza(user);
+			return new ResponseEntity<>(json.ToJson(varianza.toString()), HttpStatus.OK);}
+		catch (ConnectionException error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
+		catch (NullDataException error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
+
+	}
 	
 	
 
