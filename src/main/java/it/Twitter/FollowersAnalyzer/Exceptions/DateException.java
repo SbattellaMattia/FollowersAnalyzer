@@ -1,7 +1,7 @@
 package it.Twitter.FollowersAnalyzer.Exceptions;
 
 public class DateException extends Exception {
-	final static String message="Wrong type of data:";
+	final static String message="Wrong type of data: ";
 	private static final long serialVersionUID = 3L;
 
 	public DateException(String mex) {

@@ -61,16 +61,43 @@ public class FilterByCreation extends Filter {
 					int UserMonth=Integer.parseInt(i.getCreatedAt().substring(3,5));
 					int UserDay=Integer.parseInt(i.getCreatedAt().substring(0,2));
 
-					if (UserYear>startyear && UserYear<endyear) {
-						FollowerDate.add(i);}
-					if (UserYear==startyear || UserYear==endyear) {
-						if (UserMonth>startmonth && UserMonth<endmonth) {
-							FollowerDate.add(i);}
-						if (UserMonth==startmonth || UserMonth==endmonth) {
-							if (UserDay>startday && UserDay<endday) {
-								FollowerDate.add(i);}
+					if(UserYear>startyear && UserYear<endyear)FollowerDate.add(i);
+
+
+					if(UserYear==startyear && UserYear==endyear) {
+
+						if(UserMonth>startmonth && UserMonth<endmonth)FollowerDate.add(i);
+
+						if(UserMonth==startmonth && UserMonth==endmonth){
+							if(UserDay>startday && UserDay<endday)FollowerDate.add(i);}
+						else {
+							if(UserMonth==startmonth || UserMonth==endmonth) {
+								if(UserMonth==startmonth) {
+									if(UserDay>startday)FollowerDate.add(i);
+								}
+								if(UserMonth==endmonth) {
+									if(UserDay<endday)FollowerDate.add(i);}
+							}
 						}
 					}
+					else{
+						if(UserYear==startyear || UserYear==endyear) {
+							if(UserYear==startyear){
+								if (UserMonth>startmonth) {
+									FollowerDate.add(i);}
+								if(UserMonth==startmonth){
+									if(UserDay>startday)FollowerDate.add(i);}
+							}
+							if(UserYear==endyear){
+								if (UserMonth<endmonth) {
+									FollowerDate.add(i);}
+								if(UserMonth==endmonth){
+									if(UserDay<startday)FollowerDate.add(i);}
+							}
+						}
+					}
+					
+
 
 				}
 
@@ -137,14 +164,39 @@ public class FilterByCreation extends Filter {
 					int UserMonth=Integer.parseInt(i.getCreatedAt().substring(3,5));
 					int UserDay=Integer.parseInt(i.getCreatedAt().substring(0,2));
 
-					if (UserYear>startyear && UserYear<endyear) {
-						FollowingDate.add(i);}
-					if (UserYear==startyear || UserYear==endyear) {
-						if (UserMonth>startmonth && UserMonth<endmonth) {
-							FollowingDate.add(i);}
-						if (UserMonth==startmonth || UserMonth==endmonth) {
-							if (UserDay>startday && UserDay<endday) {
-								FollowingDate.add(i);}
+					if(UserYear>startyear && UserYear<endyear)FollowingDate.add(i);
+
+
+					if(UserYear==startyear && UserYear==endyear) {
+
+						if(UserMonth>startmonth && UserMonth<endmonth)FollowingDate.add(i);
+
+						if(UserMonth==startmonth && UserMonth==endmonth){
+							if(UserDay>startday && UserDay<endday)FollowingDate.add(i);}
+						else {
+							if(UserMonth==startmonth || UserMonth==endmonth) {
+								if(UserMonth==startmonth) {
+									if(UserDay>startday)FollowingDate.add(i);
+								}
+								if(UserMonth==endmonth) {
+									if(UserDay<endday)FollowingDate.add(i);}
+							}
+						}
+					}
+					else{
+						if(UserYear==startyear || UserYear==endyear) {
+							if(UserYear==startyear){
+								if (UserMonth>startmonth) {
+									FollowingDate.add(i);}
+								if(UserMonth==startmonth){
+									if(UserDay>startday)FollowingDate.add(i);}
+							}
+							if(UserYear==endyear){
+								if (UserMonth<endmonth) {
+									FollowingDate.add(i);}
+								if(UserMonth==endmonth){
+									if(UserDay<startday)FollowingDate.add(i);}
+							}
 						}
 					}
 
@@ -157,9 +209,6 @@ public class FilterByCreation extends Filter {
 		if (FollowingDate.isEmpty()) throw new NullDataException("No users match the request");
 		return UserArrayToString(FollowingDate);
 	}
-
-
-
 
 
 
