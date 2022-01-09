@@ -10,7 +10,7 @@ public class ServiceRetweeted_by extends Service{
 	private String PATTERN_SERVICE_RETWEETED_BY="/retweeted_by";
 	
 	public ServiceRetweeted_by(Long id) {
-		this.Url=PATTERN_TWEET_ID+id+PATTERN_SERVICE_RETWEETED_BY+PARAMETER+PATTERN_USER_FIELDS+AND+PATTERN_MAX_RESULTS;
+		this.Url=PATTERN_TWEET_ID+id+PATTERN_SERVICE_RETWEETED_BY+PARAMETER+PATTERN_USER_FIELDS;
 	}
 	
 	public String getRetweeted_by() throws IOException, ConnectionException {

@@ -22,7 +22,7 @@ public class StatFollowersRange {
 	private int tot;
 	
 	
-	public void Stat(ArrayList<User> followers) {
+	public StatFollowersRange(ArrayList<User> followers) {
 		
 		for(User i: followers) {
 			int num=i.getFollowers().size();
@@ -45,11 +45,11 @@ public class StatFollowersRange {
 
 	public String StatToString(String message) throws WrongParameter {
 		if(message.equals("number")) {
-		return "{\"Number for section of followers\":[{\"LESS_10\": \"" + LESS_10 + "\",\"BETWEEN_10_25\": \"" + BETWEEN_10_25 + "\",\"BETWEEN_25_50\": \""
+		return "{\"Number for range of followers\":[{\"LESS_10\": \"" + LESS_10 + "\",\"BETWEEN_10_25\": \"" + BETWEEN_10_25 + "\",\"BETWEEN_25_50\": \""
 				+ BETWEEN_25_50 + "\",\"BETWEEN_50_75\": \"" + BETWEEN_50_75 + "\",\"BETWEEN_75_100\": \"" + BETWEEN_75_100
 				+ "\",\"MORE_100\": \"" + MORE_100 + "\"}]}";}
 		if(message.equals("%")) {
-			return "{\"Percentage for section of followers\":[{\"LESS_10\": \"" + perLESS_10 + "%\",\"BETWEEN_10_25\": \"" + perBETWEEN_10_25 + "%\",\"BETWEEN_25_50\": \""
+			return "{\"Percentage for range of followers\":[{\"LESS_10\": \"" + perLESS_10 + "%\",\"BETWEEN_10_25\": \"" + perBETWEEN_10_25 + "%\",\"BETWEEN_25_50\": \""
 					+ perBETWEEN_25_50 + "%\",\"BETWEEN_50_75\": \"" + perBETWEEN_50_75 + "%\",\"BETWEEN_75_100\": \"" + perBETWEEN_75_100
 					+ "%\",\"MORE_100\": \"" + perMORE_100 + "%\"}]}";}
 		

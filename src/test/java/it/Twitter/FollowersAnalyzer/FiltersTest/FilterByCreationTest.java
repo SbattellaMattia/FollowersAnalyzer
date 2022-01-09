@@ -1,8 +1,7 @@
 package it.Twitter.FollowersAnalyzer.FiltersTest;
 
-import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions ;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +34,7 @@ class FilterByCreationTest extends TestCase{
 		(user.getFollowers()).add(user1);
 		(user.getFollowers()).add(user2);
 		(user.getFollowers()).add(user3);
-		System.out.println("setUp completato");
+		//System.out.println("setUp completato");
 	
 	}
 	
@@ -73,7 +72,7 @@ class FilterByCreationTest extends TestCase{
 
 	
 	
-	@Test
+	@Ignore
     public void UserToString10() throws NumberFormatException, DateException, NullDataException, WrongParameter {
     	FilterByCreation filter= new FilterByCreation();
     	System.out.println(filter.FollowerFilter(user, "00-01-2021", "01-10-2020"));
@@ -84,8 +83,7 @@ class FilterByCreationTest extends TestCase{
 	 
 
 	@AfterEach
-	public void tearDown() throws Exception {
-	}
+	public void tearDown() throws Exception {}
 }
 
 

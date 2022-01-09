@@ -32,8 +32,8 @@ import it.Twitter.FollowersAnalyzer.Service.ServiceTweets;
 import it.Twitter.FollowersAnalyzer.Service.ServiceUserById;
 import it.Twitter.FollowersAnalyzer.Service.ServiceUserByUsername;
 import it.Twitter.FollowersAnalyzer.Stats.StatFollowersRange;
-import it.Twitter.FollowersAnalyzer.Stats.StatMedia;
-import it.Twitter.FollowersAnalyzer.Stats.StatVarianza;
+import it.Twitter.FollowersAnalyzer.Stats.StatAverage;
+import it.Twitter.FollowersAnalyzer.Stats.StatVariation;
 import it.Twitter.FollowersAnalyzer.Utils.Counter;
 import it.Twitter.FollowersAnalyzer.Exceptions.ConnectionException;
 import it.Twitter.FollowersAnalyzer.Exceptions.DateException;
@@ -230,15 +230,17 @@ public class Controller {
 	
 		
 	@GetMapping(value="/Tweet/Retweeted_by/{id}")
-	public ResponseEntity<JSONObject> getRetweeted_by(@PathVariable Long id,@RequestParam(defaultValue = "all") String username) throws IOException, ParseException, NullDataException, ConnectionException, DateException{
+	public ResponseEntity<JSONObject> getRetweeted_by(@PathVariable Long id,@RequestParam(defaultValue = "all") String username) throws IOException, ParseException, NullDataException, ConnectionException, DateException, WrongParameter{
 		try {
 			ServiceRetweeted_by service = new ServiceRetweeted_by(id);
-			Tweet tweet=new Tweet(id);
+			Tweet tweet=jsonTweet.parseTweet(getTweetById(id).getBody());
 			tweet.setRetweeted_by(jsonUser.parseUsers(json.ToJson(service.getRetweeted_by())));
-			return new ResponseEntity<>(json.ToJson(tweet.RetweetedByArrayToString()), HttpStatus.OK);}
+			return new ResponseEntity<>(json.ToJson(filterByUsername.FilterRetweeted(tweet, username)), HttpStatus.OK);}
 		catch (ConnectionException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 		catch (NullDataException error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
+		catch (WrongParameter error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 	}
 
@@ -252,7 +254,7 @@ public class Controller {
 			user.setFollowers(jsonUser.parseUsers(getFollowers(id,"all").getBody()));
 			for(User i : user.getFollowers()) {
 				i.setFollowers(jsonUser.parseUsers(getFollowers(i.getId(),"all").getBody()));}
-			StatMedia media =new StatMedia(user);
+			StatAverage media =new StatAverage(user);
 			return new ResponseEntity<>(json.ToJson(media.toString()), HttpStatus.OK);}
 		catch (ConnectionException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
@@ -269,8 +271,7 @@ public class Controller {
 			user.setFollowers(jsonUser.parseUsers(getFollowers(id,"all").getBody()));
 			for(User i : user.getFollowers()) {
 				i.setFollowers(jsonUser.parseUsers(getFollowers(i.getId(),"all").getBody()));}
-			StatFollowersRange StatFollowersRange= new StatFollowersRange();
-			StatFollowersRange.Stat(user.getFollowers());
+			StatFollowersRange StatFollowersRange= new StatFollowersRange(user.getFollowers());
 			return new ResponseEntity<>(json.ToJson(StatFollowersRange.StatToString(method)), HttpStatus.OK);}
 		catch (WrongParameter error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
@@ -321,7 +322,7 @@ public class Controller {
 			user.setFollowers(jsonUser.parseUsers(getFollowers(id,"all").getBody()));
 			for(User i : user.getFollowers()) {
 				i.setFollowers(jsonUser.parseUsers(getFollowers(i.getId(),"all").getBody()));}
-			StatVarianza varianza =new StatVarianza(user);
+			StatVariation varianza =new StatVariation(user);
 			return new ResponseEntity<>(json.ToJson(varianza.toString()), HttpStatus.OK);}
 		catch (ConnectionException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
