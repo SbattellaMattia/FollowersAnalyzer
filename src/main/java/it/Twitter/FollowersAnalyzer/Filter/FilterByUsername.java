@@ -3,6 +3,7 @@ package it.Twitter.FollowersAnalyzer.Filter;
 import java.util.ArrayList;
 
 import it.Twitter.FollowersAnalyzer.Exceptions.WrongParameter;
+import it.Twitter.FollowersAnalyzer.Model.Tweet;
 import it.Twitter.FollowersAnalyzer.Model.User;
 
 public class FilterByUsername extends Filter {
@@ -36,6 +37,22 @@ public class FilterByUsername extends Filter {
 		}
 		if(UsernameFollowing.isEmpty()) throw new WrongParameter(username+" not found");
 		return UserArrayToString(UsernameFollowing);
+	}
+	
+	
+	public String FilterRetweeted(Tweet tweet,String username) throws WrongParameter {
+		ArrayList<User> UsernameRetweeted =new  ArrayList<User>();
+		
+		if(username.equals("all")) {
+			for(User i: tweet.getRetweeted_by()) {
+				UsernameRetweeted.add(i) ;}
+		}
+		else {
+			for(User i:tweet.getRetweeted_by()) {
+				if (i.getUsername().equals(username)) UsernameRetweeted.add(i);}
+		}
+		if(UsernameRetweeted.isEmpty()) throw new WrongParameter(username+" not found");
+		return UserArrayToString(UsernameRetweeted);
 	}
 	
 }
