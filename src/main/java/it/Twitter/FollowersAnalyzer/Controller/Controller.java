@@ -282,7 +282,7 @@ public class Controller {
 	}
 
 	//restituisce gli utenti che hanno messo like ad un tweet il cui id è passato come parametro
-	@GetMapping(value="/Tweet/LikingUser/{id}")
+	@GetMapping(value="/Tweet/LikingUsers/{id}")
 	public ResponseEntity<JSONObject> getLikes(@PathVariable Long id,@RequestParam(defaultValue = "all") String method) throws IOException, ParseException, NullDataException, ConnectionException, WrongParameter, DateException{
 		try {
 			ServiceLikingUsers service = new ServiceLikingUsers(id);
