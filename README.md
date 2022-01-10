@@ -94,7 +94,7 @@ N° | TIPO | ROTTA | PARAMETRO | DESCRIZIONE
 ## :white_small_square: Filtri
 N° | TIPO | ROTTA | PARAMETRO | DESCRIZIONE
 -- | -- | -- | -- | --
-**[10.](#10)**|GET|```/Filter/FollowersByCreation/```|id utente|*Passato come parametro un id utente, la rotta restituisce l'elenco dei followers filtrati per data di creazione dell'account. [:information_source:](#info)**
+**[10.](#10)**|GET|```/Filter/FollowersByCreation/```|id utente|*Passato come parametro un id utente, la rotta restituisce l'elenco dei followers filtrati per data di creazione dell'account. [:information_source:](#info)*
 **[11.](#11)**|GET|```/Filter/FollowingByCreation/```|id utente|*Passato come parametro un id utente, la rotta restituisce l'elenco degli (utenti) seguiti filtrati per data di creazione dell'account. [:information_source:](#info)*
 **[12.](#12)**|GET|```/Filter/VerifiedFollowers/```|id utente|*Passato come parametro un id utente, la rotta restituisce l'elenco dei followers filtrati secondo il verificato del loro profilo. [:information_source:](#info)*
 **13.**|GET|```/Filter/Refollowers/```|id utente|*Passato come parametro un id utente, la rotta restituisce l'elenco degli utenti che ricambiano il follow.*
@@ -116,20 +116,20 @@ N° | TIPO | ROTTA | PARAMETRO | DESCRIZIONE
 ## :white_small_square: Specifiche
 E' necessario specificare che alcune rotte possono includere un parametro aggiuntivo per modificare i risultati di filtri e statistiche aggiungendo alla richiesta:
 ```
-/? <PARAMETRO> = <OPZIONE>
+/? <PARAMETRO 1> = <OPZIONE> , <(eventuale) PARAMETRO 2> = <OPZIONE>
 ```
 Se non verrà inserito nulla, la rotta sarà eseguita con un defaul value (in descrizione in tabella) preimpostato e restituirà il risultato descritto [qui](#rotte).
 
 Tutte le varie possibilità sono in descrizione nella seguente tabella:
-ROTTA | "/?" | PARAMETRO | "=" | OPZIONE | VALORE DI DEFAULT | DESCRIZIONE
+ROTTA | "/?" | PARAMETRI | "=" | OPZIONI | VALORE DI DEFAULT | DESCRIZIONE
 -- | -- | -- | -- | -- | -- | --
-<a name="3">3.</a>|```/?```|"username"| ```=``` | Username della persona da ricercare | ```all``` | Se viene inserito l'username, la rotta restituisce i paramentri dell'utente ricercato fra tutti i followers.
-<a name="4">4.</a>|```/?```|"username"| ```=``` | Username della persona da ricercare | ```all``` | Se viene inserito l'username, la rotta restituisce l'utente seguito con il nome inseito.
-<a name="8">8.</a>|```/?```|"username"| ```=``` | Username della persona da ricercare | ```all``` | Se viene inserito l'username e l'utente viene trovato tra coloro che hanno riteittato, ne restituisce i suoi dati.
+<a name="3">3.</a>|```/?```|"username"| ```=``` | Username della persona da ricercare | ```all``` | Nel caso venga inserito l'username, la rotta restituirà i paramentri dell'utente ricercato fra tutti i followers; se non trovato verrà mostrato un messaggio di errore.
+<a name="4">4.</a>|```/?```|"username"| ```=``` | Username della persona da ricercare | ```all``` | Nel caso venga inserito l'username, la rotta restituirà l'utente seguito con il nome inseito; se non trovato, verrà mostrato un messaggio di errore.
+<a name="8">8.</a>|```/?```|"username"| ```=``` | Username della persona da ricercare | ```all``` | Nel caso venga inserito l'username e l'utente viene trovato tra coloro che hanno ritwittato, la rotta ne restituirà i suoi dati.
 <a name="9">9.</a>|```/?```|"method"| ```=``` | ```followers``` |  ```all``` | Se inserita l'opzione ```followers```, la rotta restituirà esclusivamente i followers dell'utente che hanno messo like al tweet.
-<a name="10">10.</a>|```/?```|"username"| ```=``` | ```all``` | | |
-<a name="11">11.</a>|```/?```|"username"| ```=``` | ```all``` | | |
-<a name="12">12.</a>|```/?```|"username"| ```=``` | ```all``` | | |
+<a name="10">10.</a>|```/?```|P1 = "StartDate", P2 = "EndDate"| ```=``` | Data di inizio e di fine della ricerca | ```all```, ```all``` | Possono essere inseriti a discrezione dell'utente uno o entrambi i valori, a seconda dei valori inseriti verranno restituiti i followers filtrati nell'arco temporale scelto. La data di inzio se non inserita è settata al giorno di fondazione di Twitter.|
+<a name="11">11.</a>|```/?```|P1 = "StartDate", P2 = "EndDate"| ```=``` | Data di inizio e di fine della ricerca | ```all```, ```all``` | Possono essere inseriti a discrezione dell'utente uno o entrambi i valori, a seconda dei valori inseriti verranno restituiti gli utenti seguiti filtrati nell'arco temporale scelto. La data di inzio se non inserita è settata al giorno di fondazione di Twitter.|
+<a name="12">12.</a>|```/?```|"method"| ```=``` | ```verified```,  ```not_verified``` | ```all```| Nel caso venga inserita l'opzione ```verified```, la rottà restituirà i followers dal profilo verificato; nel caso di inserimento dell'opzione ```not_ verified```, la rottà restituirà i followers dal profilo non verificato. |
 <a name="16">16.</a>|```/?```|"username"| ```=``` | ```all``` | | |
 <a name="17">17.</a>|```/?```|"username"| ```=``` | ```all``` | | |
 
@@ -167,5 +167,5 @@ Per lo sviluppo del programma è risultato necessario l'utilizzo di:
 
 | Sviluppatore | Email  | Profilo GitHub |
 |--|--|--|
-| Sbattella Mattia |s1081890@studenti.univpm.it | 
+| Sbattella Mattia | tiasba01@gmail.com | https://github.com/SbattellaMattia
 | Sumcutean Sara | s1099404@studenti.univpm.it  | https://github.com/SaraSumcutean
