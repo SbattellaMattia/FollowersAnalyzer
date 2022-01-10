@@ -53,7 +53,7 @@ public class StatFollowersRange {
 					+ perBETWEEN_25_50 + "%\",\"BETWEEN_50_75\": \"" + perBETWEEN_50_75 + "%\",\"BETWEEN_75_100\": \"" + perBETWEEN_75_100
 					+ "%\",\"MORE_100\": \"" + perMORE_100 + "%\"}]}";}
 		
-		throw new WrongParameter(" \""+message+"\" is not allowed");
+		throw new WrongParameter("\""+message+"\" is not allowed");
 	}
 
 }

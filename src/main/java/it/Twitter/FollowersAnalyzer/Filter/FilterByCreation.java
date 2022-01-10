@@ -13,7 +13,7 @@ public class FilterByCreation extends Filter {
 
 		ArrayList<User> FollowerDate = new ArrayList<User>();
 		try {
-			if(StartDate.length()!=10)throw new WrongParameter("Use correct form of data: dd-mm-yyyy: "+StartDate);
+			if(StartDate.length()!=10)throw new WrongParameter("Use correct form of data: dd-mm-yyyy");
 
 			int startyear=checkYear(Integer.parseInt(StartDate.substring(6,StartDate.length())));
 			int startmonth=checkMonth(Integer.parseInt(StartDate.substring(3,5)));
@@ -40,7 +40,7 @@ public class FilterByCreation extends Filter {
 				}
 			}
 			else {
-				if(EndDate.length()!=10)throw new WrongParameter("Use correct form of data: dd-mm-yyyy"+EndDate);
+				if(EndDate.length()!=10)throw new WrongParameter("Use correct form of data: dd-mm-yyyy");
 				int endyear=checkYear(Integer.parseInt(EndDate.substring(6,EndDate.length())));
 				int endmonth=checkMonth(Integer.parseInt(EndDate.substring(3,5)));
 				int endday=checkDay(Integer.parseInt(EndDate.substring(0,2)),endmonth);

@@ -1,5 +1,8 @@
 package it.Twitter.FollowersAnalyzer.FiltersTest;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -66,6 +69,13 @@ class FilterByFollowersTest {
 		FilterByFollowers FollowersFilter= new FilterByFollowers();
 		System.out.println(FollowersFilter.Filter(user, tweet, "followers"));
 	}
+	
+	@Test
+    void exceptionTesting() {
+		FilterByFollowers FollowersFilter= new FilterByFollowers();
+        WrongParameter exception = assertThrows(WrongParameter.class, () ->FollowersFilter.Filter(user, tweet, "xxx"));
+        assertEquals("Wrong or inexistent parameter: \"xxx\" is not allowed", exception.getMessage());
+    }
 	
 	@AfterEach
 	public void tearDown() throws Exception {}

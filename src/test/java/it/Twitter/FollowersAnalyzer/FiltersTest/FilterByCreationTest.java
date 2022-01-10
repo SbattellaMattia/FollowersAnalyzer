@@ -1,6 +1,7 @@
 package it.Twitter.FollowersAnalyzer.FiltersTest;
 
-import org.junit.Ignore;
+import static org.junit.Assert.assertThrows;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,6 +39,10 @@ class FilterByCreationTest extends TestCase{
 	
 	}
 	
+	/*Format: passiamo l'utente, la data di inizio filtraggio, la data di fine filtraggio
+	 * 
+	 * verranno restituiti i followers creati tra le due date
+	*/
 
 	@Test
 	public void UserToString() throws NumberFormatException, DateException, NullDataException, WrongParameter {
@@ -69,19 +74,48 @@ class FilterByCreationTest extends TestCase{
 		System.out.println(filter.FollowerFilter(user, "31-10-2011", "02-11-2011"));
 	}
 	
-
+	@Test
+    void exceptionTesting1() {
+		FilterByCreation filter= new FilterByCreation();
+        DateException exception = assertThrows(DateException.class, () ->filter.FollowerFilter(user, "00-01-2021", "null"));
+        assertEquals("Wrong type of data: day<1 or day>31: 0", exception.getMessage());
+    }
 	
+	@Test
+    void exceptionTesting2() {
+		FilterByCreation filter= new FilterByCreation();
+        DateException exception = assertThrows(DateException.class, () ->filter.FollowerFilter(user, "31-04-2021", "null"));
+        assertEquals("Wrong type of data: April, June, September, November have 30 days: 31", exception.getMessage());
+    }
 	
-	@Ignore
-    public void UserToString10() throws NumberFormatException, DateException, NullDataException, WrongParameter {
-    	FilterByCreation filter= new FilterByCreation();
-    	System.out.println(filter.FollowerFilter(user, "00-01-2021", "01-10-2020"));
-    	//DateException thrown = assertThrows(DateException.class,() ->{});
-    	/*assertEquals(filter.FollowerFilter(user, "00-01-2021", "01-10-2020"),"Wrong type of data: day<1 or day>31:0");*/
-    	
+	@Test
+    void exceptionTesting3() {
+		FilterByCreation filter= new FilterByCreation();
+		WrongParameter exception = assertThrows(WrongParameter.class, () ->filter.FollowerFilter(user, "01-01-2021", "01-01-2020"));
+        assertEquals("Wrong or inexistent parameter: start year > end year : 2021-2020", exception.getMessage());
+    }
+	
+	@Test
+    void exceptionTesting4() {
+		FilterByCreation filter= new FilterByCreation();
+		WrongParameter exception = assertThrows(WrongParameter.class, () ->filter.FollowerFilter(user, "02-01-2021", "01-01-2021"));
+        assertEquals("Wrong or inexistent parameter: start day > end day : 2-1", exception.getMessage());
     }
 	 
-
+	@Test
+    void exceptionTesting5() {
+		FilterByCreation filter= new FilterByCreation();
+		WrongParameter exception = assertThrows(WrongParameter.class, () ->filter.FollowerFilter(user, "non sono", "una data"));
+        assertEquals("Wrong or inexistent parameter: Use correct form of data: dd-mm-yyyy", exception.getMessage());
+    }
+	
+	@Test
+    void exceptionTesting6() {
+		FilterByCreation filter= new FilterByCreation();
+		WrongParameter exception = assertThrows(WrongParameter.class, () ->filter.FollowerFilter(user, "0l-0l-2020", "0S-0S-2020"));
+        assertEquals("Wrong or inexistent parameter: Use only numbers: dd-mm-yyyy: 0l-0l-2020 0S-0S-2020", exception.getMessage());
+    }
+	 
 	@AfterEach
 	public void tearDown() throws Exception {}
 }
