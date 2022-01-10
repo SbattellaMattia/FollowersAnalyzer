@@ -1,5 +1,8 @@
 package it.Twitter.FollowersAnalyzer.StatsTest;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -64,8 +67,13 @@ class TestFollowersRange {
 		System.out.println(statRange.StatToString("%"));
 	}
 	
+	@Test
+    void exceptionTesting() {
+		StatFollowersRange statRange= new StatFollowersRange(user.getFollowers());
+        WrongParameter exception = assertThrows(WrongParameter.class, () ->statRange.StatToString("xxx"));
+        assertEquals("Wrong or inexistent parameter: \"xxx\" is not allowed", exception.getMessage());
+    }
 	
-
 	@AfterEach
 	public void tearDown() throws Exception {}
 }

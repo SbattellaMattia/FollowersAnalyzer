@@ -12,14 +12,6 @@ public class Tweet extends Super{
 	private ArrayList<User> likingUsers = new  ArrayList<User>();
 
 
-	public ArrayList<User> getRetweeted_by() {
-		return retweeted_by;
-	}
-
-	public void setRetweeted_by(ArrayList<User> retweeted_by) {
-		this.retweeted_by = retweeted_by;
-	}
-
 	public Tweet(Long id) {
 		super(id);
 	}
@@ -80,6 +72,15 @@ public class Tweet extends Super{
 	public void setLikingUsers(ArrayList<User> likingUsers) {
 		this.likingUsers = likingUsers;
 	}
+	
+	public ArrayList<User> getRetweeted_by() {
+		return retweeted_by;
+	}
+
+	public void setRetweeted_by(ArrayList<User> retweeted_by) {
+		this.retweeted_by = retweeted_by;
+	}
+
 
 	public String LikingUsersArrayToString() {
 

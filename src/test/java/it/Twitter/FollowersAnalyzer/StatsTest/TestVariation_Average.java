@@ -1,6 +1,7 @@
 package it.Twitter.FollowersAnalyzer.StatsTest;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -49,13 +50,13 @@ class TestVariation_Average {
 	@Test
 	void testVarianza() {
 		StatVariation statVarianza= new StatVariation(user);
-		assertEquals(statVarianza.getVarianza(), 9,0);
+		assertEquals( 9.0 ,statVarianza.getVarianza());
 	}
 	
 	@Test
 	void testMedia() {
 		StatAverage statMedia= new StatAverage(user);
-		assertEquals(statMedia.getMedia(), 5,0);
+		assertEquals(5.0 ,statMedia.getMedia());
 	}
 
 	@AfterEach
