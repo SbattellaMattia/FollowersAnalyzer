@@ -1,5 +1,6 @@
 package it.Twitter.FollowersAnalyzer.Stats;
 
+import it.Twitter.FollowersAnalyzer.Exceptions.NullDataException;
 import it.Twitter.FollowersAnalyzer.Model.User;
 
 public class StatVariation {
@@ -8,7 +9,7 @@ public class StatVariation {
 	private double media=0;
 	private double varianza=0;
 
-	public StatVariation(User user) {
+	public StatVariation(User user) throws NullDataException {
 		StatAverage med = new StatAverage(user);
 		media = med.getMedia();
 		for(User i : user.getFollowers()) {
@@ -17,7 +18,7 @@ public class StatVariation {
 		try {
 			varianza = Math.round((double)sommaSQ/(user.getFollowers().size()-1)*100.0)/100.0;}
 		catch(ArithmeticException e) {
-			System.err.println("Varianza non riuscita");
+			throw new NullDataException("variance failed.");
 		}
 	}
 	
@@ -33,6 +34,6 @@ public class StatVariation {
 
 
 	public String toString() {
-		return "{\"VarianzaFollowers(per utente)\":[{\"varianza\": \""+ varianza + " followers\"}]}";	
+		return "{\"Followers variance(per user)\":[{\"variance\": \""+ varianza + " followers\"}]}";	
 	}
 }

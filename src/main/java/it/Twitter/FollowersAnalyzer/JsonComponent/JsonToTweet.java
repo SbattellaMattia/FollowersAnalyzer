@@ -15,7 +15,7 @@ public class JsonToTweet {
 
 	public Tweet parseTweet(JSONObject Tweet) throws NullDataException, DateException
 	{
-		if (Tweet.get("id")==null)throw new NullDataException("no Tweets match");
+		if (Tweet.get("id")==null)throw new NullDataException("wrong or inexistent Id.");
 
 		String text = (String) Tweet.get("text");    
 		Long id = Long.parseLong((String) Tweet.get("id"));    
@@ -29,7 +29,7 @@ public class JsonToTweet {
 	public Tweet parseOneTweet(JSONObject Tweet) throws NullDataException, DateException
 	{
 		JSONObject data = (JSONObject) Tweet.get("data");
-		if(data==null)throw new NullDataException("no Tweet match");
+		if(data==null)throw new NullDataException("wrong or inexistent Id.");
 		
 		String text = (String) data.get("text");    
 		Long id = Long.parseLong((String) data.get("id"));    

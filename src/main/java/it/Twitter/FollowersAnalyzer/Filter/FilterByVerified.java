@@ -22,22 +22,22 @@ public class FilterByVerified extends Filter {
 	public String FilterToString(String method) throws WrongParameter, NullDataException {
 	
 			if(method.equals("verified")) {
-				if(NameFollowersVerified.isEmpty()) throw new NullDataException("No users match the requests");
+				if(NameFollowersVerified.isEmpty()) throw new NullDataException("No users match the requests.");
 				return "{\"Verified followers:\": " + UserArrayToString(NameFollowersVerified) + "}";
 			}
 		
 			if(method.equals("not_verified")) {
-				if(NameFollowersNotVerified.isEmpty()) throw new NullDataException("No users match the requests");
+				if(NameFollowersNotVerified.isEmpty()) throw new NullDataException("No users match the requests.");
 				return "{\"Unverified followers:\": " + UserArrayToString(NameFollowersNotVerified) + "}";
 			}
 		
 			if(method.equals("all")) {
-				if(NameFollowersVerified.isEmpty() && NameFollowersNotVerified.isEmpty()) throw new NullDataException("No users match the requests");
+				if(NameFollowersVerified.isEmpty() && NameFollowersNotVerified.isEmpty()) throw new NullDataException("No users match the requests.");
 				if(NameFollowersVerified.isEmpty()) return "{\"Unverified followers:\": " + UserArrayToString(NameFollowersNotVerified) + "}";
 				if(NameFollowersNotVerified.isEmpty()) return "{\"Verified followers:\": " + UserArrayToString(NameFollowersVerified) + "}";
 				else return "{\"Verified followers:\": " + UserArrayToString(NameFollowersVerified) + "}," + "{\"Unverified followers:\": " + UserArrayToString(NameFollowersNotVerified) + "}";
 			}
 
-		throw new WrongParameter(" \""+method+"\" is not allowed");
+		throw new WrongParameter(" \""+method+"\" is not allowed.");
 	}
 }
