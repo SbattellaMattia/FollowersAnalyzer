@@ -6,6 +6,7 @@ import java.net.URLConnection;
 
 import it.Twitter.FollowersAnalyzer.Exceptions.ConnectionException;
 
+
 public abstract class Service {	
 	
 	private String BearerToken;
@@ -24,6 +25,17 @@ public abstract class Service {
 		//this.BearerToken = "AAAAAAAAAAAAAAAAAAAAAMlcXQEAAAAAYb28sKQdHrua1w1PqUY2oP9OjM0%3DTQ81FuSWRLb8px1DIHkx5Knk2ZD4guUN6KZiNNPKBov6X5rpAu";
 	}
 
+	
+	/**
+	 * Metodo per 
+	 * 
+	 * @param id Id utente da inserire.
+	 * @return JSONObject contenente i dati dell'utente ricercato.
+	 * @throws 
+	 * @throws 
+	 * @throws  
+	 * @throws  Se il collegamento con l'API di twitter non va a buon fine.
+	 */
 
 	public String Connection(String Url) throws IOException,ConnectionException {
 		String aux="";
