@@ -17,7 +17,7 @@ public class JsonToUser {
 	
 	public User parseUser(JSONObject User) throws NullDataException, DateException
 	{
-		if ((User.get("id"))==null)throw new NullDataException("no Users match");
+		if ((User.get("id"))==null)throw new NullDataException("wrong or inexistent Id");
 		
 		Long id = Long.parseLong((String) User.get("id"));
 		String name = (String) User.get("name");    
@@ -36,7 +36,7 @@ public class JsonToUser {
 	public User parseOneUser(JSONObject User) throws NullDataException, DateException
 	{
 		JSONObject data = (JSONObject) User.get("data");
-		if(data==null)throw new NullDataException("no User match");
+		if(data==null)throw new NullDataException("wrong or inexistent Id.");
 		
 		Long id = Long.parseLong((String) data.get("id"));    
 		String name = (String) data.get("name");    

@@ -34,6 +34,7 @@ import it.Twitter.FollowersAnalyzer.Service.ServiceUserByUsername;
 import it.Twitter.FollowersAnalyzer.Stats.StatFollowersRange;
 import it.Twitter.FollowersAnalyzer.Stats.StatAverage;
 import it.Twitter.FollowersAnalyzer.Stats.StatVariation;
+import it.Twitter.FollowersAnalyzer.Stats.StatsLikes;
 import it.Twitter.FollowersAnalyzer.Utils.Counter;
 import it.Twitter.FollowersAnalyzer.Exceptions.ConnectionException;
 import it.Twitter.FollowersAnalyzer.Exceptions.DateException;
@@ -332,5 +333,20 @@ public class Controller {
 	}
 	
 	
-
+	@GetMapping(value="/FollowersStats/LikesPercentage/{id}")
+	public ResponseEntity<JSONObject> getLikesPercentage(@PathVariable Long id) throws IOException, ParseException, NullDataException, ConnectionException, WrongParameter, DateException{
+		try {
+			Tweet tweet=jsonTweet.parseTweet(getTweetById(id).getBody());
+			User user= jsonUser.parseUser(getUserById(tweet.getAuthorId()).getBody());
+			tweet.setLikingUsers(jsonUser.parseUsers(getLikes(id,"followers").getBody()));
+			user.setFollowers(jsonUser.parseUsers(getFollowers(user.getId(),"all").getBody()));
+			StatsLikes stat=new StatsLikes(user, tweet);
+			return new ResponseEntity<>(json.ToJson(stat.toString()), HttpStatus.OK);}
+		catch (ConnectionException error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
+		catch (NullDataException error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
+	}
+	
+	
 }
