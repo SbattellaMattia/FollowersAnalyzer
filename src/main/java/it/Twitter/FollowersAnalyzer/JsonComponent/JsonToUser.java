@@ -19,7 +19,7 @@ public class JsonToUser {
 	{
 		if ((User.get("id"))==null)throw new NullDataException("no Users match");
 		
-		Long id = Long.parseLong((String) User.get("id"));    
+		Long id = Long.parseLong((String) User.get("id"));
 		String name = (String) User.get("name");    
 		String username = (String) User.get("username");    
 		String createdAt = date.stringToDate((String) User.get("created_at"));
@@ -38,9 +38,9 @@ public class JsonToUser {
 		JSONObject data = (JSONObject) User.get("data");
 		if(data==null)throw new NullDataException("no User match");
 		
+		Long id = Long.parseLong((String) data.get("id"));    
 		String name = (String) data.get("name");    
 		String username = (String) data.get("username");    
-		Long id = Long.parseLong((String) data.get("id"));    
 		String createdAt = date.stringToDate((String) data.get("created_at"));
 		boolean verified;
 		if ((data.get("verified")).equals(true)) verified = true;
