@@ -6,11 +6,33 @@ import it.Twitter.FollowersAnalyzer.Exceptions.NullDataException;
 import it.Twitter.FollowersAnalyzer.Exceptions.WrongParameter;
 import it.Twitter.FollowersAnalyzer.Model.User;
 
+/**
+* Classe FilterByVerified che estende {@link it.Twitter.FollowersAnalyzer.Filter.Filter Filter}.
+* 
+* 
+* Filtra gli Utenti verificati/non verificati.
+* 
+* @author Sbattella Mattia
+* @author Sumcutean Sara
+* 
+* @see it.Twitter.FollowersAnalyzer.Filter.Filter Filter
+*/
 public class FilterByVerified extends Filter {
 
 	ArrayList<User> NameFollowersVerified =new  ArrayList<User>();
 	ArrayList<User> NameFollowersNotVerified =new  ArrayList<User>();
 
+	
+	
+	/**
+	* Metodo che filtra i Followers in base al verificato/non verificato
+	* 
+	* Filtra gli Utenti verificati/non verificati e li inserisce in due ArrayList diversi.
+	* 
+	* @param user Utente i cui Followers verranno filtrati.
+	* 
+	* @return <Code>void</Code>
+	*/
 	public void Filter(User user) {
 
 		for(User i: user.getFollowers()) {
@@ -19,6 +41,20 @@ public class FilterByVerified extends Filter {
 		}
 	}
 
+	
+	/**
+	 * Metodo che filtra i Followers in base al verificato/non verificato
+	 * 
+	 * @param method Metodo di filtraggio: 
+	 * <b>all</b>=ritorna tutti gli utenti; <b>verified</b>=ritorna solo i followers verificati;
+	 * <b>not_verified</b>=ritorna solo i followers non verificati.
+	 * 
+	 * @throws NullDataException se il method da ricercare non restituisce nessun Utente. 
+	 * @throws WrongParameter se method è diverso da <b>all</b>, <b>verified</b> o <b>not_verified</b>.
+	 * 
+	 * @return <Code>String</Code>: Stringa dei Followers filtrata per verificato, convertibile in JSONObject.
+	 * 
+	 */
 	public String FilterToString(String method) throws WrongParameter, NullDataException {
 	
 			if(method.equals("verified")) {

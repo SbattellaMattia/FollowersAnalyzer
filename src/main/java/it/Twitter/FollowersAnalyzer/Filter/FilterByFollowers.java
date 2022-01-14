@@ -11,7 +11,7 @@ import it.Twitter.FollowersAnalyzer.Model.User;
  * Classe FilterByFollowers che estende {@link it.Twitter.FollowersAnalyzer.Filter.Filter Filter}.
  * 
  * 
- * Tra gli Utenti che hanno messo like ad un tweet filtra quelli che sono followers.
+ * Tra gli Utenti che hanno messo like ad un Tweet filtra quelli che sono Followers.
  * 
  * @author Sbattella Mattia
  * @author Sumcutean Sara
@@ -30,7 +30,7 @@ public class FilterByFollowers extends Filter{
 	 * 
 	 * @throws WrongParameter se method è diverso da "all" o "followers".
 	 * 
-	 * @return <Code>String</Code>: Lista di utenti filtrata, convertibile in JSONObject.
+	 * @return <Code>String</Code>: Stringa di utenti filtrata, convertibile in JSONObject.
 	 */
 	public String Filter(User user,Tweet tweet,String method) throws WrongParameter {
 
