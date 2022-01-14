@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.Twitter.FollowersAnalyzer.Exceptions.NullDataException;
 import it.Twitter.FollowersAnalyzer.Model.User;
 import it.Twitter.FollowersAnalyzer.Stats.StatAverage;
 import it.Twitter.FollowersAnalyzer.Stats.StatVariation;
@@ -48,13 +49,13 @@ class TestVariation_Average {
 	 *  */
 	
 	@Test
-	void testVarianza() {
+	void testVarianza() throws NullDataException {
 		StatVariation statVarianza= new StatVariation(user);
 		assertEquals( 9.0 ,statVarianza.getVarianza());
 	}
 	
 	@Test
-	void testMedia() {
+	void testMedia() throws NullDataException {
 		StatAverage statMedia= new StatAverage(user);
 		assertEquals(5.0 ,statMedia.getMedia());
 	}

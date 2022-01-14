@@ -43,6 +43,13 @@ import it.Twitter.FollowersAnalyzer.Exceptions.WrongParameter;
 
 import it.Twitter.FollowersAnalyzer.JsonComponent.JsonToTweet;
 
+/**
+ * Questa classe gestisce tutte le chiamate al server che il client può fare.
+ * 
+ * @author Sbattella Mattia
+ * @author Sumcutean Sara
+ * 
+ */
 
 @RestController
 public class Controller {
@@ -58,6 +65,17 @@ public class Controller {
 	FilterByVerified filterByVerified= new FilterByVerified();
 	
 	
+	
+	/**
+	 * Rotta di tipo GET che restituisce i dati di un determinato utente.
+	 * 
+	 * @param id Id utente da inserire.
+	 * @return JSONObject contenente i dati dell'utente ricercato.
+	 * @throws IOException
+	 * @throws ParseException
+	 * @throws NullDataException 
+	 * @throws ConnectionException Se il collegamento con l'API di twitter non va a buon fine.
+	 */
 	
 	@GetMapping(value="/UserById/{id}")
 	public ResponseEntity<JSONObject> getUserById(@PathVariable Long id)throws IOException, ParseException, NullDataException, ConnectionException, DateException{
