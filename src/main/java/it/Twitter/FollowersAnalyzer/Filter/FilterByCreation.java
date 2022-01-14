@@ -7,9 +7,38 @@ import it.Twitter.FollowersAnalyzer.Exceptions.NullDataException;
 import it.Twitter.FollowersAnalyzer.Exceptions.WrongParameter;
 import it.Twitter.FollowersAnalyzer.Model.User;
 
+
+/**
+ * Classe FilterByCreation che estende {@link it.Twitter.FollowersAnalyzer.Filter.Filter Filter}.
+ * 
+ * 
+ * Filtra i followers/following di un utente a seconda della data di creazione dell'account.
+ * 
+ * @author Sbattella Mattia
+ * @author Sumcutean Sara
+ * 
+ * @see it.Twitter.FollowersAnalyzer.Filter.Filter Filter
+ */
+
+
 public class FilterByCreation extends Filter {
 
-	public String FollowerFilter(User user,String StartDate, String EndDate) throws NumberFormatException, DateException, NullDataException, WrongParameter {
+	
+	/**
+	 * Metodo per filtrare i Followers
+	 * 
+	 * @param User Utente i cui Followers dovranno essere filtrati.
+	 * @param StartDate Data di inizio filtraggio.
+	 * @param EndDate Data di fine filtraggio.
+	 * 
+	 * @throws NumberFormatException se la data ha caratteri oltre a cifre.
+	 * @throws DateException se la data inserita non è valida (es. mm=13).
+	 * @throws NullDataException se nessun utente è tra le due date.
+	 * @throws WrongParameter se <b>StartDate</b> > <b>EndDate</b> o se il formato "dd-mm-yyyy" è errato.
+	 * 
+	 * @return <Code>String</Code>: Lista di utenti filtrata, convertibile in JSONObject.
+	 */
+	public String FollowerFilter(User User,String StartDate, String EndDate) throws NumberFormatException, DateException, NullDataException, WrongParameter {
 
 		ArrayList<User> FollowerDate = new ArrayList<User>();
 		try {
@@ -21,7 +50,7 @@ public class FilterByCreation extends Filter {
 
 
 			if(EndDate.equals("null")) {
-				for(User i: user.getFollowers()) {
+				for(User i: User.getFollowers()) {
 					int UserYear=Integer.parseInt(i.getCreatedAt().substring(6,i.getCreatedAt().length()));
 					int UserMonth=Integer.parseInt(i.getCreatedAt().substring(3,5));
 					int UserDay=Integer.parseInt(i.getCreatedAt().substring(0,2));
@@ -56,7 +85,7 @@ public class FilterByCreation extends Filter {
 					}
 				}
 
-				for(User i: user.getFollowers()) {
+				for(User i: User.getFollowers()) {
 					int UserYear=Integer.parseInt(i.getCreatedAt().substring(6,i.getCreatedAt().length()));
 					int UserMonth=Integer.parseInt(i.getCreatedAt().substring(3,5));
 					int UserDay=Integer.parseInt(i.getCreatedAt().substring(0,2));
@@ -114,8 +143,21 @@ public class FilterByCreation extends Filter {
 
 
 
-
-	public String FollowingFilter(User user,String StartDate, String EndDate) throws NumberFormatException, DateException, NullDataException, WrongParameter {
+	/**
+	 * Metodo per filtrare i Following
+	 * 
+	 * @param User Utente i cui Following dovranno essere filtrati.
+	 * @param StartDate Data di inizio filtraggio.
+	 * @param EndDate Data di fine filtraggio.
+	 * 
+	 * @throws NumberFormatException se la data ha caratteri oltre a cifre.
+	 * @throws DateException se la data inserita non è valida (es. mm=13).
+	 * @throws NullDataException se nessun utente è tra le due date.
+	 * @throws WrongParameter se <b>StartDate</b> > <b>EndDate</b> o se il formato "dd-mm-yyyy" è errato.
+	 * 
+	 * @return <Code>String</Code>: Lista di utenti filtrata, convertibile in JSONObject.
+	 */
+	public String FollowingFilter(User User,String StartDate, String EndDate) throws NumberFormatException, DateException, NullDataException, WrongParameter {
 		ArrayList<User> FollowingDate = new ArrayList<User>();
 		try {
 			if(StartDate.length()!=10)throw new WrongParameter("Use correct form of data: dd-mm-yyyy"+StartDate);
@@ -124,7 +166,7 @@ public class FilterByCreation extends Filter {
 			int startday=checkDay(Integer.parseInt(StartDate.substring(0,2)),startmonth);
 
 			if(EndDate.equals("null")) {
-				for(User i: user.getFollowing()) {
+				for(User i: User.getFollowing()) {
 					int UserYear=Integer.parseInt(i.getCreatedAt().substring(6,i.getCreatedAt().length()));
 					int UserMonth=Integer.parseInt(i.getCreatedAt().substring(3,5));
 					int UserDay=Integer.parseInt(i.getCreatedAt().substring(0,2));
@@ -159,7 +201,7 @@ public class FilterByCreation extends Filter {
 					}
 				}
 
-				for(User i: user.getFollowing()) {
+				for(User i: User.getFollowing()) {
 					int UserYear=Integer.parseInt(i.getCreatedAt().substring(6,i.getCreatedAt().length()));
 					int UserMonth=Integer.parseInt(i.getCreatedAt().substring(3,5));
 					int UserDay=Integer.parseInt(i.getCreatedAt().substring(0,2));
@@ -211,17 +253,44 @@ public class FilterByCreation extends Filter {
 	}
 
 
-
+	/**
+	 * Metodo per verificare che l'anno immesso sia corretto.
+	 * 
+	 * @param year Anno da controllare.
+	 *
+	 * @throws DateException se l'anno inserito è <2006 o >2021.
+	 * 
+	 * @return <Code>Int</Code>: Anno immesso (se corretto).
+	 */
 	public int checkYear(int year) throws DateException {
-		if(year<2005 || year>2021 )
-			throw new DateException("year<2010 or year>2021: " + year);
+		if(year<2006 || year>2021 )
+			throw new DateException("year<2006 or year>2021: " + year);
 		return year;}
 
+	/**
+	 * Metodo per verificare che il mese immesso sia corretto.
+	 * 
+	 * @param month Mese da controllare.
+	 *
+	 * @throws DateException se il mese inserito è <1 o >12.
+	 * 
+	 * @return <Code>Int</Code>: Mese immesso (se corretto).
+	 */
 	public int checkMonth(int month) throws DateException {
 		if(month<1 || month>12 )
 			throw new DateException("month<1 or month>12: " + month);
 		return month;}
 
+	/**
+	 * Metodo per verificare che il giorno immesso sia corretto.
+	 * 
+	 * @param day Giorno da controllare.
+	 * @param month Determina il numero di giorni possibili.
+	 *
+	 * @throws DateException se il giorno inserito è <1 o >28/>30/>31 in base al mese immesso.
+	 * 
+	 * @return <Code>Int</Code>: Giorno immesso (se corretto).
+	 */
 	public int checkDay(int day, int month) throws DateException {
 		if(day<1 || day>31 )
 			throw new DateException("day<1 or day>31: " + day);

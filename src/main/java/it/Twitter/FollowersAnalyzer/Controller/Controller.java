@@ -114,12 +114,10 @@ public class Controller {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 		catch (NullDataException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
-		catch (WrongParameter error) {
-			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 	}
 	
 	@GetMapping(value="/Filter/FollowersByCreation/{id}")
-	public ResponseEntity<JSONObject> getFollowerFilterDate(@PathVariable Long id, @RequestParam(defaultValue = "21-03-2006") String StartDate,@RequestParam(defaultValue = "null") String EndDate) throws IOException, ParseException, ConnectionException, WrongParameter, NullDataException, NumberFormatException, DateException{
+	public ResponseEntity<JSONObject> getFollowerFilterDate(@PathVariable Long id, @RequestParam(defaultValue = "21-03-2006") String StartDate,@RequestParam(defaultValue = "null") String EndDate) throws IOException, ParseException, ConnectionException, NullDataException, NumberFormatException, DateException{
 		
 		try {
 			User user= jsonUser.parseUser(getUserById(id).getBody());
@@ -137,7 +135,7 @@ public class Controller {
 	}
 
 	@GetMapping(value="/Following/{id}")
-	public ResponseEntity<JSONObject> getFollowing(@PathVariable Long id, @RequestParam(defaultValue = "all") String username)throws IOException, ParseException, NullDataException, ConnectionException, DateException, WrongParameter{
+	public ResponseEntity<JSONObject> getFollowing(@PathVariable Long id, @RequestParam(defaultValue = "all") String username)throws IOException, ParseException, NullDataException, ConnectionException, DateException{
 		try{
 			User user= jsonUser.parseUser(getUserById(id).getBody());
 			ServiceFollowing service = new ServiceFollowing(id);	
@@ -146,8 +144,6 @@ public class Controller {
 		catch (ConnectionException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 		catch (NullDataException error) {
-			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
-		catch (WrongParameter error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 	}
 	
@@ -258,8 +254,6 @@ public class Controller {
 		catch (ConnectionException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 		catch (NullDataException error) {
-			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
-		catch (WrongParameter error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 	}
 
