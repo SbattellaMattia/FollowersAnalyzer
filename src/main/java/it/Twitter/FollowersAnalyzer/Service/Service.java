@@ -60,7 +60,7 @@ public abstract class Service {
 	 * @throws IOException
 	 * @throws ConnectionException
 	 * 
-	 * @return <Code>String</Code>: Stringa contenente la risposta del server API di Twitter, trasformabile in JSONObject.
+	 * @return <Code>String</Code>: Stringa contenente la risposta del server API di Twitter, trasformabile in <b>JSONObject</b>.
 	 * 
 	 */
 	public String Connection(String Url) throws IOException,ConnectionException {

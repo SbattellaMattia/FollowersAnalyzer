@@ -7,7 +7,7 @@ import it.Twitter.FollowersAnalyzer.Exceptions.ConnectionException;
 /**
 * Classe ServiceRetweeted_by che estende {@link it.Twitter.FollowersAnalyzer.Service.Service Service}.
 * 
-* Dato l'Id di un Tweet, restituisce gli Utenti che lo hanno retweetato.
+* Dato l'<b>Id</b> di un Tweet, restituisce gli Utenti che lo hanno retweetato.
 * 
 * @author Sbattella Mattia
 * @author Sumcutean Sara
@@ -33,7 +33,7 @@ public class ServiceRetweeted_by extends Service{
 	 * @throws IOException
 	 * @throws ConnectionException
 	 * 
-	 * @return <Code>String</Code>: Stringa contenente la risposta del server API di Twitter, trasformabile in JSONObject.
+	 * @return <Code>String</Code>: Stringa contenente la risposta del server API di Twitter, trasformabile in <b>JSONObject</b>.
 	 * 
 	 */
 	public String getRetweeted_by() throws IOException, ConnectionException {

@@ -7,7 +7,7 @@ import it.Twitter.FollowersAnalyzer.Exceptions.ConnectionException;
 /**
 * Classe ServiceUserByUsername che estende {@link it.Twitter.FollowersAnalyzer.Service.Service Service}.
 * 
-* Dato l'Username di un Utente restituisce l'Utente stesso.
+* Dato l'<b>Username</b> di un Utente restituisce l'Utente stesso.
 * 
 * @author Sbattella Mattia
 * @author Sumcutean Sara
@@ -33,7 +33,7 @@ public class ServiceUserByUsername extends Service {
 	 * @throws IOException
 	 * @throws ConnectionException
 	 * 
-	 * @return <Code>String</Code>: Stringa contenente la risposta del server API di Twitter, trasformabile in JSONObject.
+	 * @return <Code>String</Code>: Stringa contenente la risposta del server API di Twitter, trasformabile in <b>JSONObject</b>.
 	 * 
 	 */
 	public String getUser() throws IOException,ConnectionException{

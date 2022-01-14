@@ -7,7 +7,7 @@ import it.Twitter.FollowersAnalyzer.Exceptions.ConnectionException;
 /**
 * Classe ServiceFollowing che estende {@link it.Twitter.FollowersAnalyzer.Service.Service Service}.
 * 
-*  Dato un Id di un Utente, restituisce gli Utenti che segue.
+*  Dato l'<b>Id</b> di un Utente, restituisce gli Utenti che segue.
 * 
 * @author Sbattella Mattia
 * @author Sumcutean Sara
@@ -33,7 +33,7 @@ public class ServiceFollowing extends Service{
 	 * @throws IOException
 	 * @throws ConnectionException
 	 * 
-	 * @return <Code>String</Code>: Stringa contenente la risposta del server API di Twitter, trasformabile in JSONObject.
+	 * @return <Code>String</Code>: Stringa contenente la risposta del server API di Twitter, trasformabile in <b>JSONObject</b>.
 	 * 
 	 */
 	public String getFollowing() throws IOException, ConnectionException {

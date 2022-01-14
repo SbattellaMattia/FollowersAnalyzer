@@ -7,7 +7,7 @@ import it.Twitter.FollowersAnalyzer.Exceptions.ConnectionException;
 /**
 * Classe ServiceLikedTweets che estende {@link it.Twitter.FollowersAnalyzer.Service.Service Service}.
 * 
-* Dato l'Id di un Utente, restituisce i Tweet a cui ha messo like.
+* Dato l'<b>Id</b> di un Utente, restituisce i Tweet a cui ha messo like.
 * 
 * @author Sbattella Mattia
 * @author Sumcutean Sara
@@ -33,7 +33,7 @@ public class ServiceLikedTweets extends Service{
 	 * @throws IOException
 	 * @throws ConnectionException
 	 * 
-	 * @return <Code>String</Code>: Stringa contenente la risposta del server API di Twitter, trasformabile in JSONObject.
+	 * @return <Code>String</Code>: Stringa contenente la risposta del server API di Twitter, trasformabile in <b>JSONObject</b>.
 	 * 
 	 */
 	public String getLikedTweets() throws IOException, ConnectionException {

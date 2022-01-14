@@ -7,7 +7,7 @@ import it.Twitter.FollowersAnalyzer.Exceptions.ConnectionException;
 /**
 * Classe ServiceTweetById che estende {@link it.Twitter.FollowersAnalyzer.Service.Service Service}.
 * 
-* Dato l'Id di un Tweet,restituisce il Tweet stesso.
+* Dato l'<b>Id</b> di un Tweet,restituisce il Tweet stesso.
 * 
 * @author Sbattella Mattia
 * @author Sumcutean Sara
@@ -31,7 +31,7 @@ public class ServiceTweetById extends Service {
 	 * @throws IOException
 	 * @throws ConnectionException
 	 * 
-	 * @return <Code>String</Code>: Stringa contenente la risposta del server API di Twitter, trasformabile in JSONObject.
+	 * @return <Code>String</Code>: Stringa contenente la risposta del server API di Twitter, trasformabile in <b>JSONObject</b>.
 	 * 
 	 */
 	public String getTweetById() throws IOException,ConnectionException {
