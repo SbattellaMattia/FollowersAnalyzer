@@ -2,6 +2,14 @@ package it.Twitter.FollowersAnalyzer.Model;
 
 import java.util.ArrayList;
 
+/** Questa classe descrive le proprietà di ogni Utente Twitter. Estende la classe {@link it.Twitter.FollowersAnalyzer.Model.Super Super}
+ * 
+ * @author Sbattella Mattia
+ * @author Sumcutean Sara
+ * 
+ * @see it.Twitter.FollowersAnalyzer.Model.Super Super
+ */
+
 public class User extends Super{
 
 	private String name;
@@ -21,7 +29,11 @@ public class User extends Super{
 	private ArrayList<Tweet> likedTweets = new ArrayList<Tweet>();
 
 
-
+	/**
+	 * Costruttore della classe User.
+	 * 
+	 * @param id : Id dell'Utente.
+	 */
 	public User(Long id) {
 		super(id);
 		name = getName();
@@ -29,7 +41,12 @@ public class User extends Super{
 		location = getLocation();
 	}
 
-
+	/**
+	 * Costruttore della classe User.
+	 * 
+	 * @param id : Id dell'Utente.
+	 * @param name : Nome dell'utente.
+	 */
 	public User(Long id, String name) {
 		super(id);
 		this.name = name;
