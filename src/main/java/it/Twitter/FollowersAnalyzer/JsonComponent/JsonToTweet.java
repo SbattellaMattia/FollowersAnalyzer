@@ -10,25 +10,53 @@ import it.Twitter.FollowersAnalyzer.Exceptions.NullDataException;
 import it.Twitter.FollowersAnalyzer.Model.Tweet;
 import it.Twitter.FollowersAnalyzer.Utils.StringToDate;
 
+/**
+* 
+* Classe per convertire un <b>JSONObject</b> in {@link Tweet} o <b>ArrayList</b> di tipo {@link Tweet}.
+* 
+* @author Sbattella Mattia
+* @author Sumcutean Sara
+* 
+*/
 public class JsonToTweet {
 	StringToDate date = new StringToDate();
 
-	public Tweet parseTweet(JSONObject Tweet) throws NullDataException, DateException
+	/**
+	 * Il metodo parseTweet permette di convertire in {@link Tweet} un <b>JSONObject</b>.
+	 * 
+	 * @param  JsonTweet JSONObject del Tweet.
+	 * 
+	 * @return {@link Tweet}.
+	 * 
+	 * @throws NullDataException
+	 * @throws DateException
+	 */
+	public Tweet parseTweet(JSONObject JsonTweet) throws NullDataException, DateException
 	{
-		if (Tweet.get("id")==null)throw new NullDataException("wrong or inexistent Id.");
+		if (JsonTweet.get("id")==null)throw new NullDataException("wrong or inexistent Id.");
 
-		String text = (String) Tweet.get("text");    
-		Long id = Long.parseLong((String) Tweet.get("id"));    
-		String createdAt = date.stringToDate((String) Tweet.get("created_at"));
-		Long authorId = Long.parseLong((String) Tweet.get("author_id"));
+		String text = (String) JsonTweet.get("text");    
+		Long id = Long.parseLong((String) JsonTweet.get("id"));    
+		String createdAt = date.stringToDate((String) JsonTweet.get("created_at"));
+		Long authorId = Long.parseLong((String) JsonTweet.get("author_id"));
 		Tweet tweet=new Tweet(id,text,createdAt,authorId);
 		return tweet;
 	}
 
-	
-	public Tweet parseOneTweet(JSONObject Tweet) throws NullDataException, DateException
+	/**
+	 * Il metodo parseOneTweet permette di convertire in {@link Tweet} un <b>JSONObject</b> 
+	 * contenente un <b>JSONArray</b> con un solo elemento.
+	 * 
+	 * @param  JSONTweet JSONObject del Tweet.
+	 * 
+	 * @return {@link Tweet}.
+	 * 
+	 * @throws NullDataException
+	 * @throws DateException
+	 */
+	public Tweet parseOneTweet(JSONObject JSONTweet) throws NullDataException, DateException
 	{
-		JSONObject data = (JSONObject) Tweet.get("data");
+		JSONObject data = (JSONObject) JSONTweet.get("data");
 		if(data==null)throw new NullDataException("wrong or inexistent Id.");
 		
 		String text = (String) data.get("text");    
@@ -39,11 +67,21 @@ public class JsonToTweet {
 		return tweet;
 	}
 	
-
-	public ArrayList<Tweet> parseTweets(JSONObject Tweet) throws NullDataException, DateException
+	/**
+	 * Il metodo parseTweets permette di convertire in <b>ArrayList</b> di tipo {@link Tweet}
+	 * un <b>JSONObject</b> contenente un <b>JSONArray</b> con più elementi.
+	 * 
+	 * @param  JsonTweet JSONObject del JSONArray di Tweet.
+	 * 
+	 * @return <b>ArrayList</b> di tipo {@link Tweet}.
+	 * 
+	 * @throws NullDataException
+	 * @throws DateException
+	 */
+	public ArrayList<Tweet> parseTweets(JSONObject JsonTweet) throws NullDataException, DateException
 	{
 		ArrayList<Tweet> tweets = new ArrayList<Tweet>(); 
-		JSONArray data = (JSONArray) Tweet.get("data");
+		JSONArray data = (JSONArray) JsonTweet.get("data");
 		if(data == null) throw new NullDataException("no Tweets match");
 		@SuppressWarnings("unchecked")
 		Iterator<JSONObject> iterator = data.iterator();

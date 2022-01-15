@@ -36,7 +36,7 @@ public class FilterByCreation extends Filter {
 	 * @throws NullDataException se nessun utente è tra le due date.
 	 * @throws WrongParameter se <b>StartDate</b> > <b>EndDate</b> o se il formato "dd-mm-yyyy" è errato.
 	 * 
-	 * @return <Code>String</Code>: Lista di utenti filtrata, convertibile in JSONObject.
+	 * @return <Code>String</Code>: Stringa di utenti filtrata, convertibile in JSONObject.
 	 */
 	public String FollowerFilter(User User,String StartDate, String EndDate) throws NumberFormatException, DateException, NullDataException, WrongParameter {
 
@@ -155,7 +155,7 @@ public class FilterByCreation extends Filter {
 	 * @throws NullDataException se nessun utente è tra le due date.
 	 * @throws WrongParameter se <b>StartDate</b> > <b>EndDate</b> o se il formato "dd-mm-yyyy" è errato.
 	 * 
-	 * @return <Code>String</Code>: Lista di utenti filtrata, convertibile in JSONObject.
+	 * @return <Code>String</Code>: Stringa di utenti filtrata, convertibile in JSONObject.
 	 */
 	public String FollowingFilter(User User,String StartDate, String EndDate) throws NumberFormatException, DateException, NullDataException, WrongParameter {
 		ArrayList<User> FollowingDate = new ArrayList<User>();

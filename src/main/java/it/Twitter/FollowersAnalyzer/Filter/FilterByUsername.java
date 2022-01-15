@@ -29,7 +29,7 @@ public class FilterByUsername extends Filter {
 	 * 
 	 * @throws NullDataException se UsernameFollowers risulta vuoto (nessun Utente con <b>{username}</b> trovato). 
 	 * 
-	 * @return <Code>String</Code>: Lista dei Followers filtrata per Username, convertibile in JSONObject.
+	 * @return <Code>String</Code>: Stringa dei Followers filtrata per Username, convertibile in JSONObject.
 	 * 
 	 */
 	public String FilterFollower(User user,String username) throws NullDataException {
@@ -56,7 +56,7 @@ public class FilterByUsername extends Filter {
 	 * 
 	 * @throws NullDataException se UsernameFollowing risulta vuoto (nessun Utente con <b>{username}</b> trovato). 
 	 * 
-	 * @return <Code>String</Code>: Lista dei Following filtrata per Username, convertibile in JSONObject.
+	 * @return <Code>String</Code>: Stringa dei Following filtrata per Username, convertibile in JSONObject.
 	 * 
 	 */
 	public String FilterFollowing(User user,String username) throws NullDataException {
@@ -85,7 +85,7 @@ public class FilterByUsername extends Filter {
 	 * 
 	 * @throws NullDataException se UsernameRetweeted risulta vuoto (nessun Utente con <b>{username}</b> trovato). 
 	 * 
-	 * @return <Code>String</Code>: Lista degli Utenti che hanno Retweettato il Tweet, filtrata per Username, convertibile in JSONObject.
+	 * @return <Code>String</Code>: Stringa degli Utenti che hanno Retweettato il Tweet, filtrata per Username, convertibile in JSONObject.
 	 * 
 	 */
 	public String FilterRetweeted(Tweet tweet,String username) throws NullDataException {

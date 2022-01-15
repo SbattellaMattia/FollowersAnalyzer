@@ -12,30 +12,56 @@ import it.Twitter.FollowersAnalyzer.Exceptions.NullDataException;
 import it.Twitter.FollowersAnalyzer.Model.User;
 import it.Twitter.FollowersAnalyzer.Utils.StringToDate;
 
+/** 
+* Classe per convertire un <b>JSONObject</b> in {@link User} o <b>ArrayList</b> di tipo {@link User}.
+* 
+* @author Sbattella Mattia
+* @author Sumcutean Sara
+* 
+*/
 public class JsonToUser {
 	StringToDate date = new StringToDate();
 	
-	public User parseUser(JSONObject User) throws NullDataException, DateException
+	/**
+	 * Il metodo parseUser permette di convertire in {@link User} un <b>JSONObject</b>.
+	 * 
+	 * @param  JsonUser JSONObject dell'Utente.
+	 * 
+	 * @return {@link User}.
+	 * 
+	 * @throws NullDataException
+	 * @throws DateException
+	 */
+	public User parseUser(JSONObject JsonUser) throws NullDataException, DateException
 	{
-		if ((User.get("id"))==null)throw new NullDataException("wrong or inexistent Id");
+		if ((JsonUser.get("id"))==null)throw new NullDataException("wrong or inexistent Id");
 		
-		Long id = Long.parseLong((String) User.get("id"));
-		String name = (String) User.get("name");    
-		String username = (String) User.get("username");    
-		String createdAt = date.stringToDate((String) User.get("created_at"));
+		Long id = Long.parseLong((String) JsonUser.get("id"));
+		String name = (String) JsonUser.get("name");    
+		String username = (String) JsonUser.get("username");    
+		String createdAt = date.stringToDate((String) JsonUser.get("created_at"));
 		boolean verified;
-		if ((User.get("verified")).equals(true)) verified = true;
+		if ((JsonUser.get("verified")).equals(true)) verified = true;
 		else verified = false;
 	
 		User user=new User(id,name,username,createdAt,verified);
 		return user; 
 	}
 
-	
-	
-	public User parseOneUser(JSONObject User) throws NullDataException, DateException
+	/**
+	 * Il metodo parseOneUser permette di convertire in {@link User} un <b>JSONObject</b> 
+	 * contenente un <b>JSONArray</b> con un solo elemento.
+	 * 
+	 * @param  JsonUser JSONObject dell'Utente.
+	 * 
+	 * @return {@link User}.
+	 * 
+	 * @throws NullDataException
+	 * @throws DateException
+	 */
+	public User parseOneUser(JSONObject JsonUser) throws NullDataException, DateException
 	{
-		JSONObject data = (JSONObject) User.get("data");
+		JSONObject data = (JSONObject) JsonUser.get("data");
 		if(data==null)throw new NullDataException("wrong or inexistent Id.");
 		
 		Long id = Long.parseLong((String) data.get("id"));    
@@ -51,11 +77,21 @@ public class JsonToUser {
 	}
 
 
-
-	public ArrayList<User> parseUsers(JSONObject Users) throws NullDataException, DateException
+	/**
+	 * Il metodo parseUsers permette di convertire in <b>ArrayList</b> di tipo {@link User}
+	 * un <b>JSONObject</b> contenente un <b>JSONArray</b> con più elementi.
+	 * 
+	 * @param  JsonUsers JSONObject del JSONArray di Utenti.
+	 * 
+	 * @return <b>ArrayList</b> di tipo {@link User}.
+	 * 
+	 * @throws NullDataException
+	 * @throws DateException
+	 */
+	public ArrayList<User> parseUsers(JSONObject JsonUsers) throws NullDataException, DateException
 	{
 		ArrayList<User> followers = new ArrayList<User>(); 
-		JSONArray data = (JSONArray) Users.get("data");
+		JSONArray data = (JSONArray) JsonUsers.get("data");
 		if(data == null) throw new NullDataException("no Users match");
 		@SuppressWarnings("unchecked")
 		Iterator<JSONObject> iterator = data.iterator();
