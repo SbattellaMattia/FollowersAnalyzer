@@ -52,7 +52,13 @@ public class User extends Super{
 		this.name = name;
 	}
 
-
+	/**
+	 * Costruttore della classe User.
+	 * 
+	 * @param id : Id dell'Utente.
+	 * @param name : Nome dell'utente.
+	 * @param username : Username dell'utente.
+	 */
 	public User(Long id, String name, String username) {
 		super(id);
 		this.name = name;
@@ -60,6 +66,14 @@ public class User extends Super{
 
 	}
 
+	/**
+	 * Costruttore della classe User.
+	 * 
+	 * @param id : Id dell'Utente.
+	 * @param name : Nome dell'utente.
+	 * @param username : Username dell'utente.
+	 * @param createdAt : Data di creazione dell'utente da inserire nel formato <b>dd/MM/yyyy</b>.
+	 */
 	public User(Long id, String name, String username, String createdAt) {
 		super(id);
 		this.name = name;
@@ -67,7 +81,15 @@ public class User extends Super{
 		this.createdAt = createdAt;
 	}
 	
-	
+	/**
+	 * Costruttore della classe User.
+	 * 
+	 * @param id : Id dell'Utente.
+	 * @param name : Nome dell'utente.
+	 * @param username : Username dell'utente.
+	 * @param createdAt : Data di creazione dell'utente da inserire nel formato <b>dd/MM/yyyy</b>.
+	 * @param verified : Valore booleano che indica il verificato del profilo utente.
+	 */
 	public User(Long id, String name, String username, String createdAt, boolean verified) {
 		super(id);
 		this.name = name;
@@ -76,12 +98,20 @@ public class User extends Super{
 		this.verified = verified;
 	}
 
-
+	/**
+     * Metodo che restituisce il nome dell'utente.
+     * 
+     * @return <Code>name</Code> : nome dell'utente.
+     */
 	public String getName() {
 		return name;
 	}
 
-
+	/**
+     * Metodo che setta il nome dell'utente.
+     * 
+     * @param name : nome dell'utente.
+     */
 	public void setName(String name) {
 		this.name = name;
 	}
