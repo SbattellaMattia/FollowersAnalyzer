@@ -23,8 +23,8 @@ public class FilterByUsername extends Filter {
 	 * Metodo che filtra i Followers in base all'username passato come parametro, li inserisce 
 	 * nell'ArrayList <b>UsernameFollowers</b>.
 	 * 
-	 * @param user Utente i cui followers dovranno essere filtrati.
-	 * @param username Username dei followers da ricercare. 
+	 * @param user : Utente i cui followers dovranno essere filtrati.
+	 * @param username : Username dei followers da ricercare. 
 	 * <b>all</b>=ritorna tutti gli utenti; <b>{username}</b>=ritorna solo i followers con l'username inserito.
 	 * 
 	 * @throws NullDataException se UsernameFollowers risulta vuoto (nessun Utente con <b>{username}</b> trovato). 
@@ -50,8 +50,8 @@ public class FilterByUsername extends Filter {
 	/**
 	 * Metodo che filtra i following in base all'username passato come parametro, li inserisce nell'ArrayList <b>UsernameFollowing</b>.
 	 * 
-	 * @param user Utente i cui Following dovranno essere filtrati.
-	 * @param username Username dei following da ricercare. 
+	 * @param user : Utente i cui Following dovranno essere filtrati.
+	 * @param username : Username dei following da ricercare. 
 	 * <b>all</b>=ritorna tutti gli utenti; <b>{username}</b>=ritorna solo i following con l'username inserito.
 	 * 
 	 * @throws NullDataException se UsernameFollowing risulta vuoto (nessun Utente con <b>{username}</b> trovato). 
@@ -79,8 +79,8 @@ public class FilterByUsername extends Filter {
 	/**
 	 * Metodo che filtra gli Utenti che hanno Retweettato un Tweet in base all'username passato come parametro, li inserisce nell'ArrayList <b>UsernameRetweeted</b>.
 	 * 
-	 * @param tweet Tweet che è stato Retweettato.
-	 * @param username Username da ricercare degli Utenti che hanno Retweettato il Tweet. 
+	 * @param tweet : Tweet che è stato Retweettato.
+	 * @param username : Username da ricercare degli Utenti che hanno Retweettato il Tweet. 
 	 * <b>all</b>=ritorna tutti gli Utenti; <b>{username}</b>=ritorna solo gli Utenti che hanno Retweettato un Tweet con l'username inserito.
 	 * 
 	 * @throws NullDataException se UsernameRetweeted risulta vuoto (nessun Utente con <b>{username}</b> trovato). 

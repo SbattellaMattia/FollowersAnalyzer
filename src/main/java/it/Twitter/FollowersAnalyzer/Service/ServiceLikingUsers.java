@@ -21,7 +21,7 @@ public class ServiceLikingUsers extends Service{
 	/**
 	 * Costruttore della classe ServiceLikingUsers.
 	 * 
-	 * @param id Id del Tweet del quale verrano restituiti gli Utenti che hanno messo like, inserito nell' <b>Url</b>.
+	 * @param id : Id del Tweet del quale verrano restituiti gli Utenti che hanno messo like, inserito nell' <b>Url</b>.
 	 */
 	public ServiceLikingUsers(Long id) {
 		this.Url=PATTERN_TWEET_ID+id+PATTERN_SERVICE_LIKING_USERS+PARAMETER+PATTERN_USER_FIELDS;

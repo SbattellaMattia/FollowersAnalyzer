@@ -21,7 +21,7 @@ public class ServiceRetweeted_by extends Service{
 	/**
 	 * Costruttore della classe ServiceRetweeted_by.
 	 * 
-	 * @param id Id di un Tweet del quale verrano restituiti gli Utenti che lo hanno retweetato, inserito nell' <b>Url</b>.
+	 * @param id : Id di un Tweet del quale verrano restituiti gli Utenti che lo hanno retweetato, inserito nell' <b>Url</b>.
 	 */
 	public ServiceRetweeted_by(Long id) {
 		this.Url=PATTERN_TWEET_ID+id+PATTERN_SERVICE_RETWEETED_BY+PARAMETER+PATTERN_USER_FIELDS;

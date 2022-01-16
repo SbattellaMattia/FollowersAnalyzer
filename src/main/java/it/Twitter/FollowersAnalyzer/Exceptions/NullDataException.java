@@ -20,7 +20,7 @@ public class NullDataException extends Exception{
 	/**
 	 * Costruttore della classe NullDataException.
 	 * 
-	 * @param mex Messaggio specifico aggiuntivo che descrive l'errore riscontrato .
+	 * @param mex : Messaggio specifico aggiuntivo che descrive l'errore riscontrato .
 	 */
 	public NullDataException(String mex) {
 		super(message+mex);

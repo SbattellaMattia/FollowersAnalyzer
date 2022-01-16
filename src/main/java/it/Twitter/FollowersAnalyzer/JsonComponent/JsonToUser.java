@@ -25,7 +25,7 @@ public class JsonToUser {
 	/**
 	 * Il metodo parseUser permette di convertire in {@link User} un <b>JSONObject</b>.
 	 * 
-	 * @param  JsonUser JSONObject dell'Utente.
+	 * @param  JsonUser : JSONObject dell'Utente.
 	 * 
 	 * @return {@link User}.
 	 * 
@@ -52,7 +52,7 @@ public class JsonToUser {
 	 * Il metodo parseOneUser permette di convertire in {@link User} un <b>JSONObject</b> 
 	 * contenente un <b>JSONArray</b> con un solo elemento.
 	 * 
-	 * @param  JsonUser JSONObject dell'Utente.
+	 * @param  JsonUser : JSONObject dell'Utente.
 	 * 
 	 * @return {@link User}.
 	 * 
@@ -81,7 +81,7 @@ public class JsonToUser {
 	 * Il metodo parseUsers permette di convertire in <b>ArrayList</b> di tipo {@link User}
 	 * un <b>JSONObject</b> contenente un <b>JSONArray</b> con più elementi.
 	 * 
-	 * @param  JsonUsers JSONObject del JSONArray di Utenti.
+	 * @param  JsonUsers : JSONObject del JSONArray di Utenti.
 	 * 
 	 * @return <b>ArrayList</b> di tipo {@link User}.
 	 * 

@@ -55,7 +55,7 @@ public abstract class Service {
 	/**
 	 * Metodo per instaurare il collegamento con il server API di Twitter
 	 * 
-	 * @param Url L'url della specifica rotta con la quale instaurare il collegamento.
+	 * @param Url : L'url della specifica rotta con la quale instaurare il collegamento.
 	 * 
 	 * @throws IOException
 	 * @throws ConnectionException

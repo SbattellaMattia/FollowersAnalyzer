@@ -20,7 +20,7 @@ public class ServiceUserById extends Service {
 	/**
 	 * Costruttore della classe ServiceUserById.
 	 * 
-	 * @param id Id dell'Utente del quale verrà restituito l'utente stesso, inserito nell' <b>Url</b>.
+	 * @param id : Id dell'Utente del quale verrà restituito l'utente stesso, inserito nell' <b>Url</b>.
 	 */
 	public ServiceUserById(Long id) {
 		this.Url=PATTERN_USER_ID+id+ PARAMETER+PATTERN_USER_FIELDS;

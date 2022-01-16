@@ -21,7 +21,7 @@ public class DateException extends Exception {
 	/**
 	 * Costruttore della classe DateException.
 	 * 
-	 * @param mex Messaggio specifico aggiuntivo che descrive l'errore riscontrato .
+	 * @param mex : Messaggio specifico aggiuntivo che descrive l'errore riscontrato .
 	 */
 	public DateException(String mex) {
 		super(message+mex);

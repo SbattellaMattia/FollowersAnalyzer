@@ -29,7 +29,7 @@ public class FilterByVerified extends Filter {
 	* 
 	* Filtra gli Utenti verificati/non verificati e li inserisce in due ArrayList diversi.
 	* 
-	* @param user Utente i cui Followers verranno filtrati.
+	* @param user : Utente i cui Followers verranno filtrati.
 	* 
 	* @return <Code>void</Code>
 	*/
@@ -45,7 +45,7 @@ public class FilterByVerified extends Filter {
 	/**
 	 * Metodo che filtra i Followers in base al verificato/non verificato
 	 * 
-	 * @param method Metodo di filtraggio: 
+	 * @param method : Metodo di filtraggio: 
 	 * <b>all</b>=ritorna tutti gli utenti; <b>verified</b>=ritorna solo i followers verificati;
 	 * <b>not_verified</b>=ritorna solo i followers non verificati.
 	 * 

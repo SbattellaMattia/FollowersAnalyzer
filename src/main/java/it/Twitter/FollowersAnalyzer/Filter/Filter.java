@@ -23,7 +23,7 @@ public abstract class Filter {
 	/**
 	 * Metodo per convertire i followers in <Code>String</Code>.
 	 * 
-	 * @param Users ArrayList di Utenti che devono essere convertiti in stringa.
+	 * @param Users : ArrayList di Utenti che devono essere convertiti in stringa.
 	 * 
 	 * @return <Code>String</Code>: Lista di utenti, convertibile in JSONObject.
 	 */
