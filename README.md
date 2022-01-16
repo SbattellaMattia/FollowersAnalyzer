@@ -56,9 +56,9 @@ E' possibile installare il programma nel seguente modo:
 
 •	Dal Prompt dei Comandi, aperto nella cartella che diventerà il repository locale, è possibile clonare il repository remoto da GitHub digitando:
   ```
-  $ git clone https:///github.com/SbattellaMattia/SaraSumcutean-ProgettoEsame
+  $ git clone https://github.com/SbattellaMattia/FollowersAnalyzer.git
   ```
-•	E' poi necessario importare il progetto nell'ambiente di sviluppo (Eclipse nel nostro caso):
+•	E' poi necessario importare il progetto nell'ambiente di sviluppo ad ezempio Eclipse:
   ```
   File -> Import -> Existing Maven Projects
   ```
@@ -123,8 +123,8 @@ N° | TIPO | ROTTA | PARAMETRO | DESCRIZIONE
 ## :white_small_square: Statistiche sui Followers <div align="right"> [:arrow_up_small:](#start) </div>
 N° | TIPO | ROTTA | PARAMETRO | DESCRIZIONE
 -- | -- | -- | -- | --
-**14.**|GET|```/FollowersStats/Media/```|id utente|*Passato come parametro un id utente, la rotta restituisce la media del numero di followers dei suoi followers.*
-**15.**|GET|```/FollowersStats/Varianza/```|id utente|*Passato come parametro un id utente, la rotta restituisce la varianza del numero di followers dei suoi followers.*
+**14.**|GET|```/FollowersStats/Average/```|id utente|*Passato come parametro un id utente, la rotta restituisce la media del numero di followers dei suoi followers.*
+**15.**|GET|```/FollowersStats/Variance/```|id utente|*Passato come parametro un id utente, la rotta restituisce la varianza del numero di followers dei suoi followers.*
 <a name="16.0">**[16.](#16)**|GET|```/FollowersStats/Range/```|id utente|*Passato come parametro un id utente, la rotta restituisce la suddivisione in range per numero di followers, dei followers dell'utente. [:information_source:](#info)*
 <a name="17.0">**[17.](#17)**|GET|```/FollowersStats/Activity/```|id utente|*Passato come parametro un id utente, la rotta restituisce l'ordine degli utenti più attivi sul suo profilo sulla base del numero di like. [:information_source:](#info)*
 **18.**|GET|```/FollowersStats/LikesPercentage/```|id tweet|*Passato come parametro un id tweet, la rotta restituisce la percentuale di followers che hanno messo like al tweet rispetto al totale di followers dell'utente.*
@@ -147,8 +147,8 @@ ROTTA | "?" | PARAMETRI | "=" | OPZIONI | VALORE DI DEFAULT | DESCRIZIONE
 <a name="4">[4.](#4.0)</a>|```?```|"username"| ```=``` | Username della persona da ricercare | ```all``` |*Nel caso venga inserito l'username, la rotta restituirà l'utente seguito con il nome inseito; se non trovato, verrà mostrato un messaggio di errore.*
 <a name="8">[8.](#8.0)</a>|```?```|"username"| ```=``` | Username della persona da ricercare | ```all``` |*Nel caso venga inserito l'username e l'utente viene trovato tra coloro che hanno ritwittato, la rotta ne restituirà i suoi dati.*
 <a name="9">[9.](#9.0)</a>|```?```|"method"| ```=``` | ```followers``` |  ```all``` |*Se inserita l'opzione ```followers```, la rotta restituirà esclusivamente i followers dell'utente che hanno messo like al tweet.*
-<a name="10">[10.](#10.0)</a>|```?```|"StartDate",  "EndDate"| ```=``` | Data di inizio e di fine della ricerca | ```all```, ```all``` |*Possono essere inseriti a discrezione dell'utente uno o entrambi i valori, a seconda dei quali verranno restituiti i followers filtrati nell'arco temporale scelto. La data di inzio se non inserita è settata al giorno di fondazione di Twitter. E' necessario specificare che il formato della data deve essere del tipo "**dd/MM/yyyy**".*
-<a name="11">[11.](#11.0)</a>|```?```|"StartDate", "EndDate"| ```=``` | Data di inizio e di fine della ricerca | ```all```, ```all``` |*Possono essere inseriti a discrezione dell'utente uno o entrambi i valori, a seconda dei quali verranno restituiti gli utenti seguiti filtrati nell'arco temporale scelto. La data di inzio se non inserita è settata al giorno di fondazione di Twitter. E' necessario specificare che il formato della data deve essere del tipo "**dd/MM/yyyy**".*
+<a name="10">[10.](#10.0)</a>|```?```|"StartDate",  "EndDate"| ```=``` | Data di inizio e di fine della ricerca | ```21-03-2006```, ```null``` |*Possono essere inseriti a discrezione dell'utente uno o entrambi i valori, a seconda dei quali verranno restituiti i followers filtrati nell'arco temporale scelto. La data di inzio se non inserita è settata al giorno di fondazione di Twitter. E' necessario specificare che il formato della data deve essere del tipo "**dd/MM/yyyy**".*
+<a name="11">[11.](#11.0)</a>|```?```|"StartDate", "EndDate"| ```=``` | Data di inizio e di fine della ricerca | ```21-03-2006```, ```null``` |*Possono essere inseriti a discrezione dell'utente uno o entrambi i valori, a seconda dei quali verranno restituiti gli utenti seguiti filtrati nell'arco temporale scelto. La data di inzio se non inserita è settata al giorno di fondazione di Twitter. E' necessario specificare che il formato della data deve essere del tipo "**dd/MM/yyyy**".*
 <a name="12">[12.](#12.0)</a>|```?```|"method"| ```=``` | ```verified```,  ```not_verified``` | ```all```|*Nel caso venga inserita l'opzione ```verified```, la rotta restituirà i followers che hanno il profilo verificato; nel caso di inserimento dell'opzione ```not_ verified```, la rottà restituirà i followers che hanno il profilo non verificato. L'opzione di base ```all```, restituisce entrambe le liste.*
 <a name="16">[16.](#16.0)</a>|```?```|"method"| ```=``` | ```percentage``` |```number```|*Nel caso venga inserita l'opzione ```number```, la rotta restituirà i followers dell'utente in considerazione, divisi per range in base al numero di loro followers; nel caso di inserimento dell'opzione ```percentage```, la rottà ne restituirà la suddivisione per range di percentuale.*
 <a name="17">[17.](#17.0)</a>|```?```|"method"| ```=``` | ```followers``` | ```all``` |*Nel caso venga inseria l'opzione ```followers```, la rotta restituirà l'elenco dei followers più attivi sul profilo dell'utente in considerazione.*
@@ -207,20 +207,22 @@ Di seguito, le eccezioni nelle quali si può incorrere:
  
 [:arrow_up_small:](#start) </h2>
  
-:black_circle: Il progetto è interamente documentato in JavaDoc, un applicativo utilizzato per la generazione automatica della documentazione del codice.
-
-:black_circle: Ai fini del progetto, è stato utile creare due profili Twitter utilizzabili per fare richieste. Vengono lasciati i dati in descrizione. 
+:large_blue_diamond: Il progetto è interamente documentato in JavaDoc, un applicativo utilizzato per la generazione automatica della documentazione del codice.
+<br/><br/>
+ 
+:large_blue_diamond: Ai fini del progetto, è stato utile creare due profili Twitter utilizzabili per fare richieste. Vengono lasciati i dati in descrizione. 
 * [Sbattella Mattia](https://twitter.com/DarioSecond) con rispettivo id utente: 1467146412009967620.
 * [Sumcutean Sara](https://twitter.com/Sara35793654) con rispettivo id utente: 1473955877635997696.
 
 Tramite questi profili didattici sono stati creati dei tweet di prova, messi dei like e sono stati fatti dei retweet. Vengono lasciati gli id relativi ai tweet postati.
 * 1478658975444963330
 * 1479133590613016583
-
-
-:black_circle: E' stata resa visibile l'avvenuta comprensione del concetto di ereditarietà attraverso l'estensione delle classi  ```User``` e ```Tweet``` da una classe ```Super``` contentente solo un id: componente basilare. Molto visibile questo concetto anche nella classe ```Service```, che instaura il collegamento con il server di Twitter, e nelle sue sottoclassi che sviluppano ogni specifica rischiesta.
-
-:black_circle: In *FollowersAnalyzer* che utilizza API v2, è stato scelto il tipo Long per l'id: il dato viene restituito da Twitter come stringa e modificato poi a Long. Motivazione di ciò è la maggior maneggevolezza del dato, la sua congruenza con l'utilizzo che ne viene fatto e con ciò che rappresenta, inoltre le versioni API v1 di Twitter, non utilizzate in questo progetto, restituiscono un id di tipo Long.
+<br/><br/>
+ 
+:large_blue_diamond: E' stata resa visibile l'avvenuta comprensione del concetto di ereditarietà attraverso l'estensione delle classi  ```User``` e ```Tweet``` da una classe ```Super``` contentente solo un id: componente basilare. Molto visibile questo concetto anche nella classe ```Service```, che instaura il collegamento con il server di Twitter, e nelle sue sottoclassi che sviluppano ogni specifica rischiesta.
+<br/><br/>
+ 
+:large_blue_diamond: In *FollowersAnalyzer* che utilizza API v2, è stato scelto il tipo Long per l'id: il dato viene restituito da Twitter come stringa e modificato poi a Long. Motivazione di ciò è la maggior maneggevolezza del dato, la sua congruenza con l'utilizzo che ne viene fatto e con ciò che rappresenta, inoltre le versioni API v1 di Twitter, non utilizzate in questo progetto, restituiscono un id di tipo Long.
  
  
 
@@ -229,7 +231,7 @@ Tramite questi profili didattici sono stati creati dei tweet di prova, messi dei
 
 Nelle rotte di base, dove si chiede di restituire i dati di un utente o di un tweet, viene restituito un *JSONObject* descrittivo di questi dati. L'oggetto è racchiuso fra parentesi graffe e contiene tutti i campi che lo descrivono.
 Di seguito vengono lasciati due esempi.
-
+<br/><br/>
  
 *JSONObject* che rappresenta un utente:
 ```
@@ -240,14 +242,15 @@ Di seguito vengono lasciati due esempi.
     "id": "1473955877635997696",
     "username": "Sara35793654"
 }
+ 
 ``` 
 Il campo ```name``` indica il nome dell'utente; 
 ```verified``` può avere due valori : ```true``` o ```false``` e indicano rispettivamente il concetto di verificato o non verificato del profilo;
 ```created_at``` indica la data di creazione del profilo secondo il formato dd-MM-yyyy;
 ```id``` rappresenta l'id utente;
 ```username``` è l'username dell'utente.
+<br/><br/>
  
-
 *JSONObject* che rappresenta un tweet:
 ```
 {
@@ -257,16 +260,17 @@ Il campo ```name``` indica il nome dell'utente;
     "author_id": "1473955877635997696"
 }
 ``` 
+
 Il campo ```created_at``` indica la data di creazione del tweet secondo il formato dd-MM-yyyy;
 ```id``` rappresenta l'id del tweet;
 ```text``` rappresenta il testo del tweet; 
 ```author_id``` è il campo che rappresenta l'id dell'utente autore del tweet.
- 
-
+<br/><br/>
 
 In alcune rotte vengono restituiti dei *JSONArray*, ovvero delle liste, di utenti o tweet che vengono descritti come al punto precedente cioè come *JSONObject*. 
-Tutto il dato restituito è racchiuso fra parentesi graffe, mentre la lista contenuta al suo interno, fra parentesi quadre. Gli oggetti della lista vengono rappresentati fra parentesi graffe e divisi fra loro da una virgola. Come nel seguente esempio.
-
+Tutto il dato restituito è racchiuso fra parentesi graffe, mentre la lista contenuta al suo interno, fra parentesi quadre. Gli oggetti della lista vengono rappresentati fra parentesi graffe e divisi fra loro da una virgola. Di seguito viene lasciato un esempio.
+<br/><br/>
+ 
 *JSONArray* di tweet:
 ``` 
 {
@@ -287,6 +291,8 @@ Tutto il dato restituito è racchiuso fra parentesi graffe, mentre la lista cont
 }
 ``` 
 
+<br/><br/>
+ 
 In questo caso è utile specificare che i tweet che vengono ritwittati da un utente vengono inseriti nel suo profilo come suoi tweet, ma particolareggiati.
 I retweet si riconoscono dalla dicitura "RT @<username dell'autore del tweet>: '<testo del tweet'>"
  
