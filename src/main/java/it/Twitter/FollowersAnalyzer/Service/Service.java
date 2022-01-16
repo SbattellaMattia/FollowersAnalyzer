@@ -39,7 +39,7 @@ public abstract class Service {
 	final String PATTERN_TWEET_ID="https://api.twitter.com/2/tweets/";
 	final String PATTERN_USER_FIELDS="user.fields=created_at,verified";
 	final String PATTERN_TWEET_FIELDS="tweet.fields=created_at,author_id";
-	final String PATTERN_MAX_RESULTS="max_results=10";
+	final String PATTERN_MAX_RESULTS="max_results=200";
 	final String PARAMETER="?";
 	final String AND="&";
 	

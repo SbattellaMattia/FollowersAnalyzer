@@ -33,7 +33,7 @@ import it.Twitter.FollowersAnalyzer.Service.ServiceUserById;
 import it.Twitter.FollowersAnalyzer.Service.ServiceUserByUsername;
 import it.Twitter.FollowersAnalyzer.Stats.StatFollowersRange;
 import it.Twitter.FollowersAnalyzer.Stats.StatAverage;
-import it.Twitter.FollowersAnalyzer.Stats.StatVariation;
+import it.Twitter.FollowersAnalyzer.Stats.StatVariance;
 import it.Twitter.FollowersAnalyzer.Stats.StatsLikes;
 import it.Twitter.FollowersAnalyzer.Utils.Counter;
 import it.Twitter.FollowersAnalyzer.Exceptions.ConnectionException;
@@ -69,7 +69,7 @@ public class Controller {
 	/**
 	 * Rotta di tipo GET. Passato come parametro un id utente, la rotta ne restituisce i dati.
 	 * 
-	 * @param id Id dell'utente.
+	 * @param id : Id dell'utente.
 	 * @return <code>JSONObject</code> contenente i dati dell'utente ricercato.
 	 * @throws IOException
 	 * @throws ParseException
@@ -94,7 +94,7 @@ public class Controller {
 	/**
 	 * Rotta di tipo GET. Dato l'username di un utente, la rotta restituisce i suoi dati.
 	 * 
-	 * @param username Username dell'utente.
+	 * @param username : Username dell'utente.
 	 * @return <code>JSONObject</code> contenente i dati dell'utente ricercato.
 	 * @throws IOException
 	 * @throws ParseException
@@ -119,8 +119,8 @@ public class Controller {
 	/**
 	 * Rotta di tipo GET. Passato come parametro un id utente, la rotta restituisce la lista dei suoi followers.
 	 * 
-	 * @param id Id dell'utente.
-	 * @return <code>JSONArray</code> dei followers dell'utente inserito.
+	 * @param id : Id dell'utente.
+	 * @return <code>JSONObject</code> che rappresenta l'elenco di followers dell'utente inserito.
 	 * @throws IOException
 	 * @throws ParseException
 	 * @throws NullDataException
@@ -146,10 +146,10 @@ public class Controller {
 	/**
 	 * Rotta di tipo GET. Passato come parametro un id utente, la rotta restituisce l'elenco dei followers filtrati per data di creazione dell'account.
 	 * 
-	 * @param id Id dell'utente.
-	 * @param StartDate Data di inizio dell'arco temporale desiderato per la ricerca.
-	 * @param EndDate Data di fine dell'arco temporale desiderato per la ricerca.
-	 * @return <code>JSONArray</code> dei followers filtrati.
+	 * @param id : Id dell'utente.
+	 * @param StartDate : Data di inizio dell'arco temporale desiderato per la ricerca.
+	 * @param EndDate : Data di fine dell'arco temporale desiderato per la ricerca.
+	 * @return <code>JSONObject</code> che rappresenta l'elenco dei followers filtrati.
 	 * @throws IOException
 	 * @throws ParseException
 	 * @throws ConnectionException
@@ -181,9 +181,9 @@ public class Controller {
 	/**
 	 * Rotta di tipo GET. Passato come parametro un id utente, la rotta ne restituisce l'elenco degli utenti seguiti. Si può inserire un ulteriore parametro opzionale, un username utente, per poter ricercare l'utente nell'elenco dei seguiti.
 	 * 
-	 * @param id Id dell'utente.
-	 * @param username Parametro opzionale: Username dell'utente che si vuole ricercare fra gli utenti seguiti.
-	 * @return <code>JSONArray</code> degli utenti seguiti dall'utente inserito. Se viene inserito un username utente valido verrà restituito un JSONObject contenente i suoi dati.
+	 * @param id : Id dell'utente.
+	 * @param username : Parametro opzionale. Username dell'utente che si vuole ricercare fra gli utenti seguiti.
+	 * @return <code>JSONObject</code> che rappresenta l'elenco degli utenti seguiti dall'utente inserito. Se viene inserito un username utente valido verrà restituito un JSONObject contenente i suoi dati.
 	 * @throws IOException
 	 * @throws ParseException
 	 * @throws NullDataException
@@ -208,10 +208,10 @@ public class Controller {
 	/**
 	 * Rotta di tipo GET. Passato come parametro un id utente, la rotta restituisce l'elenco degli utenti seguiti filtrati per data di creazione dell'account.
 	 * 
-	 * @param id Id dell'utente.
-	 * @param StartDate Data di inizio dell'arco temporale desiderato per la ricerca.
-	 * @param EndDate Data di fine dell'arco temporale desiderato per la ricerca.
-	 * @return <code>JSONArray</code> degli utenti seguiti filtrati.
+	 * @param id : Id dell'utente.
+	 * @param StartDate : Parametro opzionale. Data di inizio dell'arco temporale desiderato per la ricerca.
+	 * @param EndDate : Parametro opzionale. Data di fine dell'arco temporale desiderato per la ricerca.
+	 * @return <code>JSONObject</code> che rappresenta l'elenco degli utenti seguiti filtrati.
 	 * @throws IOException
 	 * @throws ParseException
 	 * @throws ConnectionException
@@ -243,9 +243,9 @@ public class Controller {
 	 *  Nel caso venga inserita l'opzione <b>verified</b>, la rotta restituirà i followers che hanno il profilo verificato; nel caso di inserimento dell'opzione <b>not_verified</b>, la rottà restituirà i followers che hanno il profilo non verificato.
 	 *  L'opzione di base <b>all</b>, restituisce entrambe le liste.
 	 * 
-	 * @param id Id dell'utente.
-	 * @param method Metodo di ricerca. Possibilità di scelta fra le opzioni: <b>verified</b>, <b>not_verified</b>, <b>all</b>.
-	 * @return <code>JSONArray</code> degli utenti filtrati.
+	 * @param id : Id dell'utente.
+	 * @param method : Parametro opzionale che indica il metodo di ricerca. Possibilità di scelta fra le opzioni: <b>verified</b>, <b>not_verified</b>, <b>all</b>.
+	 * @return <code>JSONObject</code> che rappresenta l'elenco degli utenti filtrati.
 	 * @throws IOException
 	 * @throws ParseException
 	 * @throws ConnectionException
@@ -274,8 +274,8 @@ public class Controller {
 	/**
 	 * Rotta di tipo GET. Passato come parametro un id utente, la rotta restituisce l'elenco degli utenti che ricambiano il follow.
 	 * 
-	 * @param id Id dell'utente.
-	 * @return <code>JSONArray</code> degli utenti che riseguono l'utente.
+	 * @param id : Id dell'utente.
+	 * @return <code>JSONObject</code> che rappresenta l'elenco degli utenti che seguono l'utente.
 	 * @throws IOException
 	 * @throws ParseException
 	 * @throws ConnectionException
@@ -302,7 +302,7 @@ public class Controller {
 	/**
 	 * Rotta di tipo GET. Passato come parametro un id tweet, la rotta restituisce i suoi dati.
 	 * 
-	 * @param id Id del tweet.
+	 * @param id : Id del tweet.
 	 * @return <code>JSONObject</code> contenente i dati del tweet preso in considerazione.
 	 * @throws IOException
 	 * @throws ParseException
@@ -327,8 +327,8 @@ public class Controller {
 	/**
 	 * Rotta di tipo GET. Passato come parametro un id utente, la rotta restituisce la lista dei suoi tweet.
 	 * 
-	 * @param id Id del tweet.
-	 * @return <code>JSONArray</code> dei tweet dell'utente.
+	 * @param id : Id del tweet.
+	 * @return <code>JSONObject</code> che rappresenta l'elenco dei tweet dell'utente.
 	 * @throws IOException
 	 * @throws ParseException
 	 * @throws NullDataException
@@ -354,8 +354,8 @@ public class Controller {
 	/**
 	 * Rotta di tipo GET. Passato come parametro un id utente, la rotta restituisce l'elenco di tweet ai quali ha messo like.
 	 * 
-	 * @param id Id dell'utente.
-	 * @return <code>JSONArray</code> dei tweet.
+	 * @param id : Id dell'utente.
+	 * @return <code>JSONObject</code> che rappresenta l'elenco dei tweet.
 	 * @throws IOException
 	 * @throws ParseException
 	 * @throws NullDataException
@@ -369,10 +369,7 @@ public class Controller {
 			ServiceLikedTweets service = new ServiceLikedTweets(id);
 			User user = jsonUser.parseUser(getUserById(id).getBody());
 			user.setLikedTweets(jsonTweet.parseTweets(json.ToJson(service.getLikedTweets())));
-
-			System.out.println(user.LikedTweetArrayToString());
 			return new ResponseEntity<>(json.ToJson(user.LikedTweetArrayToString()), HttpStatus.OK);}
-
 		catch (ConnectionException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 		catch (NullDataException error) {
@@ -383,9 +380,9 @@ public class Controller {
 	/**
 	 * Rotta di tipo GET. Passato come parametro un id tweet, la rotta restituisce la lista degli utenti che lo hanno ritwittato. E' possibile inserire un ulteriore parametro opzionale: l'username utente. Se l'utente viene trovato tra coloro che hanno ritwittato, la rotta ne restituirà i suoi dati.
 	 * 
-	 * @param id Id del tweet.
-	 * @param username Parametro opzionale. Username dell'utente che si vuole ricercare fra gli utenti che hanno ritwittato il tweet.
-	 * @return <code>JSONArray</code> di utenti che hanno ritwittato.
+	 * @param id : Id del tweet.
+	 * @param username : Parametro opzionale. Username dell'utente che si vuole ricercare fra gli utenti che hanno ritwittato il tweet.
+	 * @return <code>JSONObject</code> che rappresenta l'elenco di utenti che hanno ritwittato.
 	 * @throws IOException
 	 * @throws ParseException
 	 * @throws NullDataException
@@ -411,7 +408,7 @@ public class Controller {
 	/**
 	 * Rotta di tipo GET. Passato come parametro un id utente, la rotta restituisce la media del numero di followers dei suoi followers.
 	 * 
-	 * @param id Id dell'utente.
+	 * @param id : Id dell'utente.
 	 * @return <code>JSONObject</code> descrittivo della media calcolata.
 	 * @throws IOException
 	 * @throws ParseException
@@ -421,7 +418,7 @@ public class Controller {
 	 * @throws WrongParameter
 	 */
 
-	@GetMapping(value="/FollowersStats/Media/{id}")
+	@GetMapping(value="/FollowersStats/Average/{id}")
 
 	public ResponseEntity<JSONObject> getMedia(@PathVariable Long id) throws IOException, ParseException, NullDataException, ConnectionException, DateException, WrongParameter{
 		try {
@@ -442,8 +439,8 @@ public class Controller {
 	/**
 	 * Rotta di tipo GET. Passato come parametro un id utente, la rotta restituisce la suddivisione in range per numero di followers, dei followers dell'utente. Lo stesso risultato si ottiene inserendo l'opzione <b>number</b>; nel caso si inserisca l'opzione <b>percentage</b>, la rottà restituirà la suddivisione per range di percentuale.
 	 * 
-	 * @param id Id dell'utente.
-	 * @param method Parametro opzionale. Possibilità di scelta fra le opzioni: <b>number</b>, <b>percentage</b>.
+	 * @param id : Id dell'utente.
+	 * @param method : Parametro opzionale che indica il metodo di ricerca. Possibilità di scelta fra le opzioni: <b>number</b>, <b>percentage</b>.
 	 * @return <code>JSONObject</code> descrittivo dei range in base al numero di followers o alla percentuale dei followers dell'utente.
 	 * @throws IOException
 	 * @throws ParseException
@@ -474,9 +471,9 @@ public class Controller {
 	/**
 	 * Rotta di tipo GET. Passato come parametro un id tweet, la rotta restituisce gli utenti che hanno messo like al tweet. Lo stesso risultato si ottiene inserendo l'opzione <b>all</b>; se inserita l'opzione <b>followers</b>, la rotta restituirà esclusivamente i followers dell'utente che hanno messo like al tweet.
 	 * 
-	 * @param id Id del tweet.
-	 * @param method Parametro opzionale. Possibilità di scelta fra le opzioni: <b>followers</b>, <b>all</b>.
-	 * @return <code>JSONArray</code> degli utenti che hanno messo like. Con l'opzione <b>followers</b> viene restituito il <code>JSONArray</code> dei followers che hanno messo like.
+	 * @param id : Id del tweet.
+	 * @param method : Parametro opzionale che indica il metodo di ricerca. Possibilità di scelta fra le opzioni: <b>followers</b>, <b>all</b>.
+	 * @return <code>JSONObject</code> che rappresenta l'elenco degli utenti che hanno messo like. Con l'opzione <b>followers</b> viene restituito il <code>JSONObject</code> dell'elenco dei followers che hanno messo like.
 	 * @throws IOException
 	 * @throws ParseException
 	 * @throws NullDataException
@@ -504,9 +501,9 @@ public class Controller {
 	/**
 	 * Rotta di tipo GET. Passato come parametro un id utente, la rotta restituisce l'ordine degli utenti più attivi sul suo profilo sulla base del numero di like. Lo stesso risultato si ottiene inserendo l'opzione <b>all</b>; se inserita l'opzione <b>followers</b>, la rotta restituirà esclusivamente l'elenco dei followers più attivi sul profilo dell'utente in considerazione.
 	 * 
-	 * @param id Id dell'utente.
-	 * @param method Parametro opzionale. Possibilità di scelta fra le opzioni: <b>followers</b>, <b>all</b>.
-	 * @return <code>JSONArray</code> degli utenti più attivi. Con l'opzione <b>followers</b> viene restituito il <code>JSONArray</code> dei followers più attivi.
+	 * @param id : Id dell'utente.
+	 * @param method : Parametro opzionale che indica il metodo di ricerca. Possibilità di scelta fra le opzioni: <b>followers</b>, <b>all</b>.
+	 * @return <code>JSONObject</code> che rappresenta l'elenco degli utenti più attivi. Con l'opzione <b>followers</b> viene restituito il <code>JSONObject</code> dell'elenco dei followers più attivi.
 	 * @throws IOException
 	 * @throws ParseException
 	 * @throws NullDataException
@@ -534,7 +531,7 @@ public class Controller {
 	/**
 	 * Rotta di tipo GET. Passato come parametro un id utente, la rotta restituisce la varianza del numero di followers dei suoi followers.
 	 * 
-	 * @param id Id dell'utente.
+	 * @param id : Id dell'utente.
 	 * @return <code>JSONObject</code> descrittivo della varianza calcolata.
 	 * @throws IOException
 	 * @throws ParseException
@@ -544,14 +541,14 @@ public class Controller {
 	 * @throws DateException
 	 */
 
-	@GetMapping(value="/FollowersStats/Varianza/{id}")
+	@GetMapping(value="/FollowersStats/Variance/{id}")
 	public ResponseEntity<JSONObject> getVarianza(@PathVariable Long id) throws IOException, ParseException, NullDataException, ConnectionException, DateException, WrongParameter{
 		try {
 			User user=jsonUser.parseUser(getUserById(id).getBody());
 			user.setFollowers(jsonUser.parseUsers(getFollowers(id,"all").getBody()));
 			for(User i : user.getFollowers()) {
 				i.setFollowers(jsonUser.parseUsers(getFollowers(i.getId(),"all").getBody()));}
-			StatVariation varianza =new StatVariation(user);
+			StatVariance varianza =new StatVariance(user);
 			return new ResponseEntity<>(json.ToJson(varianza.toString()), HttpStatus.OK);}
 		catch (ConnectionException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
@@ -564,7 +561,7 @@ public class Controller {
 	/**
 	 * Rotta di tipo GET. Passato come parametro un id tweet, la rotta restituisce la percentuale di followers che hanno messo like al tweet rispetto al totale di followers dell'utente.
 	 * 
-	 * @param id Id del tweet.
+	 * @param id : Id del tweet.
 	 * @return <code>JSONObject</code> descrittivo della percentuale calcolata.
 	 * @throws IOException
 	 * @throws ParseException

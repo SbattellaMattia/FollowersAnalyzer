@@ -17,7 +17,7 @@ public class Counter {
 	 * Metodo counter, conta il numero di like per Utente ai Tweet di uno specifico Utente.
 	 * 
 	 * @param User
-	 * @return <Code>String</Code>: Stringa di Utenti (in ordine Decrescente) in base numero totale di like messi, 
+	 * @return <Code>String</Code>: Stringa di Utenti (in ordine Decrescente) in base al numero totale di like messi, 
 	 * convertibile in <b>JSONObject</b>.
 	 */
 	public String counter(User User) {

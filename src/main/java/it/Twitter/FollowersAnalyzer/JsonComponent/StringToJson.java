@@ -30,7 +30,7 @@ public class StringToJson{
 	}
 
 	/**
-	 * * Metodo che converte una <Code>String</Code> in <b>JSONArray</b>.
+	 * Metodo che converte una <Code>String</Code> in <b>JSONArray</b>.
 	 * @param String Stringa da convertire in <b>JSONArray</b>.
 	 * 
 	 * @return <b>JSONArray</b>.

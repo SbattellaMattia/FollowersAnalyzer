@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import it.Twitter.FollowersAnalyzer.Exceptions.WrongParameter;
 import it.Twitter.FollowersAnalyzer.Model.User;
 
+/**
+ * Classe StatFollowersRange : contiene i metodi necessari allo sviluppo di una statistica. In particolare per la suddivisione dei followers di un utente sulla base del numero dei loro rispettivi followers.
+ * 
+ *
+ * @author Sbattella Mattia
+ * @author Sumcutean Sara
+ */
 public class StatFollowersRange {
 	private int LESS_10;
 	private int BETWEEN_10_25;
@@ -21,7 +28,11 @@ public class StatFollowersRange {
 	private double perMORE_100;
 	private int tot;
 	
-	
+	/**
+	 * Costruttore della classe StatFollowersRange. Esegue il contaggio del numero di utenti appartenenti ad ogni fascia di numero di followers. Esegue poi il contaggio del numero di utenti appartenenti ad ogni fascia per percentuale di numero di followers. 
+	 * 
+	 * @param followers : <code>ArrayList</code> di followers dell'utente del quale si vuole eseguire la statistica.
+	 */
 	public StatFollowersRange(ArrayList<User> followers) {
 		
 		for(User i: followers) {
@@ -43,6 +54,16 @@ public class StatFollowersRange {
 		this.perMORE_100=Math.round(((double)MORE_100/tot*100)*100.0)/100.0;
 	}
 
+	/**
+	 * Metodo StatToString per scrivere i dati in formato <Code>String</Code>.
+	 * In base al parametro inserito si otterranno due valori diversi:
+	 * Con l'opzione <b>number</b> verrà restituita una <Code>String</Code> che rappresenta gli utenti appartenenti alle fasce secondo il numero di followers dell'utente in considerazione.
+	 * Con l'opzione <b>percentage</b> verrà restituita una <Code>String</Code> che rappresenta gli utenti appartenenti alle fasce secondo la percentuale di numero di followers dell'utente in considerazione.
+	 * 
+	 * @param message : Possibilità di scelta fra le opzioni: <b>number</b> e <b>percentage</b>.
+	 * @return <Code>String</Code> : Stringa convertibile in <b>JSONObject</b>.
+	 * @throws WrongParameter - nel caso di inserimento di un parametro inesatto.
+	 */
 	public String StatToString(String message) throws WrongParameter {
 		if(message.equals("number")) {
 		return "{\"Number for range of followers\":[{\"LESS_10\": \"" + LESS_10 + "\",\"BETWEEN_10_25\": \"" + BETWEEN_10_25 + "\",\"BETWEEN_25_50\": \""

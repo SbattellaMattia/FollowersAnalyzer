@@ -13,11 +13,21 @@ import it.Twitter.FollowersAnalyzer.Exceptions.NullDataException;
 import it.Twitter.FollowersAnalyzer.JsonComponent.JsonToUser;
 import it.Twitter.FollowersAnalyzer.Model.User;
 
+/** Questa classe TestJsonToUser testa un metodo della classe {@link it.Twitter.FollowersAnalyzer.JsonComponent.JsonToUser JsonToUser}.
+ * 
+ * @author Sbattella Mattia
+ * @author Sumcutean Sara
+ * 
+ * @see it.Twitter.FollowersAnalyzer.JsonComponent.JsonToUser JsonToUser
+ */
 class TestJsonToUser {
 
 	JSONObject UserJObj= new JSONObject();   
 	User user=new User(1234L,"Dario","SecondDario","00-00-0000",true);
 
+	/**
+	 * Metodo che inizializza i dati necessari per effettuare i test: in questo caso due JSONObject rappresentanti un utente e un tweet.
+	 */
 	@SuppressWarnings("unchecked")
 	@BeforeEach
 	void setUp() {
@@ -36,6 +46,11 @@ class TestJsonToUser {
 		assertEquals(user.UserToString(), json.parseUser(UserJObj).UserToString());
 	}
 
+	/**
+	 * Distrugge ciò che è stato inizializzato da metodo setUp.
+	 * 
+	 * @throws Exception
+	 */
 	@AfterEach
 	public void tearDown() throws Exception {}
 
