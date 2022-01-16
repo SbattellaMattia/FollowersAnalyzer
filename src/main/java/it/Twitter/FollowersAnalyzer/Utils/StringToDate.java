@@ -2,7 +2,7 @@ package it.Twitter.FollowersAnalyzer.Utils;
 
 /** 
 * Classe per convertire la <Code>String</Code> del created_at che ritorna il server API di Twetter
-* in una <Code>String</Code> data che è conforme allo schema impostato "dd-mm-yyyy".
+* in una <Code>String</Code> data che e' conforme allo schema impostato "dd-mm-yyyy".
 * 
 * @author Sbattella Mattia
 * @author Sumcutean Sara
@@ -13,7 +13,7 @@ public class StringToDate {
 
 	/**
 	 * Metodo per la conversione da <Code>String</Code> del created_at che ritorna il server API di Twetter
-	 * in una <Code>String</Code> data che è conforme allo schema impostato "dd-mm-yyyy".
+	 * in una <Code>String</Code> data che e' conforme allo schema impostato "dd-mm-yyyy".
 	 * 
 	 * @param createdAt : del tipo "yyyy-mm-dd "day of the week" hh:mm:ss".
 	 * 

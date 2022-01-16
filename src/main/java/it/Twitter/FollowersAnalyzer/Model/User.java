@@ -2,7 +2,7 @@ package it.Twitter.FollowersAnalyzer.Model;
 
 import java.util.ArrayList;
 
-/** Questa classe descrive le proprietà di ogni Utente Twitter. Estende la classe {@link it.Twitter.FollowersAnalyzer.Model.Super Super}
+/** Questa classe descrive le proprieta' di ogni Utente Twitter. Estende la classe {@link it.Twitter.FollowersAnalyzer.Model.Super Super}
  * 
  * @author Sbattella Mattia
  * @author Sumcutean Sara
@@ -162,8 +162,6 @@ public class User extends Super{
 
 	/**
 	 * Metodo che setta il numero di followers dell'utente.
-	 * 
-	 * @param followersCount :  Rappresenta il numero di followers dell'utente.
 	 */
 	public void setFollowersCount() {
 		this.followersCount = followers.size();
@@ -198,26 +196,24 @@ public class User extends Super{
 
 	/**
 	 * Metodo che setta il numero di utenti seguiti dall'utente.
-	 * 
-	 * @param followingCount :  Rappresenta il numero di utenti seguiti dall'utente.
 	 */
 	public void setFollowingCount() {
 		this.followingCount = following.size();
 	}
 
 	/**
-	 * Metodo che restituisce la località associata all'account dell'utente.
+	 * Metodo che restituisce la localita' associata all'account dell'utente.
 	 * 
-	 * @return <Code>location</Code> : località associata all'account dell'utente.
+	 * @return <Code>location</Code> : localita' associata all'account dell'utente.
 	 */
 	public String getLocation() {
 		return location;
 	}
 
 	/**
-	 * Metodo che setta la località associata all'account dell'utente.
+	 * Metodo che setta la localita' associata all'account dell'utente.
 	 * 
-	 * @param location : località associata all'account dell'utente.
+	 * @param location : localita' associata all'account dell'utente.
 	 */
 	public void setLocation(String location) {
 		this.location = location;
@@ -242,18 +238,18 @@ public class User extends Super{
 	}
 
 	/**
-	 * Metodo che restituisce un valore booleano in base a se il profilo dell'utente è protetto o meno.
+	 * Metodo che restituisce un valore booleano in base a se il profilo dell'utente e' protetto o meno.
 	 * 
-	 * @return <Code>protect</Code> : valore booleano che descrive se il profilo dell'utente è protetto o meno.
+	 * @return <Code>protect</Code> : valore booleano che descrive se il profilo dell'utente e' protetto o meno.
 	 */
 	public boolean isProtect() {
 		return protect;
 	}
 
 	/**
-	 * Metodo che setta un valore booleano in base a se il profilo dell'utente è protetto o meno.
+	 * Metodo che setta un valore booleano in base a se il profilo dell'utente e' protetto o meno.
 	 * 
-	 * @param protect : valore booleano che descrive se il profilo dell'utente è protetto o meno.
+	 * @param protect : valore booleano che descrive se il profilo dell'utente e' protetto o meno.
 	 */
 	public void setProtect(boolean protect) {
 		this.protect = protect;
@@ -278,18 +274,18 @@ public class User extends Super{
 	}
 
 	/**
-	 * Metodo che restituisce un valore booleano in base a se il profilo dell'utente è verificato o meno.
+	 * Metodo che restituisce un valore booleano in base a se il profilo dell'utente e' verificato o meno.
 	 * 
-	 * @return <Code>verified</Code> : valore booleano che descrive se il profilo dell'utente è verificato o meno.
+	 * @return <Code>verified</Code> : valore booleano che descrive se il profilo dell'utente e' verificato o meno.
 	 */
 	public boolean isVerified() {
 		return verified;
 	}
 
 	/**
-	 * Metodo che setta un valore booleano in base a se il profilo dell'utente è verificato o meno.
+	 * Metodo che setta un valore booleano in base a se il profilo dell'utente e' verificato o meno.
 	 * 
-	 * @param verified : valore booleano che descrive se il profilo dell'utente è verificato o meno.
+	 * @param verified : valore booleano che descrive se il profilo dell'utente e' verificato o meno.
 	 */
 	public void setVerified(boolean verified) {
 		this.verified = verified;

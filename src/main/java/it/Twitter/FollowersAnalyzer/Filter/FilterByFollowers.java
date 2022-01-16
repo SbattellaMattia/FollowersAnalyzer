@@ -28,7 +28,7 @@ public class FilterByFollowers extends Filter{
 	 * @param method : Metodo di filtraggio: 
 	 * <b>all</b>=ritorna tutti gli utenti; <b>followers</b>=ritorna solo i followers.
 	 * 
-	 * @throws WrongParameter se method è diverso da "all" o "followers".
+	 * @throws WrongParameter se method e' diverso da "all" o "followers".
 	 * 
 	 * @return <Code>String</Code>: Stringa di Utenti filtrata, convertibile in JSONObject.
 	 */

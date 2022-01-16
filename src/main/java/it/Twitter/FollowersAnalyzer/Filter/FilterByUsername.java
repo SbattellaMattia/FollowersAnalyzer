@@ -79,7 +79,7 @@ public class FilterByUsername extends Filter {
 	/**
 	 * Metodo che filtra gli Utenti che hanno Retweettato un Tweet in base all'username passato come parametro, li inserisce nell'ArrayList <b>UsernameRetweeted</b>.
 	 * 
-	 * @param tweet : Tweet che è stato Retweettato.
+	 * @param tweet : Tweet che e' stato Retweettato.
 	 * @param username : Username da ricercare degli Utenti che hanno Retweettato il Tweet. 
 	 * <b>all</b>=ritorna tutti gli Utenti; <b>{username}</b>=ritorna solo gli Utenti che hanno Retweettato un Tweet con l'username inserito.
 	 * 

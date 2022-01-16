@@ -69,7 +69,7 @@ public class JsonToTweet {
 	
 	/**
 	 * Il metodo parseTweets permette di convertire in <b>ArrayList</b> di tipo {@link Tweet}
-	 * un <b>JSONObject</b> contenente un <b>JSONArray</b> con più elementi.
+	 * un <b>JSONObject</b> contenente un <b>JSONArray</b> con piu' elementi.
 	 * 
 	 * @param  JsonTweet : JSONObject del JSONArray di Tweet.
 	 * 

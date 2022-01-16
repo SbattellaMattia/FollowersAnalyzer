@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import it.Twitter.FollowersAnalyzer.Exceptions.DateException;
 import it.Twitter.FollowersAnalyzer.Exceptions.NullDataException;
-import it.Twitter.FollowersAnalyzer.Exceptions.WrongParameter;
 import it.Twitter.FollowersAnalyzer.JsonComponent.JsonToUser;
 import it.Twitter.FollowersAnalyzer.Model.User;
 
@@ -54,7 +53,7 @@ class TestJsonToUser {
 	}
 
 	/**
-	 * Distrugge ciò che è stato inizializzato da metodo setUp.
+	 * Distrugge cio' che e' stato inizializzato dal metodo setUp.
 	 * 
 	 * @throws Exception
 	 */

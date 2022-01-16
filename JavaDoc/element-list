@@ -1,0 +1,14 @@
+it.Twitter.FollowersAnalyzer
+it.Twitter.FollowersAnalyzer.Controller
+it.Twitter.FollowersAnalyzer.Exceptions
+it.Twitter.FollowersAnalyzer.Filter
+it.Twitter.FollowersAnalyzer.FiltersTest
+it.Twitter.FollowersAnalyzer.JsonComponent
+it.Twitter.FollowersAnalyzer.JsonTest
+it.Twitter.FollowersAnalyzer.Model
+it.Twitter.FollowersAnalyzer.ModelTest
+it.Twitter.FollowersAnalyzer.Service
+it.Twitter.FollowersAnalyzer.Stats
+it.Twitter.FollowersAnalyzer.StatsTest
+it.Twitter.FollowersAnalyzer.Utils
+it.Twitter.FollowersAnalyzer.UtilsTest

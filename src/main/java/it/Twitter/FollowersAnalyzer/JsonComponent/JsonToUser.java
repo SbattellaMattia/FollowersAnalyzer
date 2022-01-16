@@ -79,7 +79,7 @@ public class JsonToUser {
 
 	/**
 	 * Il metodo parseUsers permette di convertire in <b>ArrayList</b> di tipo {@link User}
-	 * un <b>JSONObject</b> contenente un <b>JSONArray</b> con più elementi.
+	 * un <b>JSONObject</b> contenente un <b>JSONArray</b> con piu' elementi.
 	 * 
 	 * @param  JsonUsers : JSONObject del JSONArray di Utenti.
 	 * 

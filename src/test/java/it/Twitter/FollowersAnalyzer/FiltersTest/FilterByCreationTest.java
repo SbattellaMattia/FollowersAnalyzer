@@ -159,7 +159,7 @@ class FilterByCreationTest extends TestCase{
     }
 	 
 	/**
-	 * Distrugge ciò che è stato inizializzato da metodo setUp.
+	 * Distrugge cio' che e' stato inizializzato dal metodo setUp.
 	 * 
 	 * @throws Exception
 	 */

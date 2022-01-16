@@ -49,10 +49,10 @@ class TestVariance_Average {
 	 *  il secondo con 5 followers
 	 *  il terzo con 8 followers
 	 *  
-	 *  La media sarà: 
+	 *  La media sara': 
 	 *  (2+5+8)/3=  5
 	 *  
-	 *  La varianza sarà:
+	 *  La varianza sara':
 	 *  ((2-5)^2+(5-5)^2+(8-5)^2)/(3-1)=
 	 *  (9+0+9)/2= 9
 	 *  
@@ -81,7 +81,7 @@ class TestVariance_Average {
 	}
 
 	/**
-	 * Distrugge ciò che è stato inizializzato da metodo setUp.
+	 * Distrugge cio' che e' stato inizializzato dal metodo setUp.
 	 * 
 	 * @throws Exception
 	 */

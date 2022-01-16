@@ -57,10 +57,10 @@ public class StatFollowersRange {
 	/**
 	 * Metodo StatToString per scrivere i dati in formato <Code>String</Code>.
 	 * In base al parametro inserito si otterranno due valori diversi:
-	 * Con l'opzione <b>number</b> verrà restituita una <Code>String</Code> che rappresenta gli utenti appartenenti alle fasce secondo il numero di followers dell'utente in considerazione.
-	 * Con l'opzione <b>percentage</b> verrà restituita una <Code>String</Code> che rappresenta gli utenti appartenenti alle fasce secondo la percentuale di numero di followers dell'utente in considerazione.
+	 * Con l'opzione <b>number</b> verra' restituita una <Code>String</Code> che rappresenta gli utenti appartenenti alle fasce secondo il numero di followers dell'utente in considerazione.
+	 * Con l'opzione <b>percentage</b> verra' restituita una <Code>String</Code> che rappresenta gli utenti appartenenti alle fasce secondo la percentuale di numero di followers dell'utente in considerazione.
 	 * 
-	 * @param message : Possibilità di scelta fra le opzioni: <b>number</b> e <b>percentage</b>.
+	 * @param message : Possibilita' di scelta fra le opzioni: <b>number</b> e <b>percentage</b>.
 	 * @return <Code>String</Code> : Stringa convertibile in <b>JSONObject</b>.
 	 * @throws WrongParameter - nel caso di inserimento di un parametro inesatto.
 	 */
