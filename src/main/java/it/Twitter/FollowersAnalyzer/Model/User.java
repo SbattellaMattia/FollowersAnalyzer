@@ -298,7 +298,7 @@ public class User extends Super{
 	/**
 	 * Metodo che restituisce l'<b>ArrayList</b> dei tweet dell'utente.
 	 * 
-	 * @return <Code>tweets</Code> : <b>ArrayList</b> di tweets dell'utente.
+	 * @return <Code>tweets</Code> : <b>ArrayList</b> di tweet dell'utente.
 	 */
 	public ArrayList<Tweet> getTweets() {
 		return tweets;
@@ -316,7 +316,7 @@ public class User extends Super{
 	/**
 	 * Metodo che restituisce l'<b>ArrayList</b> dei tweet a cui l'utente ha messo like.
 	 * 
-	 * @return <Code>likedTweets</Code> : <b>ArrayList</b> di tweets a cui l'utente ha messo like.
+	 * @return <Code>likedTweets</Code> : <b>ArrayList</b> di tweet a cui l'utente ha messo like.
 	 */
 	public ArrayList<Tweet> getLikedTweets() {
 		return likedTweets;

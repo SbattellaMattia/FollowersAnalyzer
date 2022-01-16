@@ -14,6 +14,13 @@ import it.Twitter.FollowersAnalyzer.Exceptions.NullDataException;
 import it.Twitter.FollowersAnalyzer.JsonComponent.JsonToUser;
 import it.Twitter.FollowersAnalyzer.Model.User;
 
+/** Questa classe TestJsonToUser testa un metodo della classe {@link it.Twitter.FollowersAnalyzer.JsonComponent.JsonToUser JsonToUser}.
+ * 
+ * @author Sbattella Mattia
+ * @author Sumcutean Sara
+ * 
+ * @see it.Twitter.FollowersAnalyzer.JsonComponent.JsonToUser JsonToUser
+ */
 class TestJsonToUserArray {
 
 	JSONObject UserJObj= new JSONObject();
@@ -30,6 +37,9 @@ class TestJsonToUserArray {
 	User user1=new User(1234L,"Dario","SecondDario","00-00-0000",true);
 	User user2=new User(5678L,"Mirko","Rkomi","00-00-0000",false);
 	
+	/**
+	 * Metodo che inizializza i dati necessari per effettuare i test: in questo caso setta i due followers di tipo utente all'utente, crea poi due JSONObject rappresentanti un utente, li inserisce in un JsonArray e il tutto in un JSONObject.
+	 */
 	@SuppressWarnings("unchecked")
 	@BeforeEach
 	void setUp() {
@@ -54,7 +64,13 @@ class TestJsonToUserArray {
 		UserJObj.put("data",UserJArray);
 	}
 
-
+	/**
+	 * Test che verifica il corretto funzionamento del metodo parseUsers accertando che il risultato ottenuto sia uguale a quello settato in precedenza.
+	 * 
+	 * @throws ParseException
+	 * @throws NullDataException
+	 * @throws DateException
+	 */
 	@Test
 	void StringUserToJson() throws ParseException, NullDataException, DateException {
 		JsonToUser json= new JsonToUser();
@@ -65,6 +81,11 @@ class TestJsonToUserArray {
 		assertEquals(user.FollowersArrayToString(),user2.FollowersArrayToString() );
 	}
 
+	/**
+	 * Distrugge ciò che è stato inizializzato da metodo setUp.
+	 * 
+	 * @throws Exception
+	 */
 	@AfterEach
 	public void tearDown() throws Exception {}
 

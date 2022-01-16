@@ -48,7 +48,7 @@ class TestJsonObj {
 
 
 	/**
-	 * Test che verifica siano uguali il JSONObject restituito dal metodo e quello creato nel setUp riferiti all'utente.
+	 * Test che verifica siano uguali il JSONObject restituito dal metodo <b>ToJson</b> e quello creato nel setUp riferiti all'utente.
 	 * 
 	 * @throws ParseException
 	 */
@@ -59,7 +59,7 @@ class TestJsonObj {
 	}
 	
 	/**
-	 * Test che verifica siano uguali il JSONObject restituito dal metodo e quello creato nel setUp riferiti al tweet.
+	 * Test che verifica siano uguali il JSONObject restituito dal metodo <b>ToJson</b> e quello creato nel setUp riferiti al tweet.
 	 * 
 	 * @throws ParseException
 	 */

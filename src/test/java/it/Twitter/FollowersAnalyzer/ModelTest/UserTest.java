@@ -19,7 +19,7 @@ public class UserTest {
 	User user=new User(1234L,"Dario","SecondDario","00-00-0000",true);
 	
 	/**
-	 * Metodo che inizializza i dati necessari per effettuare i test: in questo caso un profilo utente.
+	 * Metodo che inizializza i dati necessari per effettuare i test.
 	 */
 	@BeforeEach
     void setUp() {

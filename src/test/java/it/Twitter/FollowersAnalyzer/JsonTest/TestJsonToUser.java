@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import it.Twitter.FollowersAnalyzer.Exceptions.DateException;
 import it.Twitter.FollowersAnalyzer.Exceptions.NullDataException;
+import it.Twitter.FollowersAnalyzer.Exceptions.WrongParameter;
 import it.Twitter.FollowersAnalyzer.JsonComponent.JsonToUser;
 import it.Twitter.FollowersAnalyzer.Model.User;
 
@@ -26,7 +27,7 @@ class TestJsonToUser {
 	User user=new User(1234L,"Dario","SecondDario","00-00-0000",true);
 
 	/**
-	 * Metodo che inizializza i dati necessari per effettuare i test: in questo caso due JSONObject rappresentanti un utente e un tweet.
+	 * Metodo che inizializza i dati necessari per effettuare i test: in questo caso un JSONObject rappresentante un utente.
 	 */
 	@SuppressWarnings("unchecked")
 	@BeforeEach
@@ -39,7 +40,13 @@ class TestJsonToUser {
 		//System.out.println("setUp completato");
 	}
 
-
+	/**
+	 * Test che verifica il corretto funzionamento del metodo parseUser confrontando il risultato con quello settato in precedenza.
+	 * 
+	 * @throws ParseException
+	 * @throws NullDataException
+	 * @throws DateException
+	 */
 	@Test
 	void StringUserToJson() throws ParseException, NullDataException, DateException {
 		JsonToUser json= new JsonToUser();

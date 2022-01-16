@@ -13,10 +13,15 @@ import it.Twitter.FollowersAnalyzer.Filter.FilterByFollowers;
 import it.Twitter.FollowersAnalyzer.Model.Tweet;
 import it.Twitter.FollowersAnalyzer.Model.User;
 
+/** Questa classe FilterByFollowersTest testa un metodo e un'eccezione della classe {@link it.Twitter.FollowersAnalyzer.Filter.FilterByFollowers FilterByFollowers}.
+ * 
+ * @author Sbattella Mattia
+ * @author Sumcutean Sara
+ * 
+ * @see it.Twitter.FollowersAnalyzer.Filter.FilterByFollowers FilterByFollowers
+ */
 class FilterByFollowersTest {
 
-
-	
 	User user=new User(0000L,"mirko","rkomi","00-00-0000");
 	User user1=new User(1111L,"pippo","e non solo","00-00-0000");
 	User user2=new User(2222L,"Dario","SecondDario","00-00-0000");
@@ -26,7 +31,9 @@ class FilterByFollowersTest {
 	
 	Tweet tweet= new Tweet(0000L,"Ciaoo");
 	
-	
+	/**
+	 * Metodo che inizializza i dati necessari per effettuare i test: in questo caso inserisce un tweet al profilo dell'utente, setta 4 followers e i 3 like al tweet prima citato.
+	 */
 	@BeforeEach
 	protected void setUp() {
 		(user.getTweets()).add(tweet);
@@ -57,19 +64,35 @@ class FilterByFollowersTest {
 	 */
 	
 	
-	
+	/**
+	 * Test che verifica il corretto funzionamento del metodo <b>Filter</b>. La <Code>String</Code> restituita dal metodo deve rispettare i criteri dell'esempio soprastante nel caso del metodo <b>all</b>.
+	 * 
+	 * @throws NumberFormatException
+	 * @throws NullDataException
+	 * @throws WrongParameter
+	 */
 	@Test
 	void testFilterByFollowers1() throws  NumberFormatException, NullDataException, WrongParameter {
 		FilterByFollowers FollowersFilter= new FilterByFollowers();
 		System.out.println(FollowersFilter.Filter(user, tweet, "all"));
 	}
 	
+	/**
+	 * Test che verifica il corretto funzionamento del metodo <b>Filter</b>. La <Code>String</Code> restituita dal metodo deve rispettare i criteri dell'esempio soprastante nel caso del metodo <b>followers</b>.
+	 * 
+	 * @throws NumberFormatException
+	 * @throws NullDataException
+	 * @throws WrongParameter
+	 */
 	@Test
 	void testFilterByFollowers2() throws  NumberFormatException, NullDataException, WrongParameter {
 		FilterByFollowers FollowersFilter= new FilterByFollowers();
 		System.out.println(FollowersFilter.Filter(user, tweet, "followers"));
 	}
 	
+	/**
+	 * Test che verifica il corretto funzionamento del lancio dell'eccezione <b>WrongParameter</b> nel caso di inserimento di un parametro non valido.
+	 */
 	@Test
     void exceptionTesting() {
 		FilterByFollowers FollowersFilter= new FilterByFollowers();
@@ -77,8 +100,12 @@ class FilterByFollowersTest {
         assertEquals("Wrong or inexistent parameter: \"xxx\" is not allowed", exception.getMessage());
     }
 	
+	/**
+	 * Distrugge ciò che è stato inizializzato da metodo setUp.
+	 * 
+	 * @throws Exception
+	 */
 	@AfterEach
 	public void tearDown() throws Exception {}
-
 
 }

@@ -9,7 +9,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import it.Twitter.FollowersAnalyzer.Exceptions.WrongParameter;
 import it.Twitter.FollowersAnalyzer.JsonComponent.StringToJson;
 import it.Twitter.FollowersAnalyzer.Model.User;
 
@@ -64,7 +63,7 @@ class TestJsonArray {
 	}
 
 	/**
-	 * Test che verifica siano uguali il JSONObject restituito dal metodo e quello creato nel setUp.
+	 * Test che verifica siano uguali il JSONObject restituito dal metodo <b>ToJson</b> e quello creato nel setUp.
 	 * 
 	 * @throws ParseException
 	 */

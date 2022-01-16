@@ -11,12 +11,12 @@ import it.Twitter.FollowersAnalyzer.Model.User;
 import it.Twitter.FollowersAnalyzer.Stats.StatAverage;
 import it.Twitter.FollowersAnalyzer.Stats.StatVariance;
 
-/** Questa classe TestVariation_Average testa alcuni metodi delle classi {@link it.Twitter.FollowersAnalyzer.Stats.StatVariance StatVariation} e {@link it.Twitter.FollowersAnalyzer.Stats.StatAverage StatAverage}.
+/** Questa classe TestVariation_Average testa alcuni metodi delle classi {@link it.Twitter.FollowersAnalyzer.Stats.StatVariance StatVariance} e {@link it.Twitter.FollowersAnalyzer.Stats.StatAverage StatAverage}.
  * 
  * @author Sbattella Mattia
  * @author Sumcutean Sara
  * 
- * @see it.Twitter.FollowersAnalyzer.Stats.StatVariance StatVariation
+ * @see it.Twitter.FollowersAnalyzer.Stats.StatVariance StatVarince
  * @see it.Twitter.FollowersAnalyzer.Stats.StatAverage StatAverage
  */
 class TestVariance_Average {
