@@ -20,7 +20,7 @@ public class ConnectionException extends Exception{
 	/**
 	 * Costruttore della classe ConnectionException.
 	 * 
-	 * @param mex Messaggio specifico aggiuntivo che descrive l'errore riscontrato .
+	 * @param mex : Messaggio specifico aggiuntivo che descrive l'errore riscontrato .
 	 */
 	public ConnectionException(String mex) {
 		super(message+mex);

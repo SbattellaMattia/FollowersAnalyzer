@@ -40,7 +40,7 @@ public class Counter {
 	/**
 	 * Metodo counterToString per convertire l'<b>HashMap</b> in <Code>String</Code>.
 	 * 
-	 * @param Counter Rappresenta l'<b>HashMap</b> (chiave={@link User},valore=n.Like).
+	 * @param Counter : Rappresenta l'<b>HashMap</b> (chiave={@link User},valore=n.Like).
 	 * @return <Code>String</Code>: Stringa di Utenti (in ordine Decrescente) in base al numero totale di like messi, 
 	 * convertibile in <b>JSONObject</b>.
 	 */

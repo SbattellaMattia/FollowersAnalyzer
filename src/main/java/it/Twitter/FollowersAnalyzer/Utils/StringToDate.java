@@ -15,9 +15,9 @@ public class StringToDate {
 	 * Metodo per la conversione da <Code>String</Code> del created_at che ritorna il server API di Twetter
 	 * in una <Code>String</Code> data che è conforme allo schema impostato "dd-mm-yyyy".
 	 * 
-	 * @param createdAt del tipo "yyyy-mm-dd "day of the week" hh:mm:ss".
+	 * @param createdAt : del tipo "yyyy-mm-dd "day of the week" hh:mm:ss".
 	 * 
-	 * @return <Code>String</Code> "dd-mm-yyyy".
+	 * @return <Code>String</Code> : "dd-mm-yyyy".
 	 */
 	public String stringToDate(String createdAt){
 		date=createdAt.substring(0,10);

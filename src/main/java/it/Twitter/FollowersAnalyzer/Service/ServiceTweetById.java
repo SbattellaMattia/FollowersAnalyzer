@@ -19,7 +19,7 @@ public class ServiceTweetById extends Service {
 	/**
 	 * Costruttore della classe ServiceTweetById.
 	 * 
-	 * @param id Id del Tweet del quale verrà restituito il Tweet stesso, inserito nell' <b>Url</b>.
+	 * @param id : Id del Tweet del quale verrà restituito il Tweet stesso, inserito nell' <b>Url</b>.
 	 */
 	public ServiceTweetById(Long id) {
 		this.Url=PATTERN_TWEET_ID+id+ PARAMETER+PATTERN_TWEET_FIELDS;

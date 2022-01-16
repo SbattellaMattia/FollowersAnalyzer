@@ -20,7 +20,7 @@ public class WrongParameter extends Exception{
 	/**
 	 * Costruttore della classe WrongParameter.
 	 * 
-	 * @param mex Messaggio specifico aggiuntivo che descrive l'errore riscontrato .
+	 * @param mex : Messaggio specifico aggiuntivo che descrive l'errore riscontrato .
 	 */
 	public WrongParameter(String mex) {
 		super(message+mex);

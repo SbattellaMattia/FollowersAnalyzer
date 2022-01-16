@@ -24,7 +24,7 @@ public class JsonToTweet {
 	/**
 	 * Il metodo parseTweet permette di convertire in {@link Tweet} un <b>JSONObject</b>.
 	 * 
-	 * @param  JsonTweet JSONObject del Tweet.
+	 * @param  JsonTweet : JSONObject del Tweet.
 	 * 
 	 * @return {@link Tweet}.
 	 * 
@@ -47,7 +47,7 @@ public class JsonToTweet {
 	 * Il metodo parseOneTweet permette di convertire in {@link Tweet} un <b>JSONObject</b> 
 	 * contenente un <b>JSONArray</b> con un solo elemento.
 	 * 
-	 * @param  JSONTweet JSONObject del Tweet.
+	 * @param  JSONTweet : JSONObject del Tweet.
 	 * 
 	 * @return {@link Tweet}.
 	 * 
@@ -71,7 +71,7 @@ public class JsonToTweet {
 	 * Il metodo parseTweets permette di convertire in <b>ArrayList</b> di tipo {@link Tweet}
 	 * un <b>JSONObject</b> contenente un <b>JSONArray</b> con più elementi.
 	 * 
-	 * @param  JsonTweet JSONObject del JSONArray di Tweet.
+	 * @param  JsonTweet : JSONObject del JSONArray di Tweet.
 	 * 
 	 * @return <b>ArrayList</b> di tipo {@link Tweet}.
 	 * 

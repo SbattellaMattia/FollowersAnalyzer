@@ -9,7 +9,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import it.Twitter.FollowersAnalyzer.Exceptions.WrongParameter;
 import it.Twitter.FollowersAnalyzer.JsonComponent.StringToJson;
 import it.Twitter.FollowersAnalyzer.Model.User;
 

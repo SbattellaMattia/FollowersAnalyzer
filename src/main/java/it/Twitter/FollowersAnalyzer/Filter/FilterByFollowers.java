@@ -23,9 +23,9 @@ public class FilterByFollowers extends Filter{
 	/**
 	 * Metodo che filtra in base al method inserito.
 	 * 
-	 * @param user Utente i cui followers dovranno essere filtrati.
-	 * @param tweet Tweet con gli Uenti che gli hanno messo like.
-	 * @param method Metodo di filtraggio: 
+	 * @param user : Utente i cui followers dovranno essere filtrati.
+	 * @param tweet : Tweet con gli Uenti che gli hanno messo like.
+	 * @param method : Metodo di filtraggio: 
 	 * <b>all</b>=ritorna tutti gli utenti; <b>followers</b>=ritorna solo i followers.
 	 * 
 	 * @throws WrongParameter se method è diverso da "all" o "followers".
@@ -49,8 +49,8 @@ public class FilterByFollowers extends Filter{
 	 * Confronta l'id dei Followers di un utente con l'id degli Utenti che hanno messo like al Tweet.
 	 * Se sono uguali li aggiunge all'ArrayList di <b>likingFollowers</b>.
 	 * 
-	 * @param user Utente i cui followers dovranno essere filtrati.
-	 * @param tweet Tweet con gli Utenti che gli hanno messo like.
+	 * @param user : Utente i cui followers dovranno essere filtrati.
+	 * @param tweet : Tweet con gli Utenti che gli hanno messo like.
 	 * 
 	 * 
 	 * @return <Code>ArrayList</Code> : <b>likingFollowers</b> 

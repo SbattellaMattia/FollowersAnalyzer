@@ -20,7 +20,7 @@ public class FilterByRefollowers extends Filter {
 	/**
 	 * Metodo che filtra in base agli utenti che ricambiano il follow.
 	 * 
-	 * @param user Utente i cui Utenti devono essere filtrati.
+	 * @param user : Utente i cui Utenti devono essere filtrati.
 	 * 
 	 * @return <Code>String</Code>: Stringa di utenti filtrata, convertibile in JSONObject.
 	 */

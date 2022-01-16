@@ -20,7 +20,7 @@ public class ServiceFollowing extends Service{
 	/**
 	 * Costruttore della classe ServiceFollowing.
 	 * 
-	 * @param id Id dell'Utente del quale verrano restituiti gli Utenti seguiti, inserito nell' <b>Url</b>.
+	 * @param id : Id dell'Utente del quale verrano restituiti gli Utenti seguiti, inserito nell' <b>Url</b>.
 	 */
 	
 	public ServiceFollowing(Long id) {

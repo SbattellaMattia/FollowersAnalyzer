@@ -12,7 +12,7 @@ import it.Twitter.FollowersAnalyzer.Model.User;
  * Classe FilterByCreation che estende {@link it.Twitter.FollowersAnalyzer.Filter.Filter Filter}.
  * 
  * 
- * Filtra i followers/following di un utente a seconda della data di creazione dell'account.
+ * Filtra i Followers/Following di un utente a seconda della data di creazione dell'account.
  * 
  * @author Sbattella Mattia
  * @author Sumcutean Sara
@@ -27,9 +27,9 @@ public class FilterByCreation extends Filter {
 	/**
 	 * Metodo per filtrare i Followers
 	 * 
-	 * @param User Utente i cui Followers dovranno essere filtrati.
-	 * @param StartDate Data di inizio filtraggio.
-	 * @param EndDate Data di fine filtraggio.
+	 * @param User : Utente i cui Followers dovranno essere filtrati.
+	 * @param StartDate : Data di inizio filtraggio.
+	 * @param EndDate Data : di fine filtraggio.
 	 * 
 	 * @throws NumberFormatException se la data ha caratteri oltre a cifre.
 	 * @throws DateException se la data inserita non è valida (es. mm=13).
@@ -144,18 +144,18 @@ public class FilterByCreation extends Filter {
 
 
 	/**
-	 * Metodo per filtrare i Following
+	 * Metodo per filtrare gli Utenti seguiti.
 	 * 
-	 * @param User Utente i cui Following dovranno essere filtrati.
-	 * @param StartDate Data di inizio filtraggio.
-	 * @param EndDate Data di fine filtraggio.
+	 * @param User : Utente i cui Utenti seguiti dovranno essere filtrati.
+	 * @param StartDate : Data di inizio filtraggio.
+	 * @param EndDate : Data di fine filtraggio.
 	 * 
 	 * @throws NumberFormatException se la data ha caratteri oltre a cifre.
 	 * @throws DateException se la data inserita non è valida (es. mm=13).
 	 * @throws NullDataException se nessun utente è tra le due date.
 	 * @throws WrongParameter se <b>StartDate</b> > <b>EndDate</b> o se il formato "dd-mm-yyyy" è errato.
 	 * 
-	 * @return <Code>String</Code>: Stringa di utenti filtrata, convertibile in JSONObject.
+	 * @return <Code>String</Code>: Stringa di Utenti filtrata, convertibile in JSONObject.
 	 */
 	public String FollowingFilter(User User,String StartDate, String EndDate) throws NumberFormatException, DateException, NullDataException, WrongParameter {
 		ArrayList<User> FollowingDate = new ArrayList<User>();
@@ -256,7 +256,7 @@ public class FilterByCreation extends Filter {
 	/**
 	 * Metodo per verificare che l'anno immesso sia corretto.
 	 * 
-	 * @param year Anno da controllare.
+	 * @param year : Anno da controllare.
 	 *
 	 * @throws DateException se l'anno inserito è <2006 o >2021.
 	 * 
@@ -270,7 +270,7 @@ public class FilterByCreation extends Filter {
 	/**
 	 * Metodo per verificare che il mese immesso sia corretto.
 	 * 
-	 * @param month Mese da controllare.
+	 * @param month : Mese da controllare.
 	 *
 	 * @throws DateException se il mese inserito è <1 o >12.
 	 * 
@@ -284,8 +284,8 @@ public class FilterByCreation extends Filter {
 	/**
 	 * Metodo per verificare che il giorno immesso sia corretto.
 	 * 
-	 * @param day Giorno da controllare.
-	 * @param month Determina il numero di giorni possibili.
+	 * @param day : Giorno da controllare.
+	 * @param month : Determina il numero di giorni possibili.
 	 *
 	 * @throws DateException se il giorno inserito è <1 o >28/>30/>31 in base al mese immesso.
 	 * 
