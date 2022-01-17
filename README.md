@@ -106,7 +106,7 @@ N° | TIPO | ROTTA | PARAMETRO | DESCRIZIONE
 **6.**|GET|```/User/Tweets/```|id utente|*Passato come parametro un id utente, la rotta restituisce la lista dei suoi tweet.*
 **7.**|GET|```/User/LikedTweets/```|id utente|*Passato come parametro un id utente, la rotta restituisce l'elenco di tweet ai quali ha messo like.*
 <a name="8.0">**[8.](#8)**|GET|```/Tweet/Retweeted_by/```|id tweet|*Passato come parametro un id tweet, la rotta restituisce la lista degli utenti che lo hanno ritwittato. [:information_source:](#info)*
-<a name="9.0">**[9.](#9)**|GET|```/Tweet/LikingUsers/```|id utente|*Passato come parametro un id tweet, la rotta restituisce gli utenti che hanno messo like al tweet. [:information_source:](#info)*
+<a name="9.0">**[9.](#9)**|GET|```/Tweet/LikingUsers/```|id tweet|*Passato come parametro un id tweet, la rotta restituisce gli utenti che hanno messo like al tweet. [:information_source:](#info)*
 
 <a name="filters"></a>
 ## :white_small_square: Filtri <div align="right"> [:arrow_up_small:](#start) </div>
@@ -147,8 +147,8 @@ ROTTA | "?" | PARAMETRI | "=" | OPZIONI | VALORE DI DEFAULT | DESCRIZIONE
 <a name="4">[4.](#4.0)</a>|```?```|"username"| ```=``` | Username della persona da ricercare | ```all``` |*Nel caso venga inserito l'username, la rotta restituirà l'utente seguito con il nome inseito; se non trovato, verrà mostrato un messaggio di errore.*
 <a name="8">[8.](#8.0)</a>|```?```|"username"| ```=``` | Username della persona da ricercare | ```all``` |*Nel caso venga inserito l'username e l'utente viene trovato tra coloro che hanno ritwittato, la rotta ne restituirà i suoi dati.*
 <a name="9">[9.](#9.0)</a>|```?```|"method"| ```=``` | ```followers``` |  ```all``` |*Se inserita l'opzione ```followers```, la rotta restituirà esclusivamente i followers dell'utente che hanno messo like al tweet.*
-<a name="10">[10.](#10.0)</a>|```?```|"StartDate",  "EndDate"| ```=``` | Data di inizio e di fine della ricerca | ```21-03-2006```, ```null``` |*Possono essere inseriti a discrezione dell'utente uno o entrambi i valori, a seconda dei quali verranno restituiti i followers filtrati nell'arco temporale scelto. La data di inzio se non inserita è settata al giorno di fondazione di Twitter. E' necessario specificare che il formato della data deve essere del tipo "**dd/MM/yyyy**".*
-<a name="11">[11.](#11.0)</a>|```?```|"StartDate", "EndDate"| ```=``` | Data di inizio e di fine della ricerca | ```21-03-2006```, ```null``` |*Possono essere inseriti a discrezione dell'utente uno o entrambi i valori, a seconda dei quali verranno restituiti gli utenti seguiti filtrati nell'arco temporale scelto. La data di inzio se non inserita è settata al giorno di fondazione di Twitter. E' necessario specificare che il formato della data deve essere del tipo "**dd/MM/yyyy**".*
+<a name="10">[10.](#10.0)</a>|```?```|"StartDate",  "EndDate"| ```=``` | Data di inizio e di fine della ricerca |```21-03-2006```, ```null```|*Possono essere inseriti a discrezione dell'utente uno o entrambi i valori, a seconda dei quali verranno restituiti i followers filtrati nell'arco temporale scelto. La data di inzio se non inserita è settata al giorno di fondazione di Twitter. E' necessario specificare che il formato della data deve essere del tipo "**dd-MM-yyyy**".*
+<a name="11">[11.](#11.0)</a>|```?```|"StartDate", "EndDate"| ```=``` | Data di inizio e di fine della ricerca | ```21-03-2006```, ```null``` |*Possono essere inseriti a discrezione dell'utente uno o entrambi i valori, a seconda dei quali verranno restituiti gli utenti seguiti filtrati nell'arco temporale scelto. La data di inzio se non inserita è settata al giorno di fondazione di Twitter. E' necessario specificare che il formato della data deve essere del tipo "**dd-MM-yyyy**".*
 <a name="12">[12.](#12.0)</a>|```?```|"method"| ```=``` | ```verified```,  ```not_verified``` | ```all```|*Nel caso venga inserita l'opzione ```verified```, la rotta restituirà i followers che hanno il profilo verificato; nel caso di inserimento dell'opzione ```not_ verified```, la rottà restituirà i followers che hanno il profilo non verificato. L'opzione di base ```all```, restituisce entrambe le liste.*
 <a name="16">[16.](#16.0)</a>|```?```|"method"| ```=``` | ```percentage``` |```number```|*Nel caso venga inserita l'opzione ```number```, la rotta restituirà i followers dell'utente in considerazione, divisi per range in base al numero di loro followers; nel caso di inserimento dell'opzione ```percentage```, la rottà ne restituirà la suddivisione per range di percentuale.*
 <a name="17">[17.](#17.0)</a>|```?```|"method"| ```=``` | ```followers``` | ```all``` |*Nel caso venga inseria l'opzione ```followers```, la rotta restituirà l'elenco dei followers più attivi sul profilo dell'utente in considerazione.*
@@ -210,9 +210,13 @@ Di seguito, le eccezioni nelle quali si può incorrere:
 :large_blue_diamond: Il progetto è interamente documentato in JavaDoc, un applicativo utilizzato per la generazione automatica della documentazione del codice.
 <br/><br/>
  
-:large_blue_diamond: Ai fini del progetto, è stato utile creare due profili Twitter utilizzabili per fare richieste. Vengono lasciati i dati in descrizione. 
-* [Sbattella Mattia](https://twitter.com/DarioSecond) con rispettivo id utente: 1467146412009967620.
+:large_blue_diamond: Ai fini del progetto, è stato utile creare un profilo Twitter utilizzabile per fare richieste e un secondo di ausilio. Vengono lasciati i dati in descrizione. 
+ 
+**Principale**
 * [Sumcutean Sara](https://twitter.com/Sara35793654) con rispettivo id utente: 1473955877635997696.
+ 
+**Ausiliario**
+* [Sbattella Mattia](https://twitter.com/DarioSecond) con rispettivo id utente: 1467146412009967620.
 
 Tramite questi profili didattici sono stati creati dei tweet di prova, messi dei like e sono stati fatti dei retweet. Vengono lasciati gli id relativi ai tweet postati.
 * 1478658975444963330
@@ -223,7 +227,15 @@ Tramite questi profili didattici sono stati creati dei tweet di prova, messi dei
 <br/><br/>
  
 :large_blue_diamond: In *FollowersAnalyzer* che utilizza API v2, è stato scelto il tipo Long per l'id: il dato viene restituito da Twitter come stringa e modificato poi a Long. Motivazione di ciò è la maggior maneggevolezza del dato, la sua congruenza con l'utilizzo che ne viene fatto e con ciò che rappresenta, inoltre le versioni API v1 di Twitter, non utilizzate in questo progetto, restituiscono un id di tipo Long.
+ <br/><br/>
  
+:warning: Attenzione! 
+
+ E' necessario che il valore immesso come id, sia un Long, l'eccezione per l'inserimento di un valore diverso, non è gestita.
+
+:warning: Attenzione! 
+
+ E' necessario che tutti gli utenti in considerazione abbiano almeno un follower, altrimenti si potrebbe incorrere nell'eccezione ```NullDataException```.
  
 
 <a name="data"></a>
