@@ -74,6 +74,6 @@ public class FilterByVerified extends Filter {
 				else return "{\"Verified followers:\": " + UserArrayToString(NameFollowersVerified) + "}," + "{\"Unverified followers:\": " + UserArrayToString(NameFollowersNotVerified) + "}";
 			}
 
-		throw new WrongParameter(" \""+method+"\" is not allowed.");
+		throw new WrongParameter(method+" is not allowed.");
 	}
 }

@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import it.Twitter.FollowersAnalyzer.Exceptions.DateException;
 import it.Twitter.FollowersAnalyzer.Exceptions.NullDataException;
-import it.Twitter.FollowersAnalyzer.Exceptions.WrongParameter;
 import it.Twitter.FollowersAnalyzer.JsonComponent.JsonToUser;
 import it.Twitter.FollowersAnalyzer.Model.User;
 

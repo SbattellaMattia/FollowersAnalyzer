@@ -121,7 +121,7 @@ public class FilterByCreation extends Filter {
 								if (UserMonth<endmonth) {
 									FollowerDate.add(i);}
 								if(UserMonth==endmonth){
-									if(UserDay<startday)FollowerDate.add(i);}
+									if(UserDay<endday)FollowerDate.add(i);}
 							}
 						}
 					}
@@ -237,7 +237,7 @@ public class FilterByCreation extends Filter {
 								if (UserMonth<endmonth) {
 									FollowingDate.add(i);}
 								if(UserMonth==endmonth){
-									if(UserDay<startday)FollowingDate.add(i);}
+									if(UserDay<endday)FollowingDate.add(i);}
 							}
 						}
 					}

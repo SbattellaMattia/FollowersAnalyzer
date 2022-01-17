@@ -41,7 +41,7 @@ public class FilterByFollowers extends Filter{
 			ArrayList<User> likingFollowers = searchLikingFollowers(user,tweet);
 			return UserArrayToString(likingFollowers);}
 
-		else throw new WrongParameter("\""+method+"\" is not allowed.");
+		else throw new WrongParameter(method+" is not allowed.");
 	}
 	
 	/**

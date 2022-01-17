@@ -25,14 +25,36 @@ public class Counter {
 		
 		
 		for(Tweet i : User.getTweets()) {
-			for(User j : i.getLikingUsers()) {
-				if(counter.containsKey(j)) {
-					Integer numOccurrence = counter.get(j);
-					numOccurrence++;
-					counter.replace(j,numOccurrence);}
-				else counter.put(j,1);
+			if(!(i.getLikingUsers().isEmpty()));{
+				for(User j : i.getLikingUsers()) {
+					
+					/*if(counter.containsKey(j)) {
+						Integer numOccurrence = counter.get(j);
+						numOccurrence++;
+						counter.replace(j,numOccurrence);}
+					else counter.put(j,1);*/
+					
+					if(counter.isEmpty()) {
+						counter.put(j,1);
+					}
+					else {
+						boolean change=false;
+						for(User key: counter.keySet()) {
+							if (j.getId().equals(key.getId())) {
+								Integer numOccurrence = counter.get(key);
+								numOccurrence++;
+								counter.replace(key,numOccurrence);	
+								change=true;
+							}
+						}
+						if(!change)counter.put(j,1);
+						
+					}
+				}
 			}
-		}	
+		}
+			
+			
 		return counterToString(counter);
 	}
 

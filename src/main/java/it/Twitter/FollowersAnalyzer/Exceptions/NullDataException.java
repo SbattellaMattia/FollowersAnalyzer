@@ -15,7 +15,7 @@ public class NullDataException extends Exception{
 	 * Messaggio generico che caratterizza la classe NullDataException.
 	 */
 	final static String message="Data is null: ";
-	private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * Costruttore della classe NullDataException.

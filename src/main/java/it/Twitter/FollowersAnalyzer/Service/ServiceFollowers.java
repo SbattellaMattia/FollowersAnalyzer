@@ -23,7 +23,7 @@ public class ServiceFollowers extends Service{
 	 * @param id : Id dell'Utente del quale verrano restituiti i Followers, inserito nell' <b>Url</b>.
 	 */
 	public ServiceFollowers(Long id) {
-		this.Url=PATTERN_USER_ID+id+PATTERN_SERVICE_FOLLOWERS+PARAMETER+PATTERN_USER_FIELDS+AND+PATTERN_MAX_RESULTS;
+		this.Url=PATTERN_USER_ID+id+PATTERN_SERVICE_FOLLOWERS+PARAMETER+PATTERN_USER_FIELDS+AND+PATTERN_MAX_RESULTS200;
 	}
 	
 	/**

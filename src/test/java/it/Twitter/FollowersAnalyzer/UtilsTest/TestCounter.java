@@ -17,20 +17,19 @@ import it.Twitter.FollowersAnalyzer.Utils.Counter;
  * @see it.Twitter.FollowersAnalyzer.Utils.Counter Counter
  */
 class TestCounter {
-	long id=1111L;
 
-	User user=new User(id,"mirko","rkomi","00-00-0000");
+	User user=new User(0000L,"mirko","rkomi","00-00-0000");
 
-	User user1=new User(id,"Pippo","e non solo","00-00-0000");
-	User user2=new User(id,"Dario","SecondDario","00-00-0000");
-	User user3=new User(id,"Sara","SaRa4326","00-00-0000");
-	User user4=new User(id,"Pluto","Plutone","00-00-0000");
-	User user5=new User(id,"Mattia","Matty","00-00-0000");
+	User user1=new User(1111L,"Pippo","e non solo","00-00-0000");
+	User user2=new User(2222L,"Dario","SecondDario","00-00-0000");
+	User user3=new User(3333L,"Sara","SaRa4326","00-00-0000");
+	User user4=new User(4444L,"Pluto","Plutone","00-00-0000");
+	User user5=new User(5555L,"Mattia","Matty","00-00-0000");
 
-	Tweet tweet1=new Tweet(id,"Ciaooo");
-	Tweet tweet2=new Tweet(id,"Forza Monturanese");
-	Tweet tweet3=new Tweet(id,"Cambiamento climatico");
-	Tweet tweet4=new Tweet(id,"Ingegneria è la miglior facoltà");
+	Tweet tweet1=new Tweet(0000L,"Ciaooo");
+	Tweet tweet2=new Tweet(0000L,"Forza Monturanese");
+	Tweet tweet3=new Tweet(0000L,"Cambiamento climatico");
+	Tweet tweet4=new Tweet(0000L,"Ingegneria è la miglior facoltà");
 
 	/**
 	 * Metodo che inizializza i dati necessari per effettuare i test: in questo caso 4 tweet e i rispettivi utenti che hanno messo like.

@@ -24,7 +24,7 @@ public class ServiceLikedTweets extends Service{
 	 * @param id : Id dell'Utente del quale verrano restituiti i Tweet a cui ha messo like, inserito nell' <b>Url</b>.
 	 */
 	public ServiceLikedTweets(Long id) {
-		this.Url=PATTERN_USER_ID+id+PATTERN_SERVICE_LIKED_TWEETS+PARAMETER+PATTERN_TWEET_FIELDS+AND+PATTERN_MAX_RESULTS;
+		this.Url=PATTERN_USER_ID+id+PATTERN_SERVICE_LIKED_TWEETS+PARAMETER+PATTERN_TWEET_FIELDS;
 	}
 	
 	/**

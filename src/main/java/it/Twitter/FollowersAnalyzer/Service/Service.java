@@ -39,7 +39,8 @@ public abstract class Service {
 	final String PATTERN_TWEET_ID="https://api.twitter.com/2/tweets/";
 	final String PATTERN_USER_FIELDS="user.fields=created_at,verified";
 	final String PATTERN_TWEET_FIELDS="tweet.fields=created_at,author_id";
-	final String PATTERN_MAX_RESULTS="max_results=200";
+	final String PATTERN_MAX_RESULTS200="max_results=200";
+	final String PATTERN_MAX_RESULTS100="max_results=100";
 	final String PARAMETER="?";
 	final String AND="&";
 	
@@ -47,8 +48,8 @@ public abstract class Service {
 	 * Costruttore della classe Service: imposta il <b>BearerToken</b> per l'autorizzazione
 	 */
 	public Service() {
-		this.BearerToken = "AAAAAAAAAAAAAAAAAAAAABIfWgEAAAAAAOF%2FgMH8TPODq1PwU9Qu0jIyJW4%3DKAuT33sk6LZuTaZR89Pyo9H0rRt6W8GYYxQNP6USsNPbNoHhb6";
-		//this.BearerToken = "AAAAAAAAAAAAAAAAAAAAAMlcXQEAAAAAYb28sKQdHrua1w1PqUY2oP9OjM0%3DTQ81FuSWRLb8px1DIHkx5Knk2ZD4guUN6KZiNNPKBov6X5rpAu";
+		//this.BearerToken = "AAAAAAAAAAAAAAAAAAAAABIfWgEAAAAAAOF%2FgMH8TPODq1PwU9Qu0jIyJW4%3DKAuT33sk6LZuTaZR89Pyo9H0rRt6W8GYYxQNP6USsNPbNoHhb6";
+		this.BearerToken = "AAAAAAAAAAAAAAAAAAAAAMlcXQEAAAAAYb28sKQdHrua1w1PqUY2oP9OjM0%3DTQ81FuSWRLb8px1DIHkx5Knk2ZD4guUN6KZiNNPKBov6X5rpAu";
 	}
 
 	

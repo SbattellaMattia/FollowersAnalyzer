@@ -15,7 +15,7 @@ public class WrongParameter extends Exception{
 	 * Messaggio generico che caratterizza la classe WrongParameter.
 	 */
 	final static String message="Wrong or inexistent parameter: ";
-	private static final long serialVersionUID = 4L;
+	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * Costruttore della classe WrongParameter.

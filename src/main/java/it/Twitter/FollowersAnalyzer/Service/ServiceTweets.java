@@ -24,7 +24,7 @@ public class ServiceTweets extends Service {
 	 * @param id : Id dell'Utente del quale verrano restituiti i Tweets effettuati, inserito nell' <b>Url</b>.
 	 */
 	public ServiceTweets(Long id) {
-		this.Url=PATTERN_USER_ID+id+PATTERN_SERVICE_TWEETS+ PARAMETER+PATTERN_TWEET_FIELDS+AND+PATTERN_MAX_RESULTS;
+		this.Url=PATTERN_USER_ID+id+PATTERN_SERVICE_TWEETS+PARAMETER+PATTERN_TWEET_FIELDS+AND+PATTERN_MAX_RESULTS100;
 	}
 	
 	/**

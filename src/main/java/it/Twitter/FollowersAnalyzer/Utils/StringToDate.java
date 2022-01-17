@@ -21,7 +21,9 @@ public class StringToDate {
 	 */
 	public String stringToDate(String createdAt){
 		date=createdAt.substring(0,10);
-		String[] aux=date.split("-");
-		return aux[2]+"-"+aux[1]+"-"+aux[0];
+		if(createdAt.charAt(4)=='-'){ 
+			String[] aux=date.split("-");
+			return aux[2]+"-"+aux[1]+"-"+aux[0];}
+		else return createdAt;
 	}
 }

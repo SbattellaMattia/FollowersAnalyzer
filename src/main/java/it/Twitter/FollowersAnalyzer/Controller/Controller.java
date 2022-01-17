@@ -369,6 +369,7 @@ public class Controller {
 			ServiceLikedTweets service = new ServiceLikedTweets(id);
 			User user = jsonUser.parseUser(getUserById(id).getBody());
 			user.setLikedTweets(jsonTweet.parseTweets(json.ToJson(service.getLikedTweets())));
+			System.out.println(user.LikedTweetArrayToString());
 			return new ResponseEntity<>(json.ToJson(user.LikedTweetArrayToString()), HttpStatus.OK);}
 		catch (ConnectionException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
@@ -493,8 +494,11 @@ public class Controller {
 			return new ResponseEntity<>(json.ToJson(filterByFollowers.Filter(user,tweet,method)), HttpStatus.OK);}
 		catch (ConnectionException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
+		catch (WrongParameter error) {
+			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
 		catch (NullDataException error) {
 			return new ResponseEntity<>(json.ToJson(error.getError()), HttpStatus.BAD_REQUEST);}
+		
 	}
 
 
@@ -518,7 +522,8 @@ public class Controller {
 			User user = jsonUser.parseUser(getUserById(id).getBody());
 			user.setTweets(jsonTweet.parseTweets(getTweets(id).getBody()));
 			for(Tweet i : user.getTweets()) {
-				i.setLikingUsers(jsonUser.parseUsers(getLikes(i.getId(),method).getBody()));}
+				if(!(i.getText().substring(0, 2)).equals("RT"))
+					i.setLikingUsers(jsonUser.parseUsers(getLikes(i.getId(),method).getBody()));}
 			Counter counter=new Counter();
 			return new ResponseEntity<>(json.ToJson(counter.counter(user)), HttpStatus.OK);}
 		catch (ConnectionException error) {
