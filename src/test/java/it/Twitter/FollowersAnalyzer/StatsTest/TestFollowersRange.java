@@ -55,13 +55,13 @@ class TestFollowersRange {
 	 *  User5=10 followers
 	 */
 
-	/*	Il conteggio è fatto in modo che venga compreso l'estremo superiore:
+	/*	Il conteggio viene fatto in modo che venga compreso l'estremo superiore:
 	 * 
 	 *  esempio: BETWEEN_25_50    utente con    25< n.followers <=50
 	 *  esempio: LESS_10    	  utente con    n.followers <=10
 	 *  esempio: MORE_100    	  utente con    n.followers >100
 	 *  
-	 *  */
+	 */
 
 	/**
 	 * Test che verifica il corretto funzionamento del metodo di stampa secondo il parametro <b>number</b>.
@@ -96,7 +96,7 @@ class TestFollowersRange {
 	}
 
 	/**
-	 * Distrugge ciò che è stato inizializzato da metodo setUp.
+	 * Distrugge cio' che e' stato inizializzato dal metodo setUp.
 	 * 
 	 * @throws Exception
 	 */

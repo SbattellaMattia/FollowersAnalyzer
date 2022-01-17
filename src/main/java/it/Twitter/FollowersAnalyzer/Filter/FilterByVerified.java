@@ -30,8 +30,6 @@ public class FilterByVerified extends Filter {
 	* Filtra gli Utenti verificati/non verificati e li inserisce in due ArrayList diversi.
 	* 
 	* @param user : Utente i cui Followers verranno filtrati.
-	* 
-	* @return <Code>void</Code>
 	*/
 	public void Filter(User user) {
 
@@ -50,7 +48,7 @@ public class FilterByVerified extends Filter {
 	 * <b>not_verified</b>=ritorna solo i followers non verificati.
 	 * 
 	 * @throws NullDataException se il method da ricercare non restituisce nessun Utente. 
-	 * @throws WrongParameter se method è diverso da <b>all</b>, <b>verified</b> o <b>not_verified</b>.
+	 * @throws WrongParameter se method e' diverso da <b>all</b>, <b>verified</b> o <b>not_verified</b>.
 	 * 
 	 * @return <Code>String</Code>: Stringa dei Followers filtrata per verificato, convertibile in JSONObject.
 	 * 

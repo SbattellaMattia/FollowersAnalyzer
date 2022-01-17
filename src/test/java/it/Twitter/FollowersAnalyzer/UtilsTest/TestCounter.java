@@ -31,6 +31,7 @@ class TestCounter {
 	Tweet tweet3=new Tweet(0000L,"Cambiamento climatico");
 	Tweet tweet4=new Tweet(0000L,"Ingegneria è la miglior facoltà");
 
+
 	/**
 	 * Metodo che inizializza i dati necessari per effettuare i test: in questo caso 4 tweet e i rispettivi utenti che hanno messo like.
 	 */
@@ -87,7 +88,7 @@ class TestCounter {
 	}
 
 	/**
-	 * Distrugge ciò che è stato inizializzato da metodo setUp.
+	 * Distrugge cio' che e' stato inizializzato dal metodo setUp.
 	 * 
 	 * @throws Exception
 	 */

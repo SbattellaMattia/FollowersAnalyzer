@@ -3,7 +3,7 @@ package it.Twitter.FollowersAnalyzer.Exceptions;
 /**
  * Classe DateException che estende  {@link Exception}.
  * 
- * Viene lanciata quando la data inserita non è del formato corretto.
+ * Viene lanciata quando la data inserita non e' del formato corretto.
  * 
  * @author Sbattella Mattia
  * @author Sumcutean Sara

@@ -21,7 +21,7 @@ public class ServiceUserByUsername extends Service {
 	/**
 	 * Costruttore della classe ServiceUserByUsername.
 	 * 
-	 * @param username : Username dell'Utente del quale verrà restituito l'Utente stesso, inserito nell' <b>Url</b>.
+	 * @param username : Username dell'Utente del quale verra' restituito l'Utente stesso, inserito nell' <b>Url</b>.
 	 */
 	public ServiceUserByUsername(String username) {
 		this.Url=PATTERN_USER_ID+PATTERN_SERVICE_BY_USERNAME+username+PARAMETER+PATTERN_USER_FIELDS;

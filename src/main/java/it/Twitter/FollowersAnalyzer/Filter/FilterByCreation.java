@@ -32,9 +32,9 @@ public class FilterByCreation extends Filter {
 	 * @param EndDate Data : di fine filtraggio.
 	 * 
 	 * @throws NumberFormatException se la data ha caratteri oltre a cifre.
-	 * @throws DateException se la data inserita non è valida (es. mm=13).
-	 * @throws NullDataException se nessun utente è tra le due date.
-	 * @throws WrongParameter se <b>StartDate</b> > <b>EndDate</b> o se il formato "dd-mm-yyyy" è errato.
+	 * @throws DateException se la data inserita non e' valida (es. mm=13).
+	 * @throws NullDataException se nessun utente e' tra le due date.
+	 * @throws WrongParameter se <b>StartDate</b> e' maggiore di <b>EndDate</b> o se il formato "dd-mm-yyyy" e' errato.
 	 * 
 	 * @return <Code>String</Code>: Stringa di utenti filtrata, convertibile in JSONObject.
 	 */
@@ -151,9 +151,9 @@ public class FilterByCreation extends Filter {
 	 * @param EndDate : Data di fine filtraggio.
 	 * 
 	 * @throws NumberFormatException se la data ha caratteri oltre a cifre.
-	 * @throws DateException se la data inserita non è valida (es. mm=13).
-	 * @throws NullDataException se nessun utente è tra le due date.
-	 * @throws WrongParameter se <b>StartDate</b> > <b>EndDate</b> o se il formato "dd-mm-yyyy" è errato.
+	 * @throws DateException se la data inserita non e' valida (es. mm=13).
+	 * @throws NullDataException se nessun utente e' tra le due date.
+	 * @throws WrongParameter se <b>StartDate</b> e' maggiore di <b>EndDate</b> o se il formato "dd-mm-yyyy" e' errato.
 	 * 
 	 * @return <Code>String</Code>: Stringa di Utenti filtrata, convertibile in JSONObject.
 	 */
@@ -258,7 +258,7 @@ public class FilterByCreation extends Filter {
 	 * 
 	 * @param year : Anno da controllare.
 	 *
-	 * @throws DateException se l'anno inserito è <2006 o >2021.
+	 * @throws DateException se l'anno inserito e' minore di 2006 o maggiore di 2021.
 	 * 
 	 * @return <Code>Int</Code>: Anno immesso (se corretto).
 	 */
@@ -272,7 +272,7 @@ public class FilterByCreation extends Filter {
 	 * 
 	 * @param month : Mese da controllare.
 	 *
-	 * @throws DateException se il mese inserito è <1 o >12.
+	 * @throws DateException se il mese inserito e' minore di 1 o maggiore di 12.
 	 * 
 	 * @return <Code>Int</Code>: Mese immesso (se corretto).
 	 */
@@ -287,7 +287,7 @@ public class FilterByCreation extends Filter {
 	 * @param day : Giorno da controllare.
 	 * @param month : Determina il numero di giorni possibili.
 	 *
-	 * @throws DateException se il giorno inserito è <1 o >28/>30/>31 in base al mese immesso.
+	 * @throws DateException se il giorno inserito e' minore di 1 o maggiore di 28/ maggiore di 30/ maggiore di 31 in base al mese immesso.
 	 * 
 	 * @return <Code>Int</Code>: Giorno immesso (se corretto).
 	 */

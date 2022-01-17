@@ -2,7 +2,7 @@ package it.Twitter.FollowersAnalyzer.Model;
 
 import java.util.ArrayList;
 
-/** Questa classe descrive le proprietà di ogni tweet. Estende la classe {@link it.Twitter.FollowersAnalyzer.Model.Super Super}
+/** Questa classe descrive le proprieta' di ogni tweet. Estende la classe {@link it.Twitter.FollowersAnalyzer.Model.Super Super}
  * 
  * @author Sbattella Mattia
  * @author Sumcutean Sara
@@ -87,7 +87,7 @@ public class Tweet extends Super{
 	/**
      * Metodo che setta l'id dell'utente autore del tweet.
      * 
-     * @param createdAt : id dell'autore.
+     * @param authorId : id dell'autore.
      */
 	public void setAuthorId(Long authorId) {
 		this.authorId = authorId;
